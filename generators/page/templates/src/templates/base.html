@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         {%block title%}<title>Politico Interactives</title>{%endblock%}
-        <%# Don't include link if using webpack, which injects it automagically. #%>
+        <%# Skip if using webpack. #%>
         <% if (cssInclude) { %> <link href="css/main.bundle.css" rel="stylesheet"> <% } %>
     </head>
     <body>
         {%block content%}{%endblock%}
-        <%# Don't include script if using webpack, which injects it automagically. #%>
+        <%# Skip if using webpack. #%>
         <% if (jsInclude) { %> <script type="text/javascript" src="js/main.bundle.js"> </script> <% } %>
     </body>
 </html>

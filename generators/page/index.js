@@ -8,49 +8,46 @@ module.exports = class extends Generator {
     this.option('title', {
       type: String,
       required: true,
-      desc: 'Title of project',
+      desc: 'Project title',
+    });
+
+    this.option('webpack', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Use webpack module bundler',
     });
   }
 
-  prompting() {
-    const questions = [{
-      type: 'input',
-      name: 'projectTitle',
-      message: 'OK, let\'s make an interactive page!\n What do we call it?',
-    }, {
-      type: 'list',
-      name: 'bundler',
-      message: 'Which Javascript bundler would you like to use?',
-      default: 'browserify',
-      choices: [
-        {
-          name: 'Browserify (default)',
-          value: 'browserify',
-        },
-        {
-          name: 'Webpack (ES2015)',
-          value: 'webpack',
-        },
-      ],
-    }];
-
-    return this.prompt(questions).then((answers) => {
-      this.bundler = answers.bundler;
-      this.projectTitle = answers.projectTitle;
-    });
+  initializing() {
+    switch (this.options.webpack) {
+      case true:
+        this.composeWith(require.resolve('../webpack'));
+        break;
+      default:
+        this.composeWith(require.resolve('../browserify'));
+    }
   }
+
   writing() {
+    // Skeleton
+    mkdirp('./src');
+    mkdirp('./dist');
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      { title: this.options.title });
     // Nunjucks templates
     this.fs.copyTpl(
       this.templatePath('src/templates/index.html'),
       this.destinationPath('src/templates/index.html'),
-      { title: this.projectTitle });
+      { title: this.options.title });
     this.fs.copyTpl(
       this.templatePath('src/templates/base.html'),
       this.destinationPath('src/templates/base.html'),
       {
-        cssInclude: this.bundler === 'browserify',
-        jsInclude: this.bundler === 'browserify',
+        cssInclude: !this.options.webpack, // Don't include script tags for webpack
+        jsInclude: !this.options.webpack, // which injects them automatically.
       });
     // SCSS files
     this.fs.copy(
@@ -59,8 +56,21 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/scss/_colors.scss'),
       this.destinationPath('src/scss/_colors.scss'));
+    this.fs.copy(
+      this.templatePath('src/scss/_fonts.scss'),
+      this.destinationPath('src/scss/_fonts.scss'));
     // Images directory
     mkdirp('./src/images');
     mkdirp('./src/images/opt');
+  }
+
+  end() {
+    const nunjucksTask = this.spawnCommand('gulp', ['nunjucks']);
+    nunjucksTask.on('close', () => {
+      const imgTask = this.spawnCommand('gulp', ['img']);
+      imgTask.on('close', () => {
+        this.spawnCommand('gulp');
+      });
+    });
   }
 };

@@ -1,15 +1,15 @@
-const yeoman = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 
-
-module.exports = yeoman.Base.extend({
-  CHOICE_AIRBNB: 'airbnb',
-  CHOICE_ES6_RECOMMENDED: 'es6-recommended',
-  CHOICE_NO_ESLINT: 'none',
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+    this.CHOICE_AIRBNB = 'airbnb';
+    this.CHOICE_ES6_RECOMMENDED = 'es6-recommended';
+    this.CHOICE_NO_ESLINT = 'none';
+  }
 
   prompting() {
-    const done = this.async();
-
     const prompts = [{
       type: 'list',
       name: 'lintProfile',
@@ -23,16 +23,15 @@ module.exports = yeoman.Base.extend({
         value: this.CHOICE_NO_ESLINT,
         name: `${chalk.bold('No ESLint')} [skips ESLint installation altogether]`,
       }],
-      message: 'Would you like to add an ESLint configuration?',
+      message: 'Would you like to add an ESLint configuration for linting your javascript?',
       store: true,
       default: 0,
     }];
 
-    this.prompt(prompts, (answers) => {
+    return this.prompt(prompts, (answers) => {
       this.lintProfile = answers.lintProfile;
-      done();
     });
-  },
+  }
 
   writing() {
     if (this.lintProfile === this.CHOICE_NO_ESLINT) return;
@@ -61,30 +60,30 @@ module.exports = yeoman.Base.extend({
     }
 
     this.fs.writeJSON('./src/.eslintrc.json', esLintConfig);
-  },
+  }
 
   install() {
     if (this.lintProfile === this.CHOICE_NO_ESLINT) return;
 
-    const npmDeps = [
+    const linterDeps = [
       'eslint',
       'babel-eslint',
     ];
 
     switch (this.lintProfile) {
       case this.CHOICE_AIRBNB:
-        npmDeps.push(
+        linterDeps.push(
           'eslint-plugin-import',
           'eslint-plugin-react',
           'eslint-plugin-jsx-a11y',
           'eslint-config-airbnb');
         break;
       case this.CHOICE_ES6_RECOMMENDED:
-        npmDeps.push('eslint-plugin-es6-recommended');
+        linterDeps.push('eslint-plugin-es6-recommended');
         break;
       default:
     }
 
-    this.npmInstall(npmDeps, { 'save-dev': true });
-  },
-});
+    this.yarnInstall(linterDeps, { dev: true });
+  }
+};
