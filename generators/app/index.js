@@ -4,9 +4,12 @@ const S = require('string');
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
-
+    // Bundler options
     this.BROWSERIFY = 'browserify';
     this.WEBPACK = 'webpack';
+    // Project type options
+    this.EMBED = 'embed';
+    this.PAGE = 'page';
   }
 
   initializing() {
@@ -22,11 +25,11 @@ module.exports = class extends Generator {
       choices: [
         {
           name: 'embeddable',
-          value: 'embed',
+          value: this.EMBED,
         },
         {
           name: 'interactive page',
-          value: 'page',
+          value: this.PAGE,
         },
       ],
     }, {

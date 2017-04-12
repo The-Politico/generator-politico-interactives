@@ -26,10 +26,14 @@ module.exports = class extends Generator {
   initializing() {
     switch (this.options.webpack) {
       case true:
-        this.composeWith(require.resolve('../webpack'));
+        this.composeWith(require.resolve('../webpack'), {
+          embed: false,
+        });
         break;
       default:
-        this.composeWith(require.resolve('../browserify'));
+        this.composeWith(require.resolve('../browserify'), {
+          embed: false,
+        });
     }
   }
 

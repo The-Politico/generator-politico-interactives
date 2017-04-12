@@ -6,4 +6,4 @@ module.exports = () =>
     .pipe(nunjucksRender({
       path: ['src/templates/'],
     }))
-    .pipe(gulp.dest('src'));
+    .pipe(gulp.dest('dist'));

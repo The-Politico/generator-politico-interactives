@@ -1,13 +1,13 @@
 const runSequence = require('run-sequence');
 
 const gulp = require('./gulp')([
-  'nunjucks',
-  'nunjucks-watch',
-  'webpack',
   'aws',
-  'img-copy',
+  'nunjucks',
+  'webpack',
+  'img-copy', // from gulp generator ↓ ↓ ↓ ↓
   'img-optimize',
   'img-resize',
+  'nunjucks-watch',
 ]);
 
 gulp.task('default', ['nunjucks-watch', 'webpack']);

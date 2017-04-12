@@ -1,6 +1,17 @@
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+
+    this.option('embed', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Whether building an embeddable',
+    });
+  }
+
   writing() {
     // JS files
     this.fs.copy(
