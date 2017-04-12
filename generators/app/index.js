@@ -61,9 +61,9 @@ module.exports = class extends Generator {
     return this.prompt(questions).then((answers) => {
       this.projectType = answers.projectType;
       this.projectTitle = answers.projectTitle;
-      this.projectDir = S(answers.projectTitle).slugify().s;
-      this.projectApp = S(answers.projectTitle).camelize().s;
       this.projectBundler = answers.projectBundler;
+      this.awsAccessKey = answers.awsAccessKey;
+      this.awsSecretKey = answers.awsSecretKey;
     });
   }
   template() {
@@ -82,6 +82,21 @@ module.exports = class extends Generator {
     }
   }
   writing() {
-  
+    const awsJSON = {
+      accessKeyId: this.awsAccessKey,
+      secretAccessKey: this.awsSecretKey,
+      params: {
+        Bucket: 'interactives.politico.com',
+      },
+    };
+
+    const d = new Date();
+    const metaJSON = {
+      year: d.getFullYear(),
+      directory: `${d.getFullYear()}/${S(this.projectTitle).slugify().s}`,
+    };
+
+    this.fs.writeJSON('aws.json', awsJSON);
+    this.fs.writeJSON('meta.json', metaJSON);
   }
 };

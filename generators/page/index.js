@@ -1,5 +1,6 @@
 const Generator = require('yeoman-generator');
 const mkdirp = require('mkdirp');
+const S = require('string');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -17,6 +18,9 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Use webpack module bundler',
     });
+
+    this.projectDir = S(this.options.title).slugify().s;
+    this.projectApp = S(this.options.title).camelize().s;
   }
 
   initializing() {
@@ -36,7 +40,11 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
-      { title: this.options.title });
+      {
+        title: this.projectApp,
+        userName: this.user.git.name(),
+        userEmail: this.user.git.email(),
+      });
     // Nunjucks templates
     this.fs.copyTpl(
       this.templatePath('src/templates/index.html'),

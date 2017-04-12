@@ -65,25 +65,25 @@ module.exports = class extends Generator {
   install() {
     if (this.lintProfile === this.CHOICE_NO_ESLINT) return;
 
-    const linterDeps = [
+    const dependencies = [
       'eslint',
       'babel-eslint',
     ];
 
     switch (this.lintProfile) {
       case this.CHOICE_AIRBNB:
-        linterDeps.push(
+        dependencies.push(
           'eslint-plugin-import',
           'eslint-plugin-react',
           'eslint-plugin-jsx-a11y',
           'eslint-config-airbnb');
         break;
       case this.CHOICE_ES6_RECOMMENDED:
-        linterDeps.push('eslint-plugin-es6-recommended');
+        dependencies.push('eslint-plugin-es6-recommended');
         break;
       default:
     }
 
-    this.yarnInstall(linterDeps, { dev: true });
+    this.yarnInstall(dependencies, { dev: true });
   }
 };

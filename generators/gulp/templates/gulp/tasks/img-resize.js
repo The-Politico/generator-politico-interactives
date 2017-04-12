@@ -5,6 +5,7 @@ const path = require('path');
 const rename = require('gulp-rename');
 const imageResize = require('gulp-image-resize');
 const merge = require('merge-stream');
+const gutil = require('gulp-util');
 
 module.exports = () => {
   const resize = (size) => {
