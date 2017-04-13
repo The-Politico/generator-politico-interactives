@@ -1,4 +1,4 @@
-# generator-politico-interactives [![NPM version][npm-image]][npm-url]
+# generator-politico-interactives [![npm version](https://badge.fury.io/js/generator-politico-interactives.svg)](https://badge.fury.io/js/generator-politico-interactives)
 
 A [Yeoman](http://yeoman.io) generator to scaffold a development environment for building Politico interactives.
 
