@@ -5,6 +5,10 @@
         {%block title%}<title>Politico Interactives</title>{%endblock%}
         <%# Skip if using webpack. #%>
         <% if (cssInclude) { %> <link href="css/main.bundle.css" rel="stylesheet"> <% } %>
+        <!--Typekit-->
+        <script src="https://use.typekit.net/you6ipe.js"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
+        <!-- end -->
     </head>
     <body>
         {%block content%}{%endblock%}

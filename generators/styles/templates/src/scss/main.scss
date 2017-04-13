@@ -1,2 +1,10 @@
+@import 'bootstrap';
 @import 'colors';
 @import 'fonts';
+
+h1{
+    font-family: $proxima;
+    background-color: $red;
+    padding: 10px 5px;
+    color: white;
+}

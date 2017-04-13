@@ -24,6 +24,9 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js'));
+    this.fs.copy(
+      this.templatePath('postcss.config.js'),
+      this.destinationPath('postcss.config.js'));
     // Gulp files
     this.fs.copy(
       this.templatePath('gulp/tasks/nunjucks.js'),
@@ -38,6 +41,7 @@ module.exports = class extends Generator {
 
   install() {
     const dependencies = [
+      'autoprefixer',
       'babel-core',
       'babel-loader',
       'babel-preset-env',

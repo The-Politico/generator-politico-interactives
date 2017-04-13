@@ -14,16 +14,16 @@ module.exports = class extends Generator {
       type: 'list',
       name: 'lintProfile',
       choices: [{
-        value: this.CHOICE_AIRBNB,
-        name: `${chalk.bold('eslint-config-airbnb')} [strict enforcement of ES2015]`,
+        value: this.CHOICE_NO_ESLINT,
+        name: `${chalk.bold('No thanks')} [skips ESLint installation altogether]`,
       }, {
         value: this.CHOICE_ES6_RECOMMENDED,
-        name: `${chalk.bold('es6-recommended')} [encourages ES2015 syntax, but more forgiving]`,
+        name: `${chalk.bold('Recommended ES2015')} [encourages ES2015 syntax, but more forgiving]`,
       }, {
-        value: this.CHOICE_NO_ESLINT,
-        name: `${chalk.bold('No ESLint')} [skips ESLint installation altogether]`,
+        value: this.CHOICE_AIRBNB,
+        name: `${chalk.bold('Enforce ES2015')} [strict enforcement (airbnb)]`,
       }],
-      message: 'Would you like to add an ESLint configuration for linting your javascript?',
+      message: 'Would you like to add an ESLint configuration for linting ES2015 javascript?',
       store: true,
       default: 0,
     }];
@@ -84,6 +84,6 @@ module.exports = class extends Generator {
       default:
     }
 
-    this.yarnInstall(dependencies, { dev: true });
+    this.yarnInstall(dependencies, { save: true });
   }
 };

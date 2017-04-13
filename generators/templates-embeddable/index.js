@@ -65,10 +65,17 @@ module.exports = class extends Generator {
     const nunjucksTask = this.spawnCommand('gulp', ['nunjucks']);
     nunjucksTask.on('close', () => {
       // Copy the rendered template over initially
-      fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
+      if (this.options.webpack) {
+        fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
+      }
+
       const imgTask = this.spawnCommand('gulp', ['img']);
       imgTask.on('close', () => {
-        this.spawnCommand('gulp');
+        // Need this for webpack. Investigating why...
+        const yarnTask = this.spawnCommand('yarn', ['install']);
+        yarnTask.on('close', () => {
+          this.spawnCommand('gulp');
+        });
       });
     });
   }

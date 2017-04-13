@@ -11,5 +11,14 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/scss/_fonts.scss'),
       this.destinationPath('src/scss/_fonts.scss'));
+    this.fs.copy(
+      this.templatePath('src/scss/_bootstrap.scss'),
+      this.destinationPath('src/scss/_bootstrap.scss'));
+  }
+  install() {
+    const dependencies = [
+      'bootstrap-sass',
+    ];
+    this.yarnInstall(dependencies, { save: true });
   }
 };
