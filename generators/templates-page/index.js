@@ -1,5 +1,6 @@
 const Generator = require('yeoman-generator');
 const mkdirp = require('mkdirp');
+const fs = require('fs');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -57,6 +58,8 @@ module.exports = class extends Generator {
   end() {
     const nunjucksTask = this.spawnCommand('gulp', ['nunjucks']);
     nunjucksTask.on('close', () => {
+      // Copy the rendered template over initially
+      fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
       const imgTask = this.spawnCommand('gulp', ['img']);
       imgTask.on('close', () => {
         this.spawnCommand('gulp');

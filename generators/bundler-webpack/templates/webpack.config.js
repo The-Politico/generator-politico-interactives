@@ -61,7 +61,7 @@ module.exports = {
     contentBase: './dist',
     port: 3000,
     stats: 'errors-only',
-    https: true,
+    https: false,
   },
   stats: 'minimal',
   devtool: 'source-map',

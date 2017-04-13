@@ -1,4 +1,5 @@
 const Generator = require('yeoman-generator');
+const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -13,14 +14,13 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    mkdirp('./dist/js');
+    mkdirp('./dist/css');
     // JS files
     this.fs.copy(
       this.templatePath('src/js/main.js'),
       this.destinationPath('src/js/main.js'));
     // Config files
-    this.fs.copy(
-      this.templatePath('postcss.config.js'),
-      this.destinationPath('postcss.config.js'));
     this.fs.copy(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js'));

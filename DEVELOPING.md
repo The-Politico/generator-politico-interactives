@@ -47,7 +47,6 @@ Writes files needed to implement a browserify bundler.
 Writes files needed to implement a webpack bundler.
 
 - `webpack.config.js`
-- `postcss.config.js`
 - `gulpfile.js`
 - `gulp/tasks/nunjucks.js`
 - `gulp/tasks/webpack.js`
