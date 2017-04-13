@@ -1,4 +1,8 @@
+![Politico][logo]
+
 # generator-politico-interactives [![npm version](https://badge.fury.io/js/generator-politico-interactives.svg)](https://badge.fury.io/js/generator-politico-interactives)
+
+
 
 A [Yeoman](http://yeoman.io) generator to scaffold a development environment for building Politico interactives.
 
@@ -71,3 +75,5 @@ To change an HTML template, check with a developer.
 #### For developers
 
 See [development docs](DEVELOPING.md).
+
+[logo]: logo.png "Logo"
