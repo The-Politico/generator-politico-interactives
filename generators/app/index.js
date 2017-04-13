@@ -15,6 +15,7 @@ module.exports = class extends Generator {
   initializing() {
     this.composeWith(require.resolve('../linters'));
     this.composeWith(require.resolve('../gulp'));
+    this.composeWith(require.resolve('../styles'));
   }
 
   prompting() {
@@ -64,6 +65,7 @@ module.exports = class extends Generator {
     return this.prompt(questions).then((answers) => {
       this.projectType = answers.projectType;
       this.projectTitle = answers.projectTitle;
+      this.projectSlug = S(answers.projectTitle).slugify().s;
       this.projectBundler = answers.projectBundler;
       this.awsAccessKey = answers.awsAccessKey;
       this.awsSecretKey = answers.awsSecretKey;
@@ -72,19 +74,35 @@ module.exports = class extends Generator {
   template() {
     switch (this.projectType) {
       case 'embed':
-        this.composeWith(require.resolve('../embeddable'), {
+        this.composeWith(require.resolve('../templates-embeddable'), {
           title: this.projectTitle,
           webpack: this.projectBundler === this.WEBPACK,
         });
         break;
       default:
-        this.composeWith(require.resolve('../page'), {
+        this.composeWith(require.resolve('../templates-page'), {
           title: this.projectTitle,
           webpack: this.projectBundler === this.WEBPACK,
         });
     }
   }
   writing() {
+    this.fs.copy(
+      this.templatePath('aws.json.example'),
+      this.destinationPath('aws.json.example'));
+
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('./.gitignore'));
+
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'), {
+        slug: this.projectSlug,
+        userName: this.user.git.name(),
+        userEmail: this.user.git.email(),
+      });
+
     const awsJSON = {
       accessKeyId: this.awsAccessKey,
       secretAccessKey: this.awsSecretKey,
@@ -95,8 +113,8 @@ module.exports = class extends Generator {
 
     const d = new Date();
     const metaJSON = {
-      year: d.getFullYear(),
-      directory: `${d.getFullYear()}/${S(this.projectTitle).slugify().s}`,
+      publishYear: d.getFullYear(),
+      publishPath: `${d.getFullYear()}/${this.projectSlug}/`,
     };
 
     this.fs.writeJSON('aws.json', awsJSON);

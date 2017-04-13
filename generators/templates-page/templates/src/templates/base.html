@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {%block title%}<title>Politico Interactives</title>{%endblock%}
+        <%# Skip if using webpack. #%>
+        <% if (cssInclude) { %> <link href="css/main.bundle.css" rel="stylesheet"> <% } %>
+    </head>
+    <body>
+        {%block content%}{%endblock%}
+        <%# Skip if using webpack. #%>
+        <% if (jsInclude) { %> <script type="text/javascript" src="js/main.bundle.js"> </script> <% } %>
+    </body>
+</html>

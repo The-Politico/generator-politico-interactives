@@ -1,0 +1,7 @@
+{
+  "accessKeyId": "ACCESS_KEY",
+  "secretAccessKey": "SECRET_KEY",
+  "params": {
+    "Bucket": "interactives.politico.com"
+  }
+}

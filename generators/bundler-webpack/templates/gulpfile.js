@@ -15,3 +15,5 @@ gulp.task('default', ['nunjucks-watch', 'webpack']);
 gulp.task('img', (cb) => {
   runSequence('img-optimize', 'img-resize', 'img-copy', cb);
 });
+
+gulp.task('publish', ['aws']);

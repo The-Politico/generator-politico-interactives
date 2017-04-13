@@ -4,8 +4,8 @@ A [Yeoman](http://yeoman.io) generator to scaffold a development environment for
 
 ### What it does:
 
-- Scaffolds your project's development directory, shortcutting setup time.
-- Compiles SCSS and bundles JS written in either ES6 or ES5.
+- Scaffolds your project's development directory, either for an embeddable feature or a complete interactive page.
+- Compiles SCSS and bundles JS written in either ES5 or ES2015 using your choice of browserify or webpack.
 - Creates responsive image sets optimized for mobile devices.
 - Publishes your project to an Amazon S3 bucket.
 
@@ -48,3 +48,26 @@ When you're ready to publish, run the publish command through gulp.
 ```bash
 $ gulp publish
 ```
+
+## Developing
+
+To develop, clone this repository and use `npm link` to test changes locally before publishing updates.
+
+#### For designers
+
+To change styles, simply update the scss files in the following directory within this generator
+
+- `generators/styles/templates/src/scss/`
+
+Make sure you've run the generator locally to check that your changes carried through.
+
+Once you're satisfied with your changes, publish via the following:
+- increment the version number in `package.json`
+- commit the repo to github
+- run `npm publish`
+
+To change an HTML template, check with a developer.
+
+#### For developers
+
+See [development docs](DEVELOPING.md).
