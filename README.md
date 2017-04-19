@@ -102,9 +102,9 @@ Optionally, there is a gulp task available which allows you to use [ArchieML](ht
 
 You will be asked if you want to use ArchieML when you start the generator. You can also add it to a project later by running:
 
-    ```bash
-    $ yo politico-interactives:archie
-    ```
+```bash
+$ yo politico-interactives:archie
+```
 
 To setup the ArchieML task you will need API credentials from a project in the [Google Developers Console](https://console.developers.google.com). Ask a developer for the client ID and secret keys. You will also need to provide the ID for the Google doc you wish to use, which you can get from the URL of your doc:
 
@@ -116,9 +116,9 @@ Your document **must have access set to "Anyone with the link can view" to use t
 
 The archie gulp task will access your Google doc and overwrite `templates/data.json` with ArchieML data. To run it:
 
-    ```bash
-    $ gulp archie
-    ```
+```bash
+$ gulp archie
+```
 
 On first running the task, you will need to authorize access to the document through Google. The task will open the authorization dialogue in your browser. Follow the prompts and then copy and paste the code returned in the redirect URL, which will look like this in the URL bar:
 
