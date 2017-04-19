@@ -8,7 +8,6 @@ const readline = require('readline');
 const google = require('googleapis');
 const GoogleAuth = require('google-auth-library');
 const archieml = require('archieml');
-const winston = require('winston');
 const path = require('path');
 const url = require('url');
 const open = require('open');
@@ -41,7 +40,8 @@ const storeToken = (token) => {
     }
   }
   fs.writeFile(TOKEN_PATH, JSON.stringify(token));
-  winston.log(`Token stored to ${TOKEN_PATH}`);
+  // eslint-disable-next-line no-console
+  console.log(`Token stored to ${TOKEN_PATH}`);
 };
 
 /**
@@ -55,7 +55,8 @@ const getNewToken = (oauth, callback) => {
     scope: SCOPES,
     approval_prompt: 'force',
   });
-  winston.log('Authorize this app by visiting this url: ', authUrl);
+  // eslint-disable-next-line no-console
+  console.log('Authorize this app by visiting this url: ', authUrl);
   open(authUrl);
   const rl = readline.createInterface({
     input: process.stdin,
@@ -65,7 +66,8 @@ const getNewToken = (oauth, callback) => {
     rl.close();
     oauth2Client.getToken(code, (err, token) => {
       if (err) {
-        winston.log('Error while trying to retrieve access token: ', err);
+        // eslint-disable-next-line no-console
+        console.log('Error while trying to retrieve access token: ', err);
         return;
       }
       oauth2Client.credentials = token;
@@ -151,7 +153,6 @@ const parseGDoc = (dom) => {
     const body = dom[0].children[1];
     let parsedText = tagHandlers.base(body);
 
-
     // Convert html entities into the characters as they exist in the google doc
     const entities = new Entities();
     parsedText = entities.decode(parsedText);
@@ -166,7 +167,8 @@ const parseGDoc = (dom) => {
       archieData);
     return archieData;
   } catch (e) {
-    winston.log('Cannot access that Google Doc', e);
+    // eslint-disable-next-line no-console
+    console.log('Cannot access that Google Doc (Are you sure you\'ve shared it?)', e);
   }
   return null;
 };
@@ -182,22 +184,24 @@ const getExportLink = (auth) => {
   });
   drive.files.get({ fileId }, (er, doc) => {
     if (er) {
-      winston.log('Error accessing gdoc:', er);
+      // eslint-disable-next-line no-console
+      console.log('Error accessing gdoc:', er);
       return;
     }
-    winston.log(doc);
     const exportLink = doc.exportLinks['text/html'];
     oauth2Client._makeRequest({ // eslint-disable-line no-underscore-dangle
       method: 'GET',
       uri: exportLink,
     }, (err, body) => {
       if (err) {
-        winston.log('Error downloading gdoc', err);
+        // eslint-disable-next-line no-console
+        console.log('Error downloading gdoc', err);
         return;
       }
       const handler = new htmlparser.DomHandler((error, dom) => {
         if (err) {
-          winston.log('Error parsing gdoc', error);
+          // eslint-disable-next-line no-console
+          console.log('Error parsing gdoc', error);
           return;
         }
         parseGDoc(dom);
