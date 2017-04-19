@@ -28,7 +28,7 @@ module.exports = class extends Generator {
       default: 0,
     }];
 
-    return this.prompt(prompts, (answers) => {
+    return this.prompt(prompts).then((answers) => {
       this.lintProfile = answers.lintProfile;
     });
   }

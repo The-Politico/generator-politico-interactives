@@ -1,5 +1,6 @@
 const gulp = require('./gulp')([
   'aws',
+  <% if (archie) { %>'archie',<% } %> // eslint-disable-line
   'browserify',
   'js-build',
   'js-watch',

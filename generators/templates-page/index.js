@@ -18,6 +18,12 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Use webpack module bundler',
     });
+    this.option('archie', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Use ArchieML',
+    });
   }
 
   initializing() {
@@ -25,13 +31,16 @@ module.exports = class extends Generator {
       case true:
         this.composeWith(require.resolve('../bundler-webpack'), {
           embed: false,
+          archie: this.options.archie,
         });
         break;
       default:
         this.composeWith(require.resolve('../bundler-browserify'), {
           embed: false,
+          archie: this.options.archie,
         });
     }
+    if (this.options.archie) this.composeWith(require.resolve('../archie'));
   }
 
   writing() {
@@ -50,6 +59,7 @@ module.exports = class extends Generator {
         cssInclude: !this.options.webpack, // Don't include script tags for webpack
         jsInclude: !this.options.webpack, // which injects them automatically.
       });
+    this.fs.writeJSON('src/templates/data.json', {});
     // Images directory
     mkdirp('./src/images');
     mkdirp('./src/images/opt');

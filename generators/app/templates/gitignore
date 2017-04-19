@@ -2,6 +2,10 @@
 aws.json
 .awspublish*
 
+# Google credentials (if using archieML)
+archie.json
+google-token.json
+
 # Logs
 logs
 *.log

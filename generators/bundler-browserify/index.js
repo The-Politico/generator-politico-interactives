@@ -10,15 +10,23 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Whether building an embeddable',
     });
+    this.option('archie', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Use ArchieML',
+    });
   }
 
   writing() {
     this.fs.copy(
       this.templatePath('src/js/main.js'),
       this.destinationPath('src/js/main.js'));
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'));
+      this.destinationPath('gulpfile.js'), {
+        archie: this.options.archie,
+      });
     this.fs.copy(
       this.templatePath('gulp/tasks/browserify.js'),
       this.destinationPath('gulp/tasks/browserify.js'));
@@ -47,12 +55,15 @@ module.exports = class extends Generator {
       'browserify',
       'browser-sync',
       'event-stream',
+      'fs-extra',
       'gulp',
       'gulp-nunjucks-render',
       'gulp-sass',
       'gulp-sourcemaps',
       'gulp-uglify',
       'gulp-util',
+      'marked',
+      'nunjucks',
       'run-sequence',
       'vinyl-buffer',
       'vinyl-source-stream',

@@ -11,6 +11,12 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Whether building an embeddable',
     });
+    this.option('archie', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Use ArchieML',
+    });
   }
 
   writing() {
@@ -34,9 +40,11 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('gulp/tasks/webpack.js'),
       this.destinationPath('gulp/tasks/webpack.js'));
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'));
+      this.destinationPath('gulpfile.js'), {
+        archie: this.options.archie,
+      });
   }
 
   install() {
@@ -47,6 +55,7 @@ module.exports = class extends Generator {
       'babel-preset-env',
       'css-loader',
       'extract-text-webpack-plugin',
+      'fs-extra',
       'glob',
       'globby',
       'gulp',
@@ -54,7 +63,9 @@ module.exports = class extends Generator {
       'gulp-util',
       'html-webpack-plugin',
       'lodash',
+      'marked',
       'node-sass',
+      'nunjucks',
       'open',
       'optimize-css-assets-webpack-plugin',
       'postcss-loader',

@@ -53,12 +53,17 @@ module.exports = class extends Generator {
         },
       ],
     }, {
+      type: 'confirm',
+      name: 'archieML',
+      message: 'Would like to include an ArchieML configuration?',
+      default: false,
+    }, {
       name: 'awsAccessKey',
-      message: 'Wha\'s your AWS access key?',
+      message: 'What\'s your AWS access key?',
       store: true,
     }, {
       name: 'awsSecretKey',
-      message: 'Wha\'s your AWS secret key?',
+      message: 'What\'s your AWS secret key?',
       store: true,
     }];
 
@@ -67,6 +72,7 @@ module.exports = class extends Generator {
       this.projectTitle = answers.projectTitle;
       this.projectSlug = S(answers.projectTitle).slugify().s;
       this.projectBundler = answers.projectBundler;
+      this.archieML = answers.archieML;
       this.awsAccessKey = answers.awsAccessKey;
       this.awsSecretKey = answers.awsSecretKey;
     });
@@ -77,12 +83,14 @@ module.exports = class extends Generator {
         this.composeWith(require.resolve('../templates-embeddable'), {
           title: this.projectTitle,
           webpack: this.projectBundler === this.WEBPACK,
+          archie: this.archieML,
         });
         break;
       default:
         this.composeWith(require.resolve('../templates-page'), {
           title: this.projectTitle,
           webpack: this.projectBundler === this.WEBPACK,
+          archie: this.archieML,
         });
     }
   }
@@ -107,7 +115,7 @@ module.exports = class extends Generator {
       accessKeyId: this.awsAccessKey,
       secretAccessKey: this.awsSecretKey,
       params: {
-        Bucket: 'interactives.politico.com',
+        Bucket: 'com.politico.interactives.politico.com',
       },
     };
 
