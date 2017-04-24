@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="utf-8">
         {%block title%}<title>Politico Interactives</title>{%endblock%}
         <%# Skip if using webpack. #%>
@@ -11,8 +12,50 @@
         <!-- end -->
     </head>
     <body>
-        {%block content%}{%endblock%}
-        <%# Skip if using webpack. #%>
-        <% if (jsInclude) { %> <script type="text/javascript" src="js/main.bundle.js"> </script> <% } %>
+        {%block nav%}
+        <nav title="navigation"><!--class="light-theme"-->
+          <div id="global-header">
+            <div id="global-header-inner">
+                <div id="global-branding">
+                   <a class="navbar-brand" href="http://www.politico.com/" title="POLITICO" target="_top">
+                     <span class="icon icon-politico "></span>
+                     <span class="icon-text">POLITICO</span>
+                   </a>
+                </div>
+                <nav id="nav-micro" role="navigation">
+                  <ul class="micro-list">
+                    <li class="subnav micro-core-header-pro-column format-s pos-alpha">
+                        <a href="https://www.politicopro.com" target="_top"><span aria-hidden="true" class="icon icon-pro-small-bold"></span>
+                        <span class="icon-text">POLITICO PRO</span>
+                    </a></li>
+                  </ul>
+                </nav>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </nav>
+        {%endblock%}
+
+        {%block header%}{%endblock%}
+
+        {%block lead_art%}{%endblock%}
+
+         <article class="container">
+            {%block content%}{%endblock%}
+         </article>
+
+         {%block footer%}
+         <footer>
+           <div id="global-footer">
+             <div class="footer-branding">
+               <a class="navbar-brand" href="http://www.politico.com/" title="POLITICO" target="_top">
+                 <span class="icon icon-politico"></span>
+               </a>
+            </div>
+           </div>
+         </footer>
+         {%endblock%}
+         <%# Skip if using webpack. #%>
+         <% if (jsInclude) { %> <script type="text/javascript" src="js/main.bundle.js"> </script> <% } %>
     </body>
 </html>

@@ -1,11 +1,196 @@
+@import 'breakpoints';
 @import 'bootstrap';
 @import 'colors';
 @import 'fonts';
+@import 'icons';
+@import 'photos';
+@import 'navigation';
+@import 'footer';
 
-h1{
+@mixin center-clear {
+  text-align: left;
+  margin: inherit 0;
+}
+
+#global-footer .icon-politico {
+  font-size: 2em;
+}
+
+.clear {
+  clear: both;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a,
+a::before,
+a::after,
+button {
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
+}
+
+body {
+  color: $black;
+  font-family: $tisa;
+  // background:$patina-gray;
+  font-size: 16px;
+  line-height: 1.1em;
+}
+
+.sans {
+  font-family: proxima;
+}
+
+.sans-bold {
+  font-family: $proxima;
+  font-weight: bold;
+}
+
+.jubilat {
+  font-family: $jubilat;
+}
+
+// Header and h groups
+header {
+  padding-top: 1.25em;
+
+  @media (max-width: $width-medium) {
+    padding: 0 15px;
+  }
+
+  .info p,
+  .info a {
+    color: $dark-gray-text;
     font-family: $proxima;
-    background-color: $red;
-    padding: 10px 5px;
-    color: white;
+    margin-top: .5em;
     text-transform: uppercase;
+    line-height: 1.3em;
+  }
+
+  .info p {
+    @media (max-width: $width-medium) {
+      font-size: 1em;
+      margin-left: 0;
+      margin-right: 0;
+      }
+    }
+}
+
+header.center {
+  p.category,
+  p.category a,
+  h1,
+  p.subhead,
+ .info {
+    margin: inherit auto;
+    text-align: center;
+
+    @media (max-width: $width-medium) {
+      @include center-clear;
+      }
+  }
+
+  p.subhead {
+    margin-top: 5px;
+    padding: 0;
+    max-width: 750px;
+  }
+}
+
+  h1 {
+    font-family: $tablet;
+    font-size: 3.25em;
+    font-weight: bold;
+    line-height: 1.1em;
+    margin: 0;
+    padding: 10px 5px;
+
+    @media (max-width: $width-medium) {
+      font-size: 2.5em;
+      }
+  }
+
+p {
+  font-size: 1.2em;
+  line-height: 1.618em;
+  margin: 1.618em auto;
+  max-width: 600px;
+  overflow-wrap: break-word;
+
+  &.subhead {
+    font-family: $proxima;
+    font-size: 1.375em;
+    font-weight: 400;
+    line-height: 1.2em;
+    margin: .5em auto 0;
+    padding-bottom: 0;
+
+    @media (max-width: $width-medium) {
+      font-size: 1.23em;
+      }
+    }
+}
+
+
+p.category,
+h1,
+header > p.subhead,
+header .info {
+  max-width: 100%;
+}
+
+p.category,
+p.category a {
+  color: $politico-red;
+  font-family: $proxima;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+h2.graphic,
+h3.graphic,
+h4.graphic,
+h5.graphic {
+  font-family: $proxima;
+}
+
+h3,
+h4,
+h5 {
+  font-weight: 700;
+}
+
+h2 + p,
+h3 + p,
+h4 + p {
+  margin-top: .2em;
+}
+
+h3.graphic {
+  font-size: 1.4em;
+}
+
+// Story
+
+
+// Sections
+article section {
+  margin: 4em auto;
+  max-width: 600px;
+
+  h3 {
+    font-size: 1.8em;
+    margin: 0;
+
+    + figure {
+      margin-top: 10px;
+    }
+  }
 }

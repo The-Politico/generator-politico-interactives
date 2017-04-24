@@ -146,7 +146,9 @@ To change styles, simply update the scss files in the following directory within
 
 - `generators/styles/templates/src/scss/`
 
-Make sure you've run the generator locally to check that your changes carried through.
+If you need to add a new SCSS file, ask a developer to help you write the line that loads your new file into a user's development directory.
+
+Make sure you've run the generator locally to c heck that your changes carried through.
 
 Once you're satisfied with your changes, publish via the following:
 - increment the version number in `package.json`

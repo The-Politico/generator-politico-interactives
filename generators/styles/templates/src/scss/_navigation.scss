@@ -1,0 +1,74 @@
+#global-header {
+  background: $politico-red;
+}
+
+#global-header {
+  .icon-politico {
+    font-size: 1.5em;
+  }
+}
+
+#global-header a,
+#global-footer a {
+  color: $white;
+}
+
+#global-branding {
+  float:left;
+}
+
+#nav-micro {
+  float:right;
+  ul {
+    list-style: none;
+    margin-bottom: 1px;
+    padding-bottom: 0;
+  }
+}
+
+a.navbar-brand .icon.icon-politico {
+  font-size: 1.5em;
+  line-height: 2.29166666666667em;
+  margin-left: .7em;
+}
+
+.micro-list>li>a {
+  background: $politico-red;
+  border-left: 1px solid $dark-red;
+  display: block;
+  font-family: $tablet;
+  font-weight: 700;
+  line-height: 3.4375;
+  min-width: 2.5em;
+  padding: 0 .9375em;
+  position: relative;
+  text-align: center;
+}
+
+a.navbar-brand .icon.icon-pro-small-bold {
+  font-size: 1em;
+  line-height: 2.29166666666667em;
+  margin-right: 1em;
+  padding: 0 .3125em;
+}
+
+//Light Theme
+.light-theme {
+  #global-header {
+    background: $white;
+    border-bottom: 0;
+  }
+
+  #global-header a, #global-footer a  {
+    color: $politico-red;
+  }
+
+  #global-header.icon , nav .icon {
+  color: $politico-red;
+  }
+
+  .micro-list>li>a {
+  background: $white;
+  border: 0;
+  }
+}

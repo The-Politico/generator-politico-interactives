@@ -1,0 +1,76 @@
+@mixin clear-photo-sets {
+  float: none;
+  margin: 0 0 1%;
+  width: 100%;
+}
+
+//Photos
+figure {
+  img {
+    width: 100%;
+  }
+
+  &.full {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &.content-fit {
+    margin: auto;
+    max-width: 600px;
+  }
+
+  &.center {
+    margin: 0 auto;
+  }
+}
+
+figcaption {
+  color: $dark-gray-text;
+  font-family: $proxima;
+  font-size: .875em;
+  line-height: 1.2em;
+  padding: 5px;
+  text-align: left;
+}
+
+//Photo sets
+//2
+.diptych {
+  margin: 2em 0;
+  width: 100%;
+}
+
+.diptych figure {
+  float: left;
+  margin: 0 1% 0 0;
+  width: calc(99% / 2);
+
+  @media (max-width: $width-small) {
+    @include clear-photo-sets;
+  }
+}
+
+.diptych figure:last-of-type {
+  margin-right: 0;
+}
+
+//3
+.triptych figure {
+  float: left;
+  margin: 0 1% 0 0;
+  width: calc(98% / 3);
+
+  @media (max-width: $width-small) {
+    @include clear-photo-sets;
+  }
+}
+
+.triptych figure:last-of-type {
+  margin-right: 0;
+}
