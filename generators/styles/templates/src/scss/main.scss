@@ -37,9 +37,14 @@ button {
 body {
   color: $black;
   font-family: $tisa;
-  // background:$patina-gray;
   font-size: 16px;
   line-height: 1.1em;
+
+  &::before, // Needed for embeddables...
+  &::after {
+    content: ' ';
+    display: table;
+  }
 }
 
 .sans {

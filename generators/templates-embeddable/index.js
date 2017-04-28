@@ -45,9 +45,18 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const d = new Date();
+    const slug = S(this.options.title).slugify().s;
     // Skeleton
     mkdirp('./src');
     mkdirp('./dist');
+    this.fs.copyTpl(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md'), {
+        title: this.options.title,
+        path: `${d.getFullYear()}/embed/${slug}/index.html`,
+        slug,
+      });
     // Nunjucks templates
     this.fs.copyTpl(
       this.templatePath('src/templates/index.html'),

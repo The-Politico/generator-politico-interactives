@@ -122,7 +122,9 @@ module.exports = class extends Generator {
     const d = new Date();
     const metaJSON = {
       publishYear: d.getFullYear(),
-      publishPath: `${d.getFullYear()}/${this.projectSlug}/`,
+      publishPath: this.projectType === 'embed' ?
+        `${d.getFullYear()}/embed/${this.projectSlug}/` :
+        `${d.getFullYear()}/${this.projectSlug}/`,
     };
 
     this.fs.writeJSON('aws.json', awsJSON);

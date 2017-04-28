@@ -19,9 +19,16 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copy(
-      this.templatePath('src/js/main.js'),
-      this.destinationPath('src/js/main.js'));
+    if (this.options.embed) {
+      this.fs.copy(
+        this.templatePath('src/js/main-embed.js'),
+        this.destinationPath('src/js/main.js'));
+    } else {
+      this.fs.copy(
+        this.templatePath('src/js/main.js'),
+        this.destinationPath('src/js/main.js'));
+    }
+
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js'), {
@@ -69,6 +76,9 @@ module.exports = class extends Generator {
       'vinyl-source-stream',
       'watchify',
     ];
+    if (this.options.embed) {
+      dependencies.push('pym.js');
+    }
     this.yarnInstall(dependencies, { save: true });
   }
 };
