@@ -1,0 +1,12 @@
+@mixin clearfix {
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+@mixin center-clear {
+  text-align: left;
+  margin: inherit 0;
+}

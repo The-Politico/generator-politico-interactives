@@ -49,10 +49,16 @@ $ gulp
 
 Develop files in the `src` directory and they will be automatically compiled to the `dist` directory, which are the files that will actually be published.
 
-When you're ready to publish, run the publish command through gulp.
+When you're ready to publish, complete the share information in `meta.json`, then run the publish command through gulp.
 
 ```bash
 $ gulp publish
+```
+
+If you need to invalidate files you've previously published in CloudFront, add the `--invalidate` flag to the `publish` command:
+
+```bash
+$ gulp publish --invalidate
 ```
 
 #### Restarting a project

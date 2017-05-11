@@ -20,11 +20,15 @@ const manageEnvironment = (environment) => {
 module.exports = () => {
   const contextData = fs.readJsonSync(
     path.resolve(process.cwd(), 'src/templates/data.json'));
+  const meta = fs.readJsonSync(
+    path.resolve(process.cwd(), 'meta.json'));
+
+  const templateContext = Object.assign({ meta }, contextData);
 
   return gulp.src('src/templates/index.html')
     .pipe(nunjucksRender({
       path: ['src/templates/'],
-      data: contextData,
+      data: templateContext,
       manageEnv: manageEnvironment,
     }))
     .pipe(gulp.dest('dist'));

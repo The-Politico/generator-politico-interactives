@@ -116,15 +116,47 @@ module.exports = class extends Generator {
       secretAccessKey: this.awsSecretKey,
       params: {
         Bucket: 'com.politico.interactives.politico.com',
+        CloudFront: 'E3V6OHE700RHMR',
       },
     };
 
-    const d = new Date();
+    const timestamp = new Date();
+    const publishPath = this.projectType === 'embed' ?
+      `${timestamp.getFullYear()}/embed/${this.projectSlug}/` :
+      `${timestamp.getFullYear()}/${this.projectSlug}/`;
+
     const metaJSON = {
-      publishYear: d.getFullYear(),
-      publishPath: this.projectType === 'embed' ?
-        `${d.getFullYear()}/embed/${this.projectSlug}/` :
-        `${d.getFullYear()}/${this.projectSlug}/`,
+      id: (Math.floor(Math.random() * 100000000000) + 1).toString(),
+      publishPath,
+      url: `http://www.politico.com/interactives/${publishPath}`,
+      share: {
+        fbook: {
+          card_title: this.projectTitle,
+          card_description: '<Text>',
+          author: 'politico',
+        },
+        twitter: {
+          card_title: this.projectTitle,
+          card_description: '<Text>',
+          author: '@politico',
+        },
+        image: {
+          url: `http://www.politico.com/interactives/${publishPath}images/share.jpg`,
+          alt: '<Text>',
+          type: 'image/jpeg',
+          width: '600',
+          height: '315',
+        },
+        keywords: 'Politico, News, Washington D.C.',
+      },
+      telium: {
+        free_paid_content: 'free',
+        site_section: 'white house',
+        ad_unit_section: 'whitehouse',
+        content_author: 'Polly Politico|Peter Politico',
+        content_byline: 'By Polly Politico and Peter Politico',
+        page_name: `${this.projectTitle} — POLITICO`,
+      },
     };
 
     this.fs.writeJSON('aws.json', awsJSON);

@@ -48,10 +48,9 @@ module.exports = class extends Generator {
     mkdirp('./src');
     mkdirp('./dist');
     // Nunjucks templates
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('src/templates/index.html'),
-      this.destinationPath('src/templates/index.html'),
-      { title: this.options.title });
+      this.destinationPath('src/templates/index.html'));
     this.fs.copyTpl(
       this.templatePath('src/templates/base.html'),
       this.destinationPath('src/templates/base.html'),
@@ -59,6 +58,36 @@ module.exports = class extends Generator {
         cssInclude: !this.options.webpack, // Don't include script tags for webpack
         jsInclude: !this.options.webpack, // which injects them automatically.
       });
+    // Meta tags
+    this.fs.copy(
+      this.templatePath('src/templates/meta/social.html'),
+      this.destinationPath('src/templates/meta/social.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/meta/telium.html'),
+      this.destinationPath('src/templates/meta/telium.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/meta/icons.html'),
+      this.destinationPath('src/templates/meta/icons.html'));
+    // Ads
+    this.fs.copy(
+      this.templatePath('src/templates/ads/banner1.html'),
+      this.destinationPath('src/templates/ads/banner1.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/ads/banner2.html'),
+      this.destinationPath('src/templates/ads/banner2.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/ads/cube.html'),
+      this.destinationPath('src/templates/ads/cube.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/ads/supercube1.html'),
+      this.destinationPath('src/templates/ads/supercube1.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/ads/supercube2.html'),
+      this.destinationPath('src/templates/ads/supercube2.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/ads/script.html'),
+      this.destinationPath('src/templates/ads/script.html'));
+    // Template context
     this.fs.writeJSON('src/templates/data.json', {});
     // Images directory
     mkdirp('./src/images');

@@ -6,6 +6,9 @@ aws.json
 archie.json
 google-token.json
 
+# Bundles
+dist/**/*.bundle.*
+
 # Logs
 logs
 *.log

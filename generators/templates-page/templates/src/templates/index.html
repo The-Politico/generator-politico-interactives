@@ -1,29 +1,30 @@
 {%extends "base.html"%}
 
 {%block title%}
-<title><%=title%></title>
-{%endblock%}
-
-{%block lead_art%}
-<figure class="content-fit">
-  <img src="https:placehold.it/800x600?text=lead+art+here" alt="An awesome picture">
-  <figcaption>Your concise caption here. <figcredit>First Last | Photo service</figcaption>
-</figure>
+<title>{{meta.share.fbook.card_title}}</title>
 {%endblock%}
 
 
 {%block header%}
+{% include "ads/banner1.html" %}
 <header class="center">
     <p class="category">
-            <a href="###" target="_blank">Category title</a></p>
-    <h1 class="">
-        Your pithy, compelling headline here</h1>
+    <a href="###" target="_blank">Category title</a></p>
+    <h1>
+        Your pithy, compelling headline here
+    </h1>
     <p class="subhead">
             Politico is an American political-journalism company based in Arlington County, Virginia, that covers politics and policy in the United States and internationally.</p>
     <div class="info">
-    <p>By <span class="byline"><a href="###">First Lastname</a></span> and <span class="byline"><a href="###">First Lastname</a></span> | <span class="timestamp"> <time datetime="2017-04-13T08:13-0400">04/13/17 08:13 PM EDT</time></span>
+        <p>
+            By <span class="byline"><a href="###">First Lastname</a></span> and <span class="byline"><a href="###">First Lastname</a></span> | <span class="timestamp"> <time datetime="2017-04-13T08:13-0400">04/13/17 08:13 PM EDT</time></span>
+        </p>
     </div>
 </header>
+<figure class="content-fit">
+    <img src="https:placehold.it/800x600?text=lead+art+here" alt="An awesome picture" />
+    <figcaption>Your concise caption here. <figcredit>First Last | Photo service</figcaption>
+</figure>
 {%endblock%}
 
 {%block content%}
@@ -34,6 +35,8 @@
 <p>He was born into the provincial gentry of Colonial Virginia to a family of wealthy planters who owned tobacco plantations and slaves, which he inherited. In his youth, he became a senior officer in the colonial militia during the first stages of the French and Indian War. In 1775, the Second Continental Congress commissioned him as commander-in-chief of the Continental Army in the American Revolution. In that command, Washington forced the British out of Boston in 1776 but was defeated and nearly captured later that year when he lost New York City.</p>
 
 <p>After crossing the Delaware River in the middle of winter, he defeated the British in two battles (Trenton and Princeton), retook New Jersey, and restored momentum to the Patriot cause. His strategy enabled Continental forces to capture two major British armies at Saratoga in 1777 and Yorktown in 1781. Historians laud Washington for the selection and supervision of his generals; preservation and command of the army; coordination with the Congress, state governors, and their militia; and attention to supplies, logistics, and training. In battle, however, Washington was repeatedly outmaneuvered by British generals with larger armies.</p>
+
+{% include "ads/cube.html" %}
 
 <section>
 <h3>Section title here</h3>

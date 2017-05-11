@@ -23,9 +23,11 @@ module.exports = class extends Generator {
   }
   install() {
     const dependencies = [
+      'fs-extra',
       'gulp',
       'gulp-awspublish',
       'gulp-changed',
+      'gulp-cloudfront-invalidate-aws-publish',
       'gulp-confirm',
       'gulp-imagemin',
       'gulp-image-resize',

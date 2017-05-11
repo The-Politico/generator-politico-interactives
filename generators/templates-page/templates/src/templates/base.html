@@ -2,10 +2,19 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta charset="utf-8">
         {%block title%}<title>Politico Interactives</title>{%endblock%}
+        {%include "meta/icons.html"%}
+        {%include "meta/social.html"%}
         <%# Skip if using webpack. #%>
         <% if (cssInclude) { %> <link href="css/main.bundle.css" rel="stylesheet"> <% } %>
+        <!-- jQuery -->
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+          crossorigin="anonymous">
+        </script>
         <!--Typekit-->
         <script src="https://use.typekit.net/you6ipe.js"></script>
         <script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -13,9 +22,8 @@
     </head>
     <body>
         {%block nav%}
-        <nav title="navigation"><!--class="light-theme"-->
-          <div id="global-header">
-            <div id="global-header-inner">
+        <nav title="navigation">
+            <div id="global-header">
                 <div id="global-branding">
                    <a class="navbar-brand" href="http://www.politico.com/" title="POLITICO" target="_top">
                      <span class="icon icon-politico "></span>
@@ -24,21 +32,20 @@
                 </div>
                 <nav id="nav-micro" role="navigation">
                   <ul class="micro-list">
-                    <li class="subnav micro-core-header-pro-column format-s pos-alpha">
+                    <li class="subnav">
+                        <a href="http://www.politico.com/magazine/" target="_top">Magazine
+                    </a></li>
+                    <li class="subnav">
                         <a href="https://www.politicopro.com" target="_top"><span aria-hidden="true" class="icon icon-pro-small-bold"></span>
                         <span class="icon-text">POLITICO PRO</span>
                     </a></li>
                   </ul>
                 </nav>
             </div>
-            <div class="clear"></div>
-          </div>
         </nav>
         {%endblock%}
 
         {%block header%}{%endblock%}
-
-        {%block lead_art%}{%endblock%}
 
          <article class="container">
             {%block content%}{%endblock%}
@@ -51,11 +58,22 @@
                <a class="navbar-brand" href="http://www.politico.com/" title="POLITICO" target="_top">
                  <span class="icon icon-politico"></span>
                </a>
+             </div>
+               <div class="footer-legal">
+                    <div class="copyright"> © 2017 POLITICO LLC</div>
+                    <ul class="legal-links">
+                      <li><a href="http://www.politico.com/terms-of-service" target="_top">Terms of Service</a></li>
+                      <li><a href="http://www.politico.com/privacy-policy" target="_top">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
             </div>
            </div>
          </footer>
          {%endblock%}
          <%# Skip if using webpack. #%>
          <% if (jsInclude) { %> <script type="text/javascript" src="js/main.bundle.js"> </script> <% } %>
+         {% include "meta/telium.html" %}
+         {% include "ads/script.html" %}
     </body>
 </html>

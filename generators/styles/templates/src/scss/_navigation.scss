@@ -1,55 +1,62 @@
 #global-header {
+  @include clearfix;
   background: $politico-red;
-}
 
-#global-header {
+  #global-header, ul {
+    @include clearfix;
+  }
+
   .icon-politico {
-    font-size: 1.5em;
+    font-size: 16px;
+    line-height: 45px;
+    margin-left: .7em;
   }
-}
 
-#global-header a,
-#global-footer a {
-  color: $white;
-}
+  a {
+    color: $white;
 
-#global-branding {
-  float:left;
-}
+      &:hover, &:focus{
+        text-decoration: none;
+        opacity: .8;
+      }
+    }
 
-#nav-micro {
-  float:right;
-  ul {
-    list-style: none;
-    margin-bottom: 1px;
-    padding-bottom: 0;
+  #global-branding {
+    float: left;
   }
-}
 
-a.navbar-brand .icon.icon-politico {
-  font-size: 1.5em;
-  line-height: 2.29166666666667em;
-  margin-left: .7em;
-}
+  #nav-micro {
+    float: right;
 
-.micro-list>li>a {
-  background: $politico-red;
-  border-left: 1px solid $dark-red;
-  display: block;
-  font-family: $tablet;
-  font-weight: 700;
-  line-height: 3.4375;
-  min-width: 2.5em;
-  padding: 0 .9375em;
-  position: relative;
-  text-align: center;
-}
+    .icon.icon-pro-small-bold {
+      font-size: 1em;
+      line-height: 2.29166666666667em;
+      padding: 0 .3125em;
+    }
 
-a.navbar-brand .icon.icon-pro-small-bold {
-  font-size: 1em;
-  line-height: 2.29166666666667em;
-  margin-right: 1em;
-  padding: 0 .3125em;
+    ul {
+      list-style: none;
+      margin-bottom: 1px;
+      padding-bottom: 0;
+
+      li{
+        float:left;
+      }
+
+      li > a {
+        background: $politico-red;
+        border-left: 1px solid $dark-red;
+        display: block;
+        font-family: $tablet;
+        font-weight: 700;
+        line-height: 45px;
+        min-width: 2.5em;
+        padding: 0 .9375em;
+        position: relative;
+        text-align: center;
+      }
+    }
+  }
 }
 
 //Light Theme

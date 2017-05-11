@@ -13,20 +13,17 @@ const url = require('url');
 const open = require('open');
 const htmlparser = require('htmlparser2');
 const Entities = require('html-entities').AllHtmlEntities;
+const http = require('http');
+const inquirer = require('inquirer');
 
-const archie = require('../../archie.json');
-
-const fileId = archie.docId;
+let oauth2Client;
+let archie;
+let fileId;
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.readonly'];
 const TOKEN_DIR = process.cwd();
 const TOKEN_PATH = path.resolve(TOKEN_DIR, 'google-token.json');
 
-if (!fs.existsSync(TOKEN_DIR)) {
-  fs.mkdirSync(TOKEN_DIR);
-}
-
-let oauth2Client;
 
 /**
  * @param {Object} token The token to store to disk.
@@ -55,6 +52,31 @@ const getNewToken = (oauth, callback) => {
     scope: SCOPES,
     approval_prompt: 'force',
   });
+
+  // Server to receive auth code
+  const hostname = 'localhost';
+  const port = 6006;
+  const server = http.createServer((req, res) => {
+    const queryObject = url.parse(req.url, true).query;
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html');
+    res.end(`
+      <h1
+        style="padding:10px 20px;
+              display: inline-block;
+              margin: 20px 0;
+              text-align: left;
+              background:#eee;
+              color:#3b5998;
+              font-family:monospace;"
+      >
+      ${queryObject.code}#
+      </h1>
+    `);
+  });
+
+  server.listen(port, hostname);
+
   // eslint-disable-next-line no-console
   console.log('Authorize this app by visiting this url: ', authUrl);
   open(authUrl);
@@ -62,8 +84,9 @@ const getNewToken = (oauth, callback) => {
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code in the URL param "code=" here: ', (code) => {
+  rl.question('Enter the code you receive from Google here: ', (code) => {
     rl.close();
+    server.close();
     oauth2Client.getToken(code, (err, token) => {
       if (err) {
         // eslint-disable-next-line no-console
@@ -91,7 +114,7 @@ const authorize = (credentials, callback) => {
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) {
-      getNewToken(oauth2Client, callback);
+      getNewToken(oauth2Client, () => callback);
     } else {
       oauth2Client.credentials = JSON.parse(token);
       callback(oauth2Client);
@@ -213,6 +236,46 @@ const getExportLink = (auth) => {
   });
 };
 
+const prompt = () => {
+  const questions = [
+    {
+      type: 'input',
+      name: 'docId',
+      message: 'What\'s your Google doc ID?',
+    },
+    {
+      type: 'input',
+      name: 'clientId',
+      message: 'What\'s your Google app client ID?',
+    },
+    {
+      type: 'input',
+      name: 'secretKey',
+      message: 'What\'s your Google app client secret key?',
+    },
+  ];
+
+  const archieJsonPath = path.resolve(process.cwd(), 'archie.json');
+
+  if (!fs.existsSync(archieJsonPath)) {
+    inquirer.prompt(questions).then((answers) => {
+      fs.writeJsonSync(archieJsonPath, {
+        docId: answers.docId,
+        clientId: answers.clientId,
+        clientSecret: answers.secretKey,
+        redirectUrl: 'http://localhost:6006',
+      });
+      archie = fs.readJsonSync(archieJsonPath);
+      fileId = archie.docId;
+      authorize(archie, getExportLink);
+    });
+  } else {
+    archie = fs.readJsonSync(archieJsonPath);
+    fileId = archie.docId;
+    authorize(archie, getExportLink);
+  }
+};
+
 module.exports = () => {
-  authorize(archie, getExportLink);
+  prompt();
 };

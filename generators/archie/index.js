@@ -46,6 +46,7 @@ module.exports = class extends Generator {
       'google-auth-library',
       'htmlparser2',
       'html-entities',
+      'inquirer',
       'open',
       'readline',
       'winston',

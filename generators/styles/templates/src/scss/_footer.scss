@@ -1,3 +1,59 @@
+// Footer
 #global-footer {
   background-color: $footer-gray;
+  color: $dark-gray-text;
+  padding: 5px 10px;
+
+  .icon-politico {
+      font-size: 1em;
+      color: $dark-gray-text;
+      padding-bottom: 3px;
+  }
+
+  a{
+    color: $dark-gray-text;
+  }
+
+  .footer-branding::after{
+    clear:both;
+    }
+
+  .copyright{
+    float: left;
+    }
+
+  .legal-links{
+    float:right;
+    text-align: right;
+
+      li+li:before {
+        content: "\0020\007C\0020";
+      }
+    }
+
+    a:hover{
+      text-decoration: none;
+    }
+
+    .copyright, .legal-links, .legal-links a{
+      font-size: 10px;
+      font-family: $proxima;
+      color: $dark-gray-text;
+    }
+
+    ul{
+      display: block;
+      margin: 0;
+    }
+
+    .legal-links li {
+      display: inline;
+    }
+
+    @media (max-width: $width-xtra-small) {
+        .legal-links, .copyright{
+          -webkit-padding-start: 0;
+        }
+    }
+
 }

@@ -1,0 +1,130 @@
+.clear {
+  clear: both;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.content-fit{
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a{
+  color: #0a7cc4;
+  &:hover, &:focus {
+    color: #0e9af3;
+  }
+}
+
+a,
+a::before,
+a::after,
+button {
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
+}
+
+article{
+  margin-bottom: 2em;
+}
+
+body {
+  color: $black;
+  font-family: $tisa;
+  font-size: 16px
+}
+
+p {
+  font-family: $tisa;
+  font-size: 1.2em;
+  line-height: 1.618em;
+  margin: 1.618em auto;
+  max-width: 600px;
+  overflow-wrap: break-word;
+
+  @media (max-width: $width-medium) {
+    font-size: 1.07em;
+  }
+}
+
+h2,
+h3,
+h4,
+h5 {
+  font-family: $jubilat;
+  font-weight: 600;
+  max-width: 600px;
+  margin-left:auto;
+  margin-right: auto;
+  margin-bottom: 0;
+
+  &.full-width{
+    max-width: 100%;
+    margin-left:0;
+    margin-right:0;
+  }
+  &.large{
+    max-width: 800px;
+  }
+}
+
+
+h2{
+  @include julibat-light;
+}
+
+h3{
+}
+
+h2 + p,
+h3 + p,
+h4 + p {
+  margin-top: .1em;
+}
+
+
+.graphic h2,
+.graphic h3,
+.graphic h4,
+.graphic h5 {
+  font-family: $proxima;
+}
+
+
+
+// Sections
+article section {
+  margin: 2em auto 0;
+  max-width: 600px;
+
+  h3, h4, h5 {
+
+    + figure {
+      margin-top: 10px;
+    }
+  }
+
+  &.full-width{
+    max-width: 100%;
+
+    figure{padding-top: 5px;}
+
+    h2,h3,h4{
+      text-align: center;
+    }
+  }
+}
+
+//credits
+p.credits{
+  font-family: $proxima;
+  font-size: .9em;
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid $light-gray;
+}
