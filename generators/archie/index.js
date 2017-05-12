@@ -40,16 +40,7 @@ module.exports = class extends Generator {
 
   install() {
     const dependencies = [
-      'archieml',
-      'fs-extra',
-      'googleapis',
-      'google-auth-library',
-      'htmlparser2',
-      'html-entities',
-      'inquirer',
-      'open',
-      'readline',
-      'winston',
+      'archieml-pipe',
     ];
 
     this.yarnInstall(dependencies, { save: true });
