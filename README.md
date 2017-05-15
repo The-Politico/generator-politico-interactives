@@ -144,7 +144,15 @@ const gulp = require('./gulp')([
 
 ## Developing
 
-To develop, clone this repository and use `npm link` to test changes locally before publishing updates.
+To develop, clone this repository to a directory on your local computer. Move into the folder and run:
+
+```bash
+$ npm link
+```
+
+This lets you use your local copy of the generator whenever you run `yo politico-interactives`, which lets you test any changes you make to the generator.
+
+**Always test your changes by running them locally _before_ publishing to github or npm.**
 
 #### For designers
 
@@ -154,14 +162,23 @@ To change styles, simply update the scss files in the following directory within
 
 If you need to add a new SCSS file, ask a developer to help you write the line that loads your new file into a user's development directory.
 
-Make sure you've run the generator locally to c heck that your changes carried through.
+If you need to make changes to HTML templates, they are split between these folder, depending on what kind of project you're updating:
 
-Once you're satisfied with your changes, publish via the following:
-- increment the version number in `package.json`
-- commit the repo to github
-- run `npm publish`
+- `generators/templates-embeddable/src/templates`
+- `generators/templates-interactive/src/templates`
 
-To change an HTML template, check with a developer.
+Again, if you need to add a new HTML file, rather than simply change an old one, talk to a developer.
+
+#### Publishing
+
+Once you're satisfied with your changes, publish your updates through the following steps:
+1. Increment the version number in `package.json`, e.g., `0.0.3` --> `0.0.4`
+2. Commit your changes to github
+3. Run:
+    ```bash
+    $ npm publish
+    ```
+
 
 #### For developers
 
