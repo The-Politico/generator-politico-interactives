@@ -2,10 +2,28 @@
   clear: both;
 }
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+article{
+  margin-bottom: 2em;
+}
+
+body {
+  color: $black;
+  font-family: $tisa;
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
 }
 
 .content-fit{
@@ -29,14 +47,16 @@ button {
   transition: all .25s ease;
 }
 
-article{
-  margin-bottom: 2em;
+.center-align-text{
+  text-align: center;
 }
 
-body {
-  color: $black;
-  font-family: $tisa;
-  font-size: 16px
+.left-align-text{
+  text-align: left;
+}
+
+.right-align-text{
+  text-align: right;
 }
 
 p {
@@ -48,7 +68,7 @@ p {
   overflow-wrap: break-word;
 
   @media (max-width: $width-medium) {
-    font-size: 1.07em;
+    font-size: 1.2em;
   }
 }
 
@@ -59,14 +79,12 @@ h5 {
   font-family: $jubilat;
   font-weight: 600;
   max-width: 600px;
-  margin-left:auto;
+  margin-bottom: 5px;
+  margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0;
 
   &.full-width{
     max-width: 100%;
-    margin-left:0;
-    margin-right:0;
   }
   &.large{
     max-width: 800px;
@@ -76,9 +94,6 @@ h5 {
 
 h2{
   @include julibat-light;
-}
-
-h3{
 }
 
 h2 + p,
@@ -96,11 +111,19 @@ h4 + p {
 }
 
 
-
 // Sections
-article section {
-  margin: 2em auto 0;
+  article section {
+  margin: 0 auto;
   max-width: 600px;
+  padding: 1.25em 0;
+
+  p:last-of-type{
+    margin-bottom: 0;
+  }
+
+  figure + p{
+      margin-top: 10px;
+  }
 
   h3, h4, h5 {
 
@@ -111,12 +134,10 @@ article section {
 
   &.full-width{
     max-width: 100%;
+  }
 
-    figure{padding-top: 5px;}
-
-    h2,h3,h4{
-      text-align: center;
-    }
+  &.large{
+    max-width: 800px;
   }
 }
 
@@ -127,4 +148,9 @@ p.credits{
   margin-top: 3em;
   padding-top: 1em;
   border-top: 1px solid $light-gray;
+  color: $satan;
+}
+
+p.credits a:hover{
+  text-decoration: underline;
 }

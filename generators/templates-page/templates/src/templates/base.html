@@ -7,8 +7,8 @@
         {%block title%}<title>Politico Interactives</title>{%endblock%}
         {%include "meta/icons.html"%}
         {%include "meta/social.html"%}
-        <%# Skip if using webpack. #%>
-        <% if (cssInclude) { %> <link href="css/main.bundle.css" rel="stylesheet"> <% } %>
+        
+         <link href="css/main.bundle.css" rel="stylesheet"> 
         <!-- jQuery -->
         <script
           src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -71,8 +71,8 @@
            </div>
          </footer>
          {%endblock%}
-         <%# Skip if using webpack. #%>
-         <% if (jsInclude) { %> <script type="text/javascript" src="js/main.bundle.js"> </script> <% } %>
+         
+          <script type="text/javascript" src="js/main.bundle.js"> </script> 
          {% include "meta/telium.html" %}
          {% include "ads/script.html" %}
     </body>

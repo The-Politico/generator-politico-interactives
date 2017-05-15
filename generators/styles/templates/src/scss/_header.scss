@@ -3,7 +3,11 @@ header {
   padding: 20px;
 
   @media (max-width: $width-medium) {
-    padding: 0 15px 15px 15px;
+    padding: 0 15px 15px;
+  }
+
+  &+figure{
+    margin-top: 0;
   }
 
   p.category,
@@ -22,7 +26,7 @@ header {
     font-weight: bold;
     line-height: 1.1em;
     margin: 0;
-    padding: 10px 5px;
+    padding: 0px 5px 10px;
 
     @media (max-width: $width-medium) {
       font-size: 2.5em;
@@ -31,7 +35,7 @@ header {
     }
 
     @media (max-width: $width-small) {
-      font-size: 2em;
+      font-size: 2.33em;
       margin-top: 0;
     }
   }
@@ -47,7 +51,7 @@ header {
     padding-bottom: 0;
 
     @media (max-width: $width-medium) {
-      font-size: 1.1em;
+      font-size: 1.25em;
       }
 
   }
@@ -63,7 +67,7 @@ header {
     margin-bottom: 10px;
 
     @media (max-width: $width-small) {
-      font-size: .91em;
+      font-size: .96em;
     }
   }
 
@@ -89,8 +93,9 @@ header {
     margin-right: auto;
     text-align: center;
 
-    @media (max-width: $width-medium) {
+    @media (max-width: $width-small) {
       @include center-clear;
+      max-width: 100%;
       }
   }
 }
