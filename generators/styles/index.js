@@ -15,6 +15,9 @@ module.exports = class extends Generator {
       this.templatePath('src/scss/_colors.scss'),
       this.destinationPath('src/scss/_colors.scss'));
     this.fs.copy(
+      this.templatePath('src/scss/_comments.scss'),
+      this.destinationPath('src/scss/_comments.scss'));
+    this.fs.copy(
       this.templatePath('src/scss/_elements.scss'),
       this.destinationPath('src/scss/_elements.scss'));
     this.fs.copy(

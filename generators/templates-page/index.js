@@ -58,7 +58,7 @@ module.exports = class extends Generator {
         cssInclude: !this.options.webpack, // Don't include script tags for webpack
         jsInclude: !this.options.webpack, // which injects them automatically.
       });
-    // Meta tags
+    // Meta
     this.fs.copy(
       this.templatePath('src/templates/meta/social.html'),
       this.destinationPath('src/templates/meta/social.html'));
@@ -68,6 +68,9 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/templates/meta/icons.html'),
       this.destinationPath('src/templates/meta/icons.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/meta/comments.html'),
+      this.destinationPath('src/templates/meta/comments.html'));
     // Ads
     this.fs.copy(
       this.templatePath('src/templates/ads/banner1.html'),
