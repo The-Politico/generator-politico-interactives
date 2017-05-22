@@ -1,4 +1,4 @@
-![Politico][logo]
+![POLITICO](https://rawgithub.com/The-Politico/src/master/images/logo/badge.png)
 
 # generator-politico-interactives [![npm version](https://badge.fury.io/js/generator-politico-interactives.svg)](https://badge.fury.io/js/generator-politico-interactives)
 
@@ -183,5 +183,3 @@ Once you're satisfied with your changes, publish your updates through the follow
 #### For developers
 
 See [development docs](DEVELOPING.md).
-
-[logo]: logo.png "Logo"
