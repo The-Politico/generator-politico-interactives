@@ -10,8 +10,14 @@
 {% include "ads/banner1.html" %}
 
 <header class="center">
+    <section class="share">
+       <a href="" class="icon icon-facebook" target="_blank"></a>
+       <a href="" class="icon icon-twitter" target="_blank"></a>
+       <a class="icon icon-mail" target="_blank"></a>
+    </section>
     <p class="category">
-    <a href="###" target="_blank">Category title</a></p>
+        <a href="###" target="_blank">Category title</a>
+    </p>
     <h1>
         Your pithy, compelling headline here
     </h1>
@@ -30,7 +36,7 @@
 {%endblock%}
 
 {%block content%}
-<p>George Washington (February 11, 1731) was an American politician and soldier who served as the first President of the United States from 1789 to 1797 and was one of the Founding Fathers of the United States. He served as Commander-in-Chief of the Continental Army during the American Revolutionary War, and later presided over the 1787 convention that drafted the United States Constitution. He is popularly considered the driving force behind the nation's establishment and came to be known as the "father of the country," both during his lifetime and to this day.</p>
+<p><span class="dropcap">G</span>eorge Washington (February 11, 1731) was an American politician and soldier who served as the first President of the United States from 1789 to 1797 and was one of the Founding Fathers of the United States. He served as Commander-in-Chief of the Continental Army during the American Revolutionary War, and later presided over the 1787 convention that drafted the United States Constitution. He is popularly considered the driving force behind the nation's establishment and came to be known as the "father of the country," both during his lifetime and to this day.</p>
 
 
 <p>After crossing the Delaware River in the middle of winter, he defeated the British in two battles (Trenton and Princeton), retook New Jersey, and restored momentum to the Patriot cause. His strategy enabled Continental forces to capture two major British armies at Saratoga in 1777 and Yorktown in 1781.</p>
@@ -67,7 +73,10 @@
 
 <p>The death of his father prevented Washington from an education at England's Appleby School such as his older brothers had received. He achieved the equivalent of an elementary school education from a variety of tutors, as well as from a school run by an Anglican clergyman in or near Fredericksburg.[17][18] There was talk of securing an appointment for him in the Royal Navy when he was 15, but it was dropped when his widowed mother objected.</p>
 
-<p class="credits">Copy edited by <a target="blank" href="###">Firstname Lastname</a>. Produced by <a target="blank" href="###">FirstName Last</a>.</p>
+<section class="credits">
+    <p>Copy edited by <a target="blank" href="###">Firstname Lastname</a>. Produced by <a target="blank" href="###">FirstName Last</a>.</p>
+</section>
+
 
 {% include "meta/comments.html" %}
 

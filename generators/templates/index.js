@@ -12,35 +12,50 @@ module.exports = class extends Generator {
       desc: 'Project title',
     });
 
-    this.option('webpack', {
-      type: Boolean,
-      required: false,
+    this.BROWSERIFY = 'browserify';
+    this.WEBPACK = 'webpack';
+  }
+
+  prompting() {
+    const questions = [{
+      type: 'list',
+      name: 'bundler',
+      message: 'Which module bundler would you like to use?',
+      default: this.BROWSERIFY,
+      choices: [
+        {
+          name: 'Browserify (default)',
+          value: this.BROWSERIFY,
+        },
+        {
+          name: 'Webpack (ES2015 + SCSS)',
+          value: this.WEBPACK,
+        },
+      ],
+    }, {
+      type: 'confirm',
+      name: 'archie',
+      message: 'Would you like to include an ArchieML configuration?',
       default: false,
-      desc: 'Use webpack module bundler',
-    });
-    this.option('archie', {
-      type: Boolean,
-      required: false,
-      default: false,
-      desc: 'Use ArchieML',
+    }];
+
+    return this.prompt(questions).then((answers) => {
+      this.webpack = answers.bundler === this.WEBPACK;
+      this.archie = answers.archie;
     });
   }
 
-  initializing() {
-    switch (this.options.webpack) {
-      case true:
-        this.composeWith(require.resolve('../bundler-webpack'), {
-          embed: false,
-          archie: this.options.archie,
-        });
-        break;
-      default:
-        this.composeWith(require.resolve('../bundler-browserify'), {
-          embed: false,
-          archie: this.options.archie,
-        });
+  template() {
+    if (this.webpack) {
+      this.composeWith(require.resolve('../bundler-webpack'), {
+        archie: this.archie,
+      });
+    } else {
+      this.composeWith(require.resolve('../bundler-browserify'), {
+        archie: this.archie,
+      });
     }
-    if (this.options.archie) this.composeWith(require.resolve('../archie'));
+    if (this.archie) this.composeWith(require.resolve('../archie'));
   }
 
   writing() {
@@ -54,10 +69,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('src/templates/base.html'),
       this.destinationPath('src/templates/base.html'),
-      {
-        cssInclude: !this.options.webpack, // Don't include script tags for webpack
-        jsInclude: !this.options.webpack, // which injects them automatically.
-      });
+      { webpack: this.webpack });
     // Meta
     this.fs.copy(
       this.templatePath('src/templates/meta/social.html'),
@@ -93,15 +105,22 @@ module.exports = class extends Generator {
     // Template context
     this.fs.writeJSON('src/templates/data.json', {});
     // Images directory
-    mkdirp('./src/images');
+    this.fs.copy(
+      this.templatePath('src/images/_share.jpg'),
+      this.destinationPath('src/images/_share.jpg'));
     mkdirp('./src/images/opt');
+    mkdirp('./dist/images');
+    // Javascript
+    this.fs.copy(
+      this.templatePath('src/js/main.js'),
+      this.destinationPath('src/js/main.js'));
   }
 
   end() {
     const nunjucksTask = this.spawnCommand('gulp', ['nunjucks']);
     nunjucksTask.on('close', () => {
       // Copy the rendered template over initially
-      if (this.options.webpack) {
+      if (this.webpack) {
         fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
       }
 

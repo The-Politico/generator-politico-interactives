@@ -2,10 +2,10 @@ const runSequence = require('run-sequence');
 
 const gulp = require('./gulp')([
   'aws',
-  <% if (archie) { %>'archie',<% } %> // eslint-disable-line
+  <% if (archie) { %>'archie',<% } %>
   'nunjucks',
   'webpack',
-  'img-copy', // from gulp generator ↓ ↓ ↓ ↓
+  'img-copy',
   'img-optimize',
   'img-resize',
   'nunjucks-watch',

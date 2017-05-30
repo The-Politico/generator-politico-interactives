@@ -1,3 +1,3 @@
 const gulp = require('gulp');
 
-module.exports = () => gulp.watch('./src/templates/**/*.html', ['nunjucks']);
+module.exports = () => gulp.watch('./src/templates/**/*', ['nunjucks']);

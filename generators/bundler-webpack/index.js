@@ -5,12 +5,6 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    this.option('embed', {
-      type: Boolean,
-      required: false,
-      default: false,
-      desc: 'Whether building an embeddable',
-    });
     this.option('archie', {
       type: Boolean,
       required: false,
@@ -22,10 +16,6 @@ module.exports = class extends Generator {
   writing() {
     mkdirp('./dist/js');
     mkdirp('./dist/css');
-    // JS files
-    this.fs.copy(
-      this.templatePath('src/js/main.js'),
-      this.destinationPath('src/js/main.js'));
     // Config files
     this.fs.copy(
       this.templatePath('webpack.config.js'),

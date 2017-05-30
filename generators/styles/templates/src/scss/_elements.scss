@@ -70,6 +70,18 @@ p {
   @media (max-width: $width-medium) {
     font-size: 1.2em;
   }
+
+  span.dropcap {
+    float: left;
+    font-size: 90px;
+    line-height: 0.85em;
+    font-family: $tablet;
+    margin-right: 0.115em;
+    color: #000;
+    text-transform: uppercase;
+    margin-top: 0px;
+   }
+
 }
 
 h2,
@@ -103,16 +115,8 @@ h4 + p {
 }
 
 
-.graphic h2,
-.graphic h3,
-.graphic h4,
-.graphic h5 {
-  font-family: $proxima;
-}
-
-
 // Sections
-  article section {
+article section {
   margin: 0 auto;
   max-width: 600px;
   padding: 1.25em 0;
@@ -139,18 +143,4 @@ h4 + p {
   &.large{
     max-width: 800px;
   }
-}
-
-//credits
-p.credits{
-  font-family: $proxima;
-  font-size: .9em;
-  margin-top: 3em;
-  padding-top: 1em;
-  border-top: 1px solid $light-gray;
-  color: $satan;
-}
-
-p.credits a:hover{
-  text-decoration: underline;
 }

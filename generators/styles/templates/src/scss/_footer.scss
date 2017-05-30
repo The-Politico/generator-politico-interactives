@@ -1,7 +1,7 @@
 // Footer
 #global-footer {
-  background-color: $footer-gray;
-  color: $dark-gray-text;
+  background-color: $politico-gray;
+  color: $medium-gray;
   padding: 5px 10px;
   position: absolute;
   right: 0;
@@ -10,12 +10,12 @@
 
   .icon-politico {
       font-size: 1em;
-      color: $dark-gray-text;
+      color: $medium-gray;
       padding-bottom: 3px;
   }
 
   a{
-    color: $dark-gray-text;
+    color: $medium-gray;
   }
 
   .footer-branding::after{
@@ -42,7 +42,7 @@
     .copyright, .legal-links, .legal-links a{
       font-size: 10px;
       font-family: $proxima;
-      color: $dark-gray-text;
+      color: $medium-gray;
     }
 
     ul{

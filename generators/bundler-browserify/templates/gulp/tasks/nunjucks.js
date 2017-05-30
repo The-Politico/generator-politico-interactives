@@ -10,7 +10,8 @@ marked.setOptions({ smartypants: true });
 const manageEnvironment = (environment) => {
   environment.addFilter('markdown', (str, kwargs) => {
     // strip outer <p> tags?
-    const strip = kwargs.strip || false;
+    const strip = typeof kwargs === 'undefined' ?
+      false : kwargs.strip || false;
     return !strip ? safe(marked(str)) :
       safe(marked(str).trim().replace(/^<p>|<\/p>$/g, ''));
   });

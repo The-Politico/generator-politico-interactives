@@ -4,12 +4,6 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    this.option('embed', {
-      type: Boolean,
-      required: false,
-      default: false,
-      desc: 'Whether building an embeddable',
-    });
     this.option('archie', {
       type: Boolean,
       required: false,
@@ -19,16 +13,6 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    if (this.options.embed) {
-      this.fs.copy(
-        this.templatePath('src/js/main-embed.js'),
-        this.destinationPath('src/js/main.js'));
-    } else {
-      this.fs.copy(
-        this.templatePath('src/js/main.js'),
-        this.destinationPath('src/js/main.js'));
-    }
-
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js'), {
@@ -66,9 +50,13 @@ module.exports = class extends Generator {
       'fs-extra',
       'gulp',
       'gulp-babili',
+      'gulp-cssnano',
+      'gulp-env',
+      'gulp-if',
       'gulp-nunjucks-render',
       'gulp-sass',
       'gulp-sourcemaps',
+      'gulp-uncss',
       'gulp-util',
       'marked',
       'nunjucks',
@@ -78,9 +66,7 @@ module.exports = class extends Generator {
       'vinyl-source-stream',
       'watchify',
     ];
-    if (this.options.embed) {
-      dependencies.push('pym.js');
-    }
+
     this.yarnInstall(dependencies, { save: true });
   }
 };

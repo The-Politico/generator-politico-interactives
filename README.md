@@ -4,11 +4,11 @@
 
 
 
-A [Yeoman](http://yeoman.io) generator to scaffold a development environment for building Politico interactives.
+A [Yeoman](http://yeoman.io) generator to scaffold a development environment for building POLITICO interactives.
 
 ### What it does:
 
-- Scaffolds your project's development directory, either for an embeddable feature or a complete interactive page.
+- Scaffolds your project's development directory.
 - Compiles SCSS and bundles JS written in either ES5 or ES2015 using your choice of browserify or webpack.
 - Creates responsive image sets optimized for mobile devices.
 - Publishes your project to an Amazon S3 bucket.
@@ -102,6 +102,34 @@ There is also an extra filter specifically for rendering [Markdown](https://gith
 <h1>{{sectionTitle|markdown(strip=true)}}</h1>
 ```
 
+#### UnCSS
+
+When building for production, this app uses [UnCSS](https://github.com/giakki/uncss) to remove unused styles. If you have rules that apply to classes set with JavaScript, you must explicitly tell UnCSS not to remove them with a special comment. By default, we also tell UnCSS to ignore any rules set inside a graphics section or with a class of `dataviz`.
+
+```CSS
+/* These rules will all be preserved by UnCSS */
+
+/* uncss:ignore */
+.myClass {
+    /* ... */
+}
+
+section.graphic{
+    /*...*/
+    .myClass {
+        /*...*/
+    }
+}
+
+.dataviz {
+    /*...*/
+    .myClass {
+        /*...*/
+    }
+}
+
+```
+
 #### ArchieML
 
 Optionally, there is a gulp task available which allows you to use [ArchieML](http://archieml.org/#demo) and Google Docs to render content into your templates.
@@ -162,16 +190,15 @@ To change styles, simply update the scss files in the following directory within
 
 If you need to add a new SCSS file, ask a developer to help you write the line that loads your new file into a user's development directory.
 
-If you need to make changes to HTML templates, they are split between these folder, depending on what kind of project you're updating:
+If you need to make changes to HTML templates, they are here:
 
-- `generators/templates-embeddable/src/templates`
-- `generators/templates-interactive/src/templates`
+- `generators/templates/src/templates`
 
 Again, if you need to add a new HTML file, rather than simply change an old one, talk to a developer.
 
 #### Publishing
 
-Once you're satisfied with your changes, publish your updates through the following steps:
+Once you're satisfied with your changes and have tested your update, publish your updates through the following steps:
 1. Increment the version number in `package.json`, e.g., `0.0.3` --> `0.0.4`
 2. Commit your changes to github
 3. Run:
