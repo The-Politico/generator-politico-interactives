@@ -15,8 +15,17 @@ module.exports = class extends Generator {
       this.templatePath('src/scss/_buttons.scss'),
       this.destinationPath('src/scss/_buttons.scss'));
     this.fs.copy(
-      this.templatePath('src/scss/_colors.scss'),
-      this.destinationPath('src/scss/_colors.scss'));
+      this.templatePath('src/scss/colors/_base.scss'),
+      this.destinationPath('src/scss/colors/_base.scss'));
+    this.fs.copy(
+      this.templatePath('src/scss/colors/_diverging.scss'),
+      this.destinationPath('src/scss/colors/_diverging.scss'));
+    this.fs.copy(
+      this.templatePath('src/scss/colors/_qualitative.scss'),
+      this.destinationPath('src/scss/colors/_qualitative.scss'));
+    this.fs.copy(
+      this.templatePath('src/scss/colors/_sequential.scss'),
+      this.destinationPath('src/scss/colors/_sequential.scss'));
     this.fs.copy(
       this.templatePath('src/scss/_comments.scss'),
       this.destinationPath('src/scss/_comments.scss'));

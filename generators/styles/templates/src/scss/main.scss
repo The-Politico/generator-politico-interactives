@@ -2,7 +2,10 @@
 
 @import 'breakpoints';
 @import 'mixins';
-@import 'colors';
+@import 'colors/base';
+@import 'colors/diverging';
+@import 'colors/qualitative';
+@import 'colors/sequential';
 @import 'fonts';
 @import 'icons';
 
