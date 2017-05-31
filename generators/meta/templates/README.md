@@ -8,3 +8,6 @@
 |-|-|
 | Developer    | [<%= userName %>](<%= userEmail %>) |
 | Link | [<%= url %>](<%= url %>) |
+
+
+©<%= year %> POLITICO

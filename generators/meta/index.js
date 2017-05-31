@@ -39,6 +39,7 @@ module.exports = class extends Generator {
         userName: this.user.git.name(),
         userEmail: this.user.git.email(),
         url: publishPath,
+        year: timestamp.getFullYear(),
       });
 
     const metaJSON = {
