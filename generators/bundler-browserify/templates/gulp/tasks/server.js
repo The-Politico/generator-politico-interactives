@@ -6,7 +6,7 @@ module.exports = () => {
     files: ['./dist/**/*'],
     server: {
       baseDir: './dist/',
-      index: <% if (embed) { %>'embed.html'<% } else {%>'index.html'<% } %>,
+      index: 'index.html',
     },
     ghostMode: false,
   });

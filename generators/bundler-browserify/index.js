@@ -35,9 +35,7 @@ module.exports = class extends Generator {
       this.destinationPath('gulp/tasks/scss.js'));
     this.fs.copyTpl(
       this.templatePath('gulp/tasks/server.js'),
-      this.destinationPath('gulp/tasks/server.js'), {
-        embed: this.options.embed,
-      });
+      this.destinationPath('gulp/tasks/server.js'));
   }
   install() {
     const dependencies = [

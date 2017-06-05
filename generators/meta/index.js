@@ -17,7 +17,8 @@ module.exports = class extends Generator {
     this.slug = S(this.title).slugify().s;
 
     const timestamp = new Date();
-    const publishPath = `http://www.politico.com/interactives/${timestamp.getFullYear()}/${this.slug}/`;
+    const publishPath = `${timestamp.getFullYear()}/${this.slug}/`;
+    const url = `http://www.politico.com/interactives/${publishPath}`;
 
     this.fs.copy(
       this.templatePath('gitignore'),
@@ -38,14 +39,14 @@ module.exports = class extends Generator {
         title: this.title,
         userName: this.user.git.name(),
         userEmail: this.user.git.email(),
-        url: publishPath,
+        url,
         year: timestamp.getFullYear(),
       });
 
     const metaJSON = {
       id: (Math.floor(Math.random() * 100000000000) + 1).toString(),
       publishPath,
-      url: `${publishPath}`,
+      url,
       share: {
         fbook: {
           card_title: this.title,
