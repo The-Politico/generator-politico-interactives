@@ -39,6 +39,9 @@ module.exports = class extends Generator {
     const esLintConfig = {
       root: true,
       parser: 'babel-eslint',
+      env: {
+        browser: true,
+      },
       rules: {
         'no-console': 0,
       },

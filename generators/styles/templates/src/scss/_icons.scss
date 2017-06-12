@@ -6,8 +6,16 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'base-icons-relative-path';
+  src: url('/fonts/website/shared/base-icons/base-icons.eot');
+  src: url('/fonts/website/shared/base-icons/base-icons.eot?#iefix') format('embedded-opentype'), url('/fonts/website/shared/base-icons/base-icons.woff2') format('woff2'), url('/fonts/website/shared/base-icons/base-icons.woff') format('woff'), url('/fonts/website/shared/base-icons/base-icons.ttf') format('truetype'), url('/fonts/website/shared/base-icons/base-icons.svg#core-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .icon {
-    font-family: 'base-icons';
+    font-family:  'base-icons-relative-path', 'base-icons';
     speak: none;
     font-style: normal;
     font-weight: normal;
