@@ -37,6 +37,7 @@ module.exports = (watch) => {
           .on('error', gutil.log.bind(gutil, 'Browserify Error'))
           .pipe(source(entry))
           .pipe(buffer())
+          // eslint-disable-next-line no-param-reassign
           .pipe(rename((filePath) => { filePath.basename += '.bundle'; }))
           .pipe(production ? sourcemaps.init({ loadMaps: true }) : gutil.noop())
           .pipe(production ? babili({

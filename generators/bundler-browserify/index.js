@@ -54,7 +54,6 @@ module.exports = class extends Generator {
       'gulp-nunjucks-render',
       'gulp-sass',
       'gulp-sourcemaps',
-      'gulp-uncss',
       'gulp-util',
       'marked',
       'nunjucks',

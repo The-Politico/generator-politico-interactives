@@ -29,6 +29,8 @@ module.exports = class extends Generator {
       'gulp-changed',
       'gulp-cloudfront-invalidate-aws-publish',
       'gulp-confirm',
+      'gulp-fail',
+      'gulp-if',
       'gulp-imagemin',
       'gulp-image-resize',
       'gulp-rename',
