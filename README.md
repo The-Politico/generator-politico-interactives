@@ -70,14 +70,20 @@ Your dist folder will be synced to the directory specified under `publishPath` i
 1. Clone the project from github and `cd` into the project folder.
 2. Install dependencies:
     ```bash
-    $ yarn install
+    $ yarn
     ```
-3. Create a new `aws.json` using `aws.json.example`.
-4. If your project is using ArchieML, run `gulp archie` to reconfigure :
+3. Create a new `aws.json` by running the aws subtask:
     ```bash
-    $ gulp archie
+    $ yo politico-interactives:aws
     ```
-5. Start `gulp`!
+4. If your project is using ArchieML, run the archie subtask to reconfigure the integration:
+    ```bash
+    $ yo politico-interactives:archie
+    ```
+5. If you're cloning a project as a template for starting a new project, delete the `.git` folder in your project root and then initialize a new git repo for the new project.
+    ```base
+    $ git init
+    ```
 
 ### Working with templates
 
