@@ -1,4 +1,4 @@
-const confirm = require('gulp-confirm');
+const prompt = require('gulp-prompt');
 const rename = require('gulp-rename');
 const awspublish = require('gulp-awspublish');
 const invalidate = require('gulp-cloudfront-invalidate-aws-publish');
@@ -11,7 +11,7 @@ const path = require('path');
 const open = require('open');
 const revAll = require('gulp-rev-all');
 
-module.exports = (cb) => {
+module.exports = () => {
   const awsJson = fs.readJsonSync(
     path.resolve(process.cwd(), 'aws.json'));
   const meta = fs.readJsonSync(
@@ -23,14 +23,19 @@ module.exports = (cb) => {
     'Cache-Control': 'max-age=300, no-transform, public',
   };
 
+  // Ignore these files during versioning
+  const versionIgnore = [
+    '.html', // html files (not regex)
+    /.*images.*$/, // images
+    /.*\.json$/, // application data
+  ];
+
   const cloudFrontConfig = {
     distribution: awsJson.params.CloudFront,
     accessKeyId: awsJson.accessKeyId,
     secretAccessKey: awsJson.secretAccessKey,
     indexRootPath: true,
   };
-
-  'asd'.replace(/\/$/, '').split('/');
 
   return gulp.src('./dist/**/*')
     .pipe(gulpIf(() => {
@@ -39,16 +44,20 @@ module.exports = (cb) => {
       // least 2 directories deep.
       const depth = awsDirectory.replace(/\/$/, '').split('/').length;
       return depth < 2;
-    }, fail(`Can't publish to ${awsDirectory}. Check meta.json and add a deeper publishPath.`)))
-    .pipe(confirm({
-      question: `You're about to publish this project to AWS under directory ${awsDirectory}. This will sync this directory with your local dist folder and may cause files to be deleted. Are you sure you want to do this?`,
-      input: '_key:y',
-    }))
+    }, fail(`Can't publish to ${awsDirectory}. Check meta.json and your publishPath setting.`)))
+    .on('end', () => {
+      gutil.log(
+        gutil.colors.cyan(`You're about to publish this project to AWS under directory ${gutil.colors.bold.black.bgYellow(awsDirectory)}. This will sync this directory with your local dist folder and may cause files to be deleted.`));
+    })
+    .pipe(prompt.confirm('Are you sure?'))
     .pipe(rename((pubPath) => {
       // eslint-disable-next-line no-param-reassign
       pubPath.dirname = path.join(awsDirectory, pubPath.dirname.replace('.\\', ''));
     }))
-    .pipe(revAll.revision())
+    .pipe(revAll.revision({
+      dontRenameFile: versionIgnore,
+      dontUpdateReference: versionIgnore,
+    }))
     .pipe(awspublish.gzip())
     .pipe(publisher.publish(headers, { force: false }))
     .pipe(publisher.sync(awsDirectory))
@@ -58,6 +67,5 @@ module.exports = (cb) => {
     .pipe(awspublish.reporter())
     .on('end', () => {
       open(meta.url);
-      cb();
     });
 };

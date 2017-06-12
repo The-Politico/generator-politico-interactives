@@ -14,5 +14,5 @@ module.exports = () =>
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(production(nano()))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/css'));

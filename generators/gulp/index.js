@@ -28,15 +28,17 @@ module.exports = class extends Generator {
       'gulp-awspublish',
       'gulp-changed',
       'gulp-cloudfront-invalidate-aws-publish',
-      'gulp-confirm',
       'gulp-fail',
       'gulp-if',
       'gulp-imagemin',
       'gulp-image-resize',
+      'gulp-prompt',
       'gulp-rename',
+      'gulp-rev-all',
       'gulp-util',
       'imagemin-jpeg-recompress@4.3.0',
       'merge-stream',
+      'open',
     ];
 
     this.yarnInstall(dependencies, { save: true });
