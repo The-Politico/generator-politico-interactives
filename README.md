@@ -24,9 +24,9 @@ $ npm install -g gulp-cli yo generator-politico-interactives
 _\* You may need to prefix with `sudo`_
 
 
-### How to use
+## How to use
 
-#### Starting a new project
+### Starting a new project
 
 Create a fresh directory for your project and move into it in your console.
 
@@ -49,6 +49,8 @@ $ gulp
 
 Develop files in the `src` directory and they will be automatically compiled to the `dist` directory, which are the files that will actually be published.
 
+### Publishing a project
+
 When you're ready to publish, complete the share information in `meta.json`, then run the publish command through gulp.
 
 ```bash
@@ -61,7 +63,9 @@ If you need to invalidate files you've previously published in CloudFront, add t
 $ gulp publish --invalidate
 ```
 
-#### Restarting a project
+Your dist folder will be synced to the directory specified under `publishPath` in `meta.json`, which means files in AWS at that location that are _not_ in your dist directory will be **deleted**. The publish task will also version and gzip CSS and JS assets.
+
+### Restarting a project
 
 1. Clone the project from github and `cd` into the project folder.
 2. Install dependencies:
@@ -75,7 +79,7 @@ $ gulp publish --invalidate
     ```
 5. Start `gulp`!
 
-#### Working with templates
+### Working with templates
 
 Templates are rendered using Nunjucks templating syntax. See Nunjucks' [template inheritance](https://mozilla.github.io/nunjucks/templating.html#template-inheritance), [tags](https://mozilla.github.io/nunjucks/templating.html#tags) and [builtin filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters) for more information.
 
@@ -102,35 +106,7 @@ There is also an extra filter specifically for rendering [Markdown](https://gith
 <h1>{{sectionTitle|markdown(strip=true)}}</h1>
 ```
 
-#### UnCSS
-
-When building for production, this app uses [UnCSS](https://github.com/giakki/uncss) to remove unused styles. If you have rules that apply to classes set with JavaScript, you must explicitly tell UnCSS not to remove them with a special comment. By default, we also tell UnCSS to ignore any rules set inside a graphics section or with a class of `dataviz`.
-
-```CSS
-/* These rules will all be preserved by UnCSS */
-
-/* uncss:ignore */
-.myClass {
-    /* ... */
-}
-
-section.graphic{
-    /*...*/
-    .myClass {
-        /*...*/
-    }
-}
-
-.dataviz {
-    /*...*/
-    .myClass {
-        /*...*/
-    }
-}
-
-```
-
-#### ArchieML
+### ArchieML
 
 Optionally, there is a gulp task available which allows you to use [ArchieML](http://archieml.org/#demo) and Google Docs to render content into your templates.
 
