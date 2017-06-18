@@ -62,7 +62,7 @@ module.exports = class extends Generator {
           author: '@politico',
         },
         image: {
-          url: `${publishPath}images/share.jpg`,
+          url: `${url}images/share.jpg`,
           alt: '<Text>',
           type: 'image/jpeg',
           width: '600',
