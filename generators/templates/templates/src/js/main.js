@@ -8,7 +8,6 @@ window.$('.icon-facebook').click((e) => {
 window.$('.icon-twitter').click((e) => {
   e.preventDefault();
   const uri = window.location.href;
-  const tweet = 'The latest news from POLITICO';
-  const status = encodeURIComponent(`${tweet} ${uri}`);
+  const status = encodeURIComponent(`${window.tweetText} ${uri}`);
   window.open(`https://twitter.com/home?status=${status}`);
 });

@@ -1,7 +1,7 @@
 {
   "name": "generator-politico-interactives",
   "description": "Yeoman generator for interactive projects at POLITICO.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "generators/app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

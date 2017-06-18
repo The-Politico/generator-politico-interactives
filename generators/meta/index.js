@@ -47,6 +47,8 @@ module.exports = class extends Generator {
       id: (Math.floor(Math.random() * 100000000000) + 1).toString(),
       publishPath,
       url,
+      timestamp: '2017-04-13T08:13-0400',
+      dateline: '04/13/17 08:13 PM EDT',
       share: {
         fbook: {
           card_title: this.title,
@@ -55,6 +57,7 @@ module.exports = class extends Generator {
         },
         twitter: {
           card_title: this.title,
+          share_tweet: 'The latest news from POLITICO.',
           card_description: 'The latest news from POLITICO.',
           author: '@politico',
         },

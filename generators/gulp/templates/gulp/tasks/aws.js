@@ -10,6 +10,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const open = require('open');
 const revAll = require('gulp-rev-all');
+const querystring = require('querystring');
 
 module.exports = () => {
   const awsJson = fs.readJsonSync(
@@ -66,6 +67,10 @@ module.exports = () => {
     .pipe(publisher.cache())
     .pipe(awspublish.reporter())
     .on('end', () => {
-      open(meta.url);
+      setTimeout(() => {
+        const q = querystring.stringify({ q: meta.url });
+        open(`https://developers.facebook.com/tools/debug/sharing/?${q}`);
+        open(meta.url);
+      }, 1000);
     });
 };

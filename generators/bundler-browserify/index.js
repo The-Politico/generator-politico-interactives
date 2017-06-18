@@ -56,12 +56,14 @@ module.exports = class extends Generator {
       'gulp-sourcemaps',
       'gulp-util',
       'marked',
+      'ngrok',
       'nunjucks',
       'react',
       'run-sequence',
       'vinyl-buffer',
       'vinyl-source-stream',
       'watchify',
+      'yargs',
     ];
 
     this.yarnInstall(dependencies, { save: true });
