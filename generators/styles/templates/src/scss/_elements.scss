@@ -101,10 +101,13 @@ h3,
 h4,
 h5 {
   font-family: $jubilat;
-  font-weight: 600;
   margin: 0 auto 5px;
   max-width: 100%;
   text-align: center;
+
+  &.sans{
+    font-family: $proxima;
+  }
 }
 
 h2,
@@ -112,7 +115,6 @@ h3,
 h4,
 h5{
   &.left{
-  max-width: 600px;
   text-align: left;
   }
   + p{
@@ -120,49 +122,81 @@ h5{
   }
 }
 
-
-
-h3.sans{
-  font-weight: 700;
+h2,
+h3,
+h4,
+h5{
+  &.right{
+  text-align: right;
+  }
+  + p{
+    margin-top: .1em;
+  }
 }
 
 
 h2, .h2 {
-  @include julibat-light;
-  font-size: 33px;
+  font-weight: 400;
+  font-size: 35px;
+
+  &.sans{
+    font-weight: 600;
+    font-size:30px;
+  }
+
   @media(max-width: $width-small){
     font-size: 28px;
   }
 }
 
 h3, .h3 {
-  @include julibat-light;
-  font-size: 25px;
+  font-weight: 200;
+  font-size: 26px;
+
   @media(max-width: $width-small){
-    font-size: 20px;
+    font-size: 25px;
+  }
+}
+
+h4, .h4 {
+  font-family: $proxima;
+  font-weight: 600;
+  font-size: 19px;
+
+  @media(max-width: $width-small){
+    font-size: 17px;
+  }
+}
+
+h5, .h5 {
+  font-family: $proxima;
+  font-weight: 600;
+  font-size: 14px;
+  color: $satan;
+  margin: 0 auto 2px;
+
+  @media(max-width: $width-small){
+    font-size: 13px;
   }
 }
 
 
-
-
 // Sections
-article section {
+  section {
   margin: 0 auto;
-  max-width: 600px;
-  padding: 1.5em 0;
+  padding: 2em 0;
 
-  p:last-of-type{
-    margin-bottom: 0;
-  }
-
-  figure + p{
-      margin-top: 10px;
-  }
-
-  h3, h4, h5 {
-    + figure {
-      margin-top: 10px;
+    p:last-of-type{
+        margin-bottom: 0;
     }
-  }
+
+    figure + p{
+        margin-top: 10px;
+    }
+
+    h3, h4, h5 {
+      + figure {
+        margin-top: 10px;
+      }
+    }
 }

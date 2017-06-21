@@ -1,8 +1,14 @@
 section.graphic {
-  h2, h3, h4, h5 {
-    font-family: $proxima;
+  h2, h3 {
+   font-family: $proxima;
+   font-weight: 600;
+  }
+
+  h2 {
+    @extend h2.sans;
+  }
+
+  h3 {
+    @extend h3.sans;
   }
 }
-
-// Prefix classes added to elements by javascript with the following:
-/* uncss:ignore */
