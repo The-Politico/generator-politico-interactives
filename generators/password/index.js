@@ -5,7 +5,7 @@ module.exports = class extends Generator {
     const questions = [{
       type: 'password',
       name: 'password',
-      message: 'Enter your passphrase.',
+      message: 'Enter your passphrase:',
     }];
 
     return this.prompt(questions).then((answers) => {

@@ -3,15 +3,14 @@ const gulp = require('gulp');
 const ngrok = require('ngrok');
 const open = require('open');
 const argv = require('yargs').argv;
-const os = require('os');
-const path = require('path');
 
 const startTunel = (port) => {
-  const ngrokConfig = Object.assign({ addr: port },
-    // eslint-disable-next-line
-    require(path.join(os.homedir(), '.ngrok2/interactives.json'))
-  );
-  ngrok.connect(ngrokConfig, (err, url) => { open(url); });
+  ngrok.connect({
+    authtoken: process.env.KEYS.ngrokToken,
+    auth: 'interactive:news',
+    subdomain: 'politico',
+    addr: port,
+  }, (err, url) => { open(url); });
 };
 
 module.exports = () => {

@@ -13,11 +13,16 @@ const revAll = require('gulp-rev-all');
 const querystring = require('querystring');
 
 module.exports = () => {
-  const awsJson = fs.readJsonSync(
-    path.resolve(process.cwd(), 'aws.json'));
   const meta = fs.readJsonSync(
     path.resolve(process.cwd(), 'meta.json'));
-  const publisher = awspublish.create(awsJson);
+  const publisher = awspublish.create({
+    accessKeyId: process.env.KEYS.awsAccessKey,
+    secretAccessKey: process.env.KEYS.awsSecretKey,
+    params: {
+      Bucket: 'com.politico.interactives.politico.com',
+      CloudFront: 'E3V6OHE700RHMR',
+    },
+  });
   const awsDirectory = meta.publishPath;
 
   const headers = {
@@ -32,9 +37,9 @@ module.exports = () => {
   ];
 
   const cloudFrontConfig = {
-    distribution: awsJson.params.CloudFront,
-    accessKeyId: awsJson.accessKeyId,
-    secretAccessKey: awsJson.secretAccessKey,
+    distribution: 'E3V6OHE700RHMR',
+    accessKeyId: process.env.KEYS.awsAccessKey,
+    secretAccessKey: process.env.KEYS.awsSecretKey,
     indexRootPath: true,
   };
 

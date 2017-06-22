@@ -6,20 +6,10 @@ module.exports = class extends Generator {
     const prompts = [{
       name: 'docId',
       message: 'What\'s your Google Doc ID?',
-    }, {
-      name: 'clientId',
-      message: 'What\'s your Google client ID?',
-      store: true,
-    }, {
-      name: 'clientSecret',
-      message: 'What\'s your Google client secret key?',
-      store: true,
     }];
 
     return this.prompt(prompts).then((answers) => {
       this.docId = answers.docId;
-      this.clientId = answers.clientId;
-      this.clientSecret = answers.clientSecret;
     });
   }
 
@@ -30,9 +20,6 @@ module.exports = class extends Generator {
 
     const config = {
       docId: this.docId,
-      clientId: this.clientId,
-      clientSecret: this.clientSecret,
-      redirectUrl: 'http://localhost:6006',
     };
 
     this.fs.writeJSON('./archie.json', config);

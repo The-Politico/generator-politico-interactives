@@ -1,8 +1,13 @@
 const env = require('gulp-env');
 const runSequence = require('run-sequence');
+const fs = require('fs-extra');
+const os = require('os');
+const path = require('path');
+const SecureKeys = require('secure-keys');
+const gutil = require('gulp-util');
 const gulp = require('./gulp')([
   'aws',
-  <% if (archie) { %>'archie',<% } %>
+//  <% if (archie) { %>'archie',<% } %>
   'browserify',
   'js-build',
   'js-watch',
@@ -14,6 +19,19 @@ const gulp = require('./gulp')([
   'img-resize',
   'nunjucks-watch',
 ]);
+require('dotenv').config();
+
+const secure = new SecureKeys({ secret: process.env.PASSWORD });
+const keysPath = path.join(os.homedir(), '.politico/interactives.json');
+const keysObj = fs.readJsonSync(keysPath);
+
+try {
+  env.set({
+    KEYS: secure.decrypt(keysObj),
+  });
+} catch (e) {
+  gutil.log('Could not read keys. Check password.');
+}
 
 
 gulp.task('build', ['scss', 'js-build', 'nunjucks']);

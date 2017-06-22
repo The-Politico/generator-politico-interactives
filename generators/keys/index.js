@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const os = require('os');
 const path = require('path');
 const SecureKeys = require('secure-keys');
+const mkdirp = require('mkdirp');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -11,7 +12,7 @@ module.exports = class extends Generator {
     this.option('password', {
       type: String,
       required: true,
-      desc: 'Keys passphrase',
+      desc: 'Keys encryption passphrase',
     });
   }
 
@@ -65,6 +66,8 @@ module.exports = class extends Generator {
 
   writing() {
     if (this.validKeys || !this.answers.write) return;
+
+    mkdirp(path.join(os.homedir(), '.politico/'));
 
     fs.writeJsonSync(this.keyPath, this.secure.encrypt({
       awsAccessKey: this.answers.awsAccessKey,
