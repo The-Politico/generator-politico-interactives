@@ -1,4 +1,5 @@
 const Generator = require('yeoman-generator');
+const fs = require('fs-extra');
 
 module.exports = class extends Generator {
 
@@ -6,36 +7,19 @@ module.exports = class extends Generator {
     const prompts = [{
       name: 'docId',
       message: 'What\'s your Google Doc ID?',
-    }, {
-      name: 'clientId',
-      message: 'What\'s your Google client ID?',
-      store: true,
-    }, {
-      name: 'clientSecret',
-      message: 'What\'s your Google client secret key?',
-      store: true,
     }];
 
     return this.prompt(prompts).then((answers) => {
       this.docId = answers.docId;
-      this.clientId = answers.clientId;
-      this.clientSecret = answers.clientSecret;
     });
   }
 
   writing() {
+    fs.appendFileSync(this.destinationPath('.env'), `\nARCHIEDOC=${this.docId}`);
+
     this.fs.copy(
       this.templatePath('gulp/tasks/archie.js'),
       this.destinationPath('gulp/tasks/archie.js'));
-
-    const config = {
-      docId: this.docId,
-      clientId: this.clientId,
-      clientSecret: this.clientSecret,
-      redirectUrl: 'http://localhost:6006',
-    };
-
-    this.fs.writeJSON('./archie.json', config);
   }
 
   install() {

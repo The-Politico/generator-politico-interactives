@@ -140,7 +140,7 @@ On first running the task, you will need to authorize access to the document thr
 
 http<nolink>://localhost:6006/?code=**COPY-THIS-CODE-HERE**
 
-This access token will be saved in `google-token.json` so that you can run the task subsequently without needing to re-authorize.
+This access token will be saved in `archie-token.json` so that you can run the task subsequently without needing to re-authorize.
 
 **Note:** If you've added ArchieML after the project was already created, you'll also need to add the task to your gulpfile. Simply edit it into the array of other tasks in `gulpfile.js`:
 
@@ -191,4 +191,4 @@ Once you're satisfied with your changes and have tested your update, publish you
 
 #### For developers
 
-See [development docs](DEVELOPING.md).
+See the [development docs](DEVELOPING.md) and the [CHANGELOG](CHANGELOG.md).

@@ -1,8 +1,0 @@
-{
-  "accessKeyId": "ACCESS_KEY",
-  "secretAccessKey": "SECRET_KEY",
-  "params": {
-    "Bucket": "com.politico.interactives.politico.com",
-    "CloudFront": "E3V6OHE700RHMR"
-  }
-}

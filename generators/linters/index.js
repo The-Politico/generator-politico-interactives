@@ -69,7 +69,7 @@ module.exports = class extends Generator {
     if (this.lintProfile === this.CHOICE_NO_ESLINT) return;
 
     const dependencies = [
-      'eslint',
+      'eslint@3.19.0',
       'babel-eslint',
     ];
 

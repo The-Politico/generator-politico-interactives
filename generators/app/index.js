@@ -1,19 +1,11 @@
 const Generator = require('yeoman-generator');
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
 
 module.exports = class extends Generator {
   initializing() {
+    this.composeWith(require.resolve('../passphrase'));
     this.composeWith(require.resolve('../linters'));
     this.composeWith(require.resolve('../gulp'));
     this.composeWith(require.resolve('../styles'));
-    this.composeWith(require.resolve('../aws'));
-
-    const ngrokConfig = path.join(os.homedir(), '.ngrok2/interactives.json');
-    if (!fs.existsSync(ngrokConfig)) {
-      this.composeWith(require.resolve('../ngrok'));
-    }
   }
 
   prompting() {
