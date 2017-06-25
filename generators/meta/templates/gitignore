@@ -1,10 +1,8 @@
-# AWS credentials
-aws.json
+# AWS
 .awspublish*
 
-# Google credentials (if using archieML)
-archie.json
-google-token.json
+# archieml-pipe token
+archie-token.json
 
 # Bundles
 dist/**/*.bundle.*

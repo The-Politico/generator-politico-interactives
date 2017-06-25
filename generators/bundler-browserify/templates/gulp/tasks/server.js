@@ -6,7 +6,7 @@ const argv = require('yargs').argv;
 
 const startTunel = (port) => {
   ngrok.connect({
-    authtoken: process.env.KEYS.ngrokToken,
+    authtoken: process.env.ngrokToken,
     auth: 'interactive:news',
     subdomain: 'politico',
     addr: port,

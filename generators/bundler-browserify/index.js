@@ -58,6 +58,7 @@ module.exports = class extends Generator {
       'gulp-util',
       'marked',
       'ngrok',
+      'node-env-file',
       'nunjucks',
       'react',
       'run-sequence',

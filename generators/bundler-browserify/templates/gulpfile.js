@@ -5,9 +5,10 @@ const os = require('os');
 const path = require('path');
 const SecureKeys = require('secure-keys');
 const gutil = require('gulp-util');
+const envFile = require('node-env-file');
 const gulp = require('./gulp')([
   'aws',
-//  <% if (archie) { %>'archie',<% } %>
+  <% if (archie) { %>'archie',<% } %>
   'browserify',
   'js-build',
   'js-watch',
@@ -19,18 +20,25 @@ const gulp = require('./gulp')([
   'img-resize',
   'nunjucks-watch',
 ]);
-require('dotenv').config();
 
-const secure = new SecureKeys({ secret: process.env.PASSWORD });
+
+/* Add secure keys to environment */
+envFile(path.join(__dirname, '.env'), { overwrite: true }); // Adds PASSPHRASE to env
+const secure = new SecureKeys({ secret: process.env.PASSPHRASE });
 const keysPath = path.join(os.homedir(), '.politico/interactives.json');
 const keysObj = fs.readJsonSync(keysPath);
-
 try {
-  env.set({
-    KEYS: secure.decrypt(keysObj),
-  });
+  env.set(secure.decrypt(keysObj));
 } catch (e) {
-  gutil.log('Could not read keys. Check password.');
+  gutil.log(
+    gutil.colors.bgRed('PASSPHRASE ERROR:'),
+    'Could not validate keys. Correct PASSPHRASE in .env or run',
+    gutil.colors.cyan('yo politico-interactives:passphrase'),
+    'to creare a new key set.'
+  );
+  gutil.log(e);
+  // Exit process if keys don't validate
+  process.exit();
 }
 
 
@@ -39,7 +47,7 @@ gulp.task('publish', (cb) => {
   env.set({ NODE_ENV: 'production' });
   runSequence('build', 'aws', cb);
 });
-gulp.task('default', ['nunjucks-watch', 'scss', 'js-watch', 'server']);
+gulp.task('default', ['nunjucks', 'nunjucks-watch', 'scss', 'js-watch', 'server']);
 
 gulp.task('img', (cb) => {
   runSequence('img-optimize', 'img-resize', 'img-copy', cb);

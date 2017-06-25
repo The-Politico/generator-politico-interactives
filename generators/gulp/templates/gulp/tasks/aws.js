@@ -16,8 +16,8 @@ module.exports = () => {
   const meta = fs.readJsonSync(
     path.resolve(process.cwd(), 'meta.json'));
   const publisher = awspublish.create({
-    accessKeyId: process.env.KEYS.awsAccessKey,
-    secretAccessKey: process.env.KEYS.awsSecretKey,
+    accessKeyId: process.env.awsAccessKey,
+    secretAccessKey: process.env.awsSecretKey,
     params: {
       Bucket: 'com.politico.interactives.politico.com',
       CloudFront: 'E3V6OHE700RHMR',
@@ -38,8 +38,8 @@ module.exports = () => {
 
   const cloudFrontConfig = {
     distribution: 'E3V6OHE700RHMR',
-    accessKeyId: process.env.KEYS.awsAccessKey,
-    secretAccessKey: process.env.KEYS.awsSecretKey,
+    accessKeyId: process.env.awsAccessKey,
+    secretAccessKey: process.env.awsSecretKey,
     indexRootPath: true,
   };
 

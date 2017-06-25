@@ -4,34 +4,39 @@ const os = require('os');
 const path = require('path');
 const SecureKeys = require('secure-keys');
 const mkdirp = require('mkdirp');
+const chalk = require('chalk');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
 
-    this.option('password', {
+    this.option('passphrase', {
       type: String,
       required: true,
-      desc: 'Keys encryption passphrase',
+      desc: 'Secure keys passphrase',
     });
   }
 
-  prompting() {
-    this.secure = new SecureKeys({ secret: this.options.password });
+  validateKeys() {
+    this.secure = new SecureKeys({ secret: this.options.passphrase });
     this.keyPath = path.join(os.homedir(), '.politico/interactives.json');
 
     try {
       const keysObj = fs.readJsonSync(this.keyPath);
       this.secure.decrypt(keysObj);
-      this.validKeys = true;
+      return true;
     } catch (e) {
-      this.validKeys = false;
+      return false;
     }
+  }
+
+  prompting() {
+    this.validKeys = this.validateKeys();
 
     const questions = [{
       name: 'write',
       type: 'confirm',
-      message: 'Couldn\'t validate your keys. Should we write a new set with your passphrase?',
+      message: 'Couldn\'t validate your keys with your passphrase. Should we write a new set?',
     }, {
       name: 'awsAccessKey',
       message: 'OK. What\'s your AWS access key?',
@@ -77,7 +82,12 @@ module.exports = class extends Generator {
       githubToken: this.answers.githubToken,
       ngrokToken: this.answers.ngrokToken,
     }));
+  }
 
-    this.log('New keys encrypted and saved to ~/.politico/interactives.json.');
+  end() {
+    if (this.validKeys || !this.answers.write) return;
+    this.log(
+      'New keys encrypted and saved to',
+      chalk.yellow('~/.politico/interactives.json.'));
   }
 };

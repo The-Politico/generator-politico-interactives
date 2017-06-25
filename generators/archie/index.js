@@ -1,4 +1,5 @@
 const Generator = require('yeoman-generator');
+const fs = require('fs-extra');
 
 module.exports = class extends Generator {
 
@@ -14,15 +15,11 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    fs.appendFileSync(this.destinationPath('.env'), `\nARCHIEDOC=${this.docId}`);
+
     this.fs.copy(
       this.templatePath('gulp/tasks/archie.js'),
       this.destinationPath('gulp/tasks/archie.js'));
-
-    const config = {
-      docId: this.docId,
-    };
-
-    this.fs.writeJSON('./archie.json', config);
   }
 
   install() {

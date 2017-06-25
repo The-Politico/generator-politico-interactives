@@ -2,7 +2,7 @@ const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
   initializing() {
-    this.composeWith(require.resolve('../password'));
+    this.composeWith(require.resolve('../passphrase'));
     this.composeWith(require.resolve('../linters'));
     this.composeWith(require.resolve('../gulp'));
     this.composeWith(require.resolve('../styles'));
