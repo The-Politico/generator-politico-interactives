@@ -8,18 +8,17 @@
 {%block header%}
 
 {% include "ads/banner1.html" %}
-
 <header class="center">
-    <section class="share">
+    <div class="share">
        <a href="" class="icon icon-facebook" target="_blank"></a>
        <a href="" class="icon icon-twitter" target="_blank"></a>
        <a class="icon icon-mail" target="_blank"></a>
-    </section>
+    </div>
     <p class="category">
         <a href="###" target="_blank">Category title</a>
     </p>
     <h1>
-        Your pithy, compelling headline here
+        Your pithy, compelling headline here that happens to be incredibly long, like really long
     </h1>
     <p class="subhead">
             Politico is an American political-journalism company based in Arlington County, Virginia, that covers politics and policy in the United States and internationally.</p>
@@ -29,49 +28,55 @@
         </p>
     </div>
 </header>
-<figure class="large no-gutters-phone">
+<!-- <figure class="large no-gutters-phone">
     <img src="https:placehold.it/800x600?text=lead+art+here" alt="An awesome picture" />
     <figcaption>Your concise caption here. <figcredit>First Last | Photo service</figcaption>
-</figure>
+</figure> -->
 {%endblock%}
 
 {%block content%}
-<p><span class="dropcap">G</span>eorge Washington (February 11, 1731) was an American politician and soldier who served as the first President of the United States from 1789 to 1797 and was one of the Founding Fathers of the United States. He served as Commander-in-Chief of the Continental Army during the American Revolutionary War, and later presided over the 1787 convention that drafted the United States Constitution. He is popularly considered the driving force behind the nation's establishment and came to be known as the "father of the country," both during his lifetime and to this day.</p>
-
-
-<p>After crossing the Delaware River in the middle of winter, he defeated the British in two battles (Trenton and Princeton), retook New Jersey, and restored momentum to the Patriot cause. His strategy enabled Continental forces to capture two major British armies at Saratoga in 1777 and Yorktown in 1781.</p>
+<p><span class="dropcap">G</span>eorge Washington (February 11, 1731) was an American politician and soldier who served as the first President of the United States from 1789 to 1797 and was one of the Founding Fathers of the United States.</p>
 
 {% include "ads/cube1.html" %}
 
- <p>Historians laud Washington for the selection and supervision of his generals; preservation and command of the army; coordination with the Congress, state governors, and their militia; and attention to supplies, logistics, and training. In battle, however, Washington was repeatedly outmaneuvered by British generals with larger armies.</p>
-
+<p>Historians laud Washington for the selection and supervision of his generals; preservation and command of the army; coordination with the Congress, state governors, and their militia; and attention to supplies, logistics, and training. In battle, however, Washington was repeatedly outmaneuvered by British generals with larger armies.</p>
 
 <section>
-<h3>No gutters phone example</h3>
+<h5>Header 5 is good for tags or dates</h5>
+<h4>Header 4</h4>
+<h3>Header 3</h3>
+<h2>Header 2</h2>
+</section>
+
+<section class="graphic content-fit ">
+  <h5>Header 5</h5>
+  <h4>Header 4</h4>
+  <h3>Header 3</h3>
+  <h2>Header 2 inside a section.graphic</h2>
+</section>
+
+ <p>Historians laud Washington for the selection and supervision of his generals; preservation and command of the army; coordination with the Congress, state governors, and their militia; and attention to supplies, logistics, and training. In battle, however, Washington was repeatedly outmaneuvered by British generals with larger armies.</p>
+
+{% include "ads/cube2.html" %}
+
+<section>
+<h3>H3 No gutters phone example</h3>
 <figure class="no-gutters-phone content-fit">
     <img src="http://www.trbimg.com/img-54e3c81a/turbine/la-sci-sn-penguins-taste-20150216-001/600/4x3" />
     <figcaption class="figcaption">
         Penguins 1.
     </figcaption>
 </figure>
+
 <p>At 26, he married Martha Dandridge Custis, a widow who already had two children, Jacky and Patsy. Washington never had any children of his own.</p>
 </section>
 
-<p>The death of his father prevented Washington from an education at England's Appleby School such as his older brothers had received. He achieved the equivalent of an elementary school education from a variety of tutors, as well as from a school run by an Anglican clergyman in or near Fredericksburg.[17][18] There was talk of securing an appointment for him in the Royal Navy when he was 15, but it was dropped when his widowed mother objected</p>
-
-<p>In 1751, Washington traveled to Barbados with Lawrence, who was suffering from tuberculosis, with the hope that the climate would be beneficial to Lawrence's health. Washington contracted smallpox during the trip, which left his face slightly scarred but immunized him against future exposures to the dreaded disease.[20] However, Lawrence's health failed to improve, and he returned to Mount Vernon where he died in the summer of 1752.</p>
-
-<section class="graphic">
-<h3>Graphic headers use sans</h3>
-<p>According to the Christian Science Monitor, in 1789, his presidential salary was 2 percent of the total U.S. budget.</p>
-<p>Throughout his life, he suffered from a laundry list of ailments: diphtheria, tuberculosis, smallpox, dysentery, malaria, quinsy (tonsillitis), carbuncle, pneumonia, and epiglottitis—to name a few.</p>
-</section>
+<p>The death of his father prevented Washington from an education at England's Appleby School such as his older brothers had received.</p>
 
 
 <h2>H2 header</h2>
-<p>George Washington was the first child of Augustine Washington (1694–1743) and his second wife Mary Ball Washington (1708–1789), born on their Pope's Creek Estate near present-day Colonial Beach in Westmoreland County, Virginia. He was born on February 11, 1731, according to the Julian calendar and Annunciation Style of enumerating years then in use in the British Empire. The Gregorian calendar was adopted within the British Empire in 1752, and it renders a birth date of February 22, 1732.</p>
+<p>George Washington was the first child of Augustine Washington (1694–1743) and his second wife Mary Ball Washington (1708–1789)</p>
 
-<p>The death of his father prevented Washington from an education at England's Appleby School such as his older brothers had received. He achieved the equivalent of an elementary school education from a variety of tutors, as well as from a school run by an Anglican clergyman in or near Fredericksburg.[17][18] There was talk of securing an appointment for him in the Royal Navy when he was 15, but it was dropped when his widowed mother objected.</p>
 
 <section class="credits">
     <p>Copy edited by <a target="blank" href="###">Firstname Lastname</a>. Produced by <a target="blank" href="###">FirstName Last</a>.</p>

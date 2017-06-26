@@ -91,14 +91,23 @@ module.exports = class extends Generator {
       this.templatePath('src/templates/ads/banner2.html'),
       this.destinationPath('src/templates/ads/banner2.html'));
     this.fs.copy(
-      this.templatePath('src/templates/ads/cube.html'),
-      this.destinationPath('src/templates/ads/cube.html'));
+        this.templatePath('src/templates/ads/banner3.html'),
+        this.destinationPath('src/templates/ads/banner3.html'));
     this.fs.copy(
-      this.templatePath('src/templates/ads/supercube1.html'),
-      this.destinationPath('src/templates/ads/supercube1.html'));
+        this.templatePath('src/templates/ads/banner4.html'),
+        this.destinationPath('src/templates/ads/banner4.html'));
     this.fs.copy(
-      this.templatePath('src/templates/ads/supercube2.html'),
-      this.destinationPath('src/templates/ads/supercube2.html'));
+      this.templatePath('src/templates/ads/cube1.html'),
+      this.destinationPath('src/templates/ads/cube1.html'));
+    this.fs.copy(
+        this.templatePath('src/templates/ads/cube2.html'),
+        this.destinationPath('src/templates/ads/cube2.html'));
+    this.fs.copy(
+        this.templatePath('src/templates/ads/cube3.html'),
+        this.destinationPath('src/templates/ads/cube3.html'));
+    this.fs.copy(
+        this.templatePath('src/templates/ads/cube4.html'),
+        this.destinationPath('src/templates/ads/cube4.html'));
     this.fs.copy(
       this.templatePath('src/templates/ads/script.html'),
       this.destinationPath('src/templates/ads/script.html'));
