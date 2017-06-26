@@ -17,7 +17,7 @@ module.exports = class extends Generator {
 
   writing() {
     fs.appendFileSync(
-      this.destinationPath('.env'), `PASSPHRASE=${this.passphrase}`);
+      this.destinationPath('.env'), `PASSPHRASE=${this.passphrase}\n`);
     this.composeWith(require.resolve('../keys'), {
       passphrase: this.passphrase,
     });
