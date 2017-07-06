@@ -75,7 +75,7 @@
 
          <script type="text/javascript">window.tweetText = "{{meta.share.twitter.share_tweet}}";</script>
          <%# Skip if using webpack. #%>
-         <% if (!webpack) { %><script type="text/javascript" src="js/main.bundle.js"></script><% } %>
+         <script type="text/javascript" src="js/main.bundle.js"></script>
          {% include "meta/telium.html" %}
          {% include "ads/script.html" %}
     </body>
