@@ -34,6 +34,7 @@ module.exports = () => {
     '.html', // html files (not regex)
     /.*images.*$/, // images
     /.*\.json$/, // application data
+    /.*\.csv$/, // application data
   ];
 
   const cloudFrontConfig = {
