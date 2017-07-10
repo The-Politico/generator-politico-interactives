@@ -185,6 +185,10 @@ Once you're satisfied with your changes and have tested your update, publish you
     ```bash
     $ npm publish
     ```
+4. Update changelog (using [changelog](https://www.npmjs.com/package/changelog)):
+    ```bash
+    $ changelog generator-politico-interactives all > CHANGELOG.md
+    ```
 
 
 #### For developers
