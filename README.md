@@ -49,7 +49,7 @@ Develop files in the `src` directory and they will be automatically compiled to 
 
 ### Publishing a project
 
-When you're ready to publish, complete the share information in `meta.json`, then run the publish command through gulp.
+When you're ready to publish, complete the information in `meta.json`, then run the publish command through gulp.
 
 ```bash
 $ gulp publish
@@ -66,22 +66,26 @@ Your dist folder will be synced to the directory specified under `publishPath` i
 ### Restarting a project
 
 1. Clone the project from github and `cd` into the project folder.
-2. Install dependencies:
+2. Create a new `.env` file with your passphrase:
+  ```bash
+  $ yo politico-interactives:passphrase
+  ```
+3. Install dependencies:
     ```bash
     $ yarn
-    ```
-3. Create a new `aws.json` by running the aws subtask:
-    ```bash
-    $ yo politico-interactives:aws
     ```
 4. If your project is using ArchieML, run the archie subtask to reconfigure the integration:
     ```bash
     $ yo politico-interactives:archie
     ```
-5. If you're cloning a project as a template for starting a new project, delete the `.git` folder in your project root and then initialize a new git repo for the new project.
-    ```base
-    $ git init
-    ```
+
+### Using a project as a template
+
+If you're cloning a project as a template for starting a new project, delete the `.git` folder in your project root and then initialize a new git repo for the new project.
+
+```base
+$ git init
+```
 
 ### Working with templates
 
