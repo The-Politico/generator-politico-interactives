@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const responsive = require('gulp-responsive');
 
 module.exports = () =>
-  gulp.src('./src/images/**/*.{png,jpg,JPG}')
+  gulp.src('./src/images/**/*.jpg')
     .pipe(responsive({
       '*': [{
         width: 400,

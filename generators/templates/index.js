@@ -113,7 +113,8 @@ module.exports = class extends Generator {
       this.destinationPath('src/templates/ads/script.html'));
     // Template context
     this.fs.writeJSON('src/templates/data.json', {});
-    // Images directory
+    // Images directories
+    mkdirp('./src/images');
     this.fs.copy(
       this.templatePath('dist/images/share.jpg'),
       this.destinationPath('dist/images/share.jpg'));

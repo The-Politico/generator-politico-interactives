@@ -114,6 +114,34 @@ There is also an extra filter specifically for rendering [Markdown](https://gith
 <h1>{{sectionTitle|markdown(strip=true)}}</h1>
 ```
 
+### Responsive images
+
+To make responsive images that load more quickly on smaller devices, drop a high-res jpg image into `src/images` directory. Then run:
+
+```bash
+$ gulp img
+```
+
+This is will create four optimized images from your source at 400, 800, 1200 and 1600 pixels width.
+
+You can easily include these images in your template with our custom `jpg` nunjucks macro. For example:
+
+```html
+<figure>
+    {{ jpg('cat', alt='A cat!') }}
+    <figcaption>A pretty cat</figcaption>
+</figure>
+```
+
+... will render as ...
+
+```html
+<figure>
+    <img src="images/cat-1800.jpg" srcset="images/cat-400.jpg 400w, images/cat-800.jpg 800w, images/cat-1200.jpg 1200w, images/cat-1800.jpg 1800w" alt="A cat!">
+    <figcaption>A pretty cat</figcaption>
+</figure>
+```
+
 ### ArchieML
 
 Optionally, there is a gulp task available which allows you to use [ArchieML](http://archieml.org/#demo) and Google Docs to render content into your templates.
