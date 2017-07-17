@@ -1,3 +1,12 @@
+0.4.0 / 2017-07-16
+==================
+
+  * Merge pull request [#47](https://github.com/The-Politico/generator-politico-interactives/issues/47) from The-Politico/images
+    Images
+  * adds macro for srcsets
+  * Adds gulp-responsive for image resizing. Updates readme.
+  * changelog
+
 0.3.5 / 2017-07-10
 ==================
 
