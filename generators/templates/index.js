@@ -113,12 +113,11 @@ module.exports = class extends Generator {
       this.destinationPath('src/templates/ads/script.html'));
     // Template context
     this.fs.writeJSON('src/templates/data.json', {});
-    // Images directory
+    // Images directories
+    mkdirp('./src/images');
     this.fs.copy(
-      this.templatePath('src/images/_share.jpg'),
-      this.destinationPath('src/images/_share.jpg'));
-    mkdirp('./src/images/opt');
-    mkdirp('./dist/images');
+      this.templatePath('dist/images/share.jpg'),
+      this.destinationPath('dist/images/share.jpg'));
     // Javascript
     this.fs.copy(
       this.templatePath('src/js/main.js'),
@@ -133,13 +132,10 @@ module.exports = class extends Generator {
         fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
       }
 
-      const imgTask = this.spawnCommand('gulp', ['img']);
-      imgTask.on('close', () => {
-        // Need this for webpack. Investigating why...
-        const yarnTask = this.spawnCommand('yarn', ['install']);
-        yarnTask.on('close', () => {
-          this.spawnCommand('gulp');
-        });
+      // Need this for webpack. Investigating why...
+      const yarnTask = this.spawnCommand('yarn', ['install']);
+      yarnTask.on('close', () => {
+        this.spawnCommand('gulp');
       });
     });
   }

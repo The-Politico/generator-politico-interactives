@@ -15,9 +15,7 @@ const gulp = require('./gulp')([
   'nunjucks',
   'scss',
   'server',
-  'img-copy',
-  'img-optimize',
-  'img-resize',
+  'img',
   'nunjucks-watch',
 ]);
 
@@ -48,7 +46,3 @@ gulp.task('publish', (cb) => {
   runSequence('build', 'aws', cb);
 });
 gulp.task('default', ['nunjucks', 'nunjucks-watch', 'scss', 'js-watch', 'server']);
-
-gulp.task('img', (cb) => {
-  runSequence('img-optimize', 'img-resize', 'img-copy', cb);
-});
