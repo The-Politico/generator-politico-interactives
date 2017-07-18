@@ -1,3 +1,6 @@
 node_modules/
 .yo-rc.json
 .DS_store
+
+venv/
+docs/build/
