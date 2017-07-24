@@ -50,6 +50,7 @@ module.exports = {
       comments: false
     }),
     new ExtractTextPlugin('css/styles.css'),
-    new OptimizeCssAssetsPlugin()
+    new OptimizeCssAssetsPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ],
 };
