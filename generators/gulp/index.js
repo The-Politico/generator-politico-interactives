@@ -11,9 +11,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('gulp/tasks/img.js'),
       this.destinationPath('gulp/tasks/img.js'));
-    this.fs.copy(
-      this.templatePath('gulp/tasks/nunjucks-watch.js'),
-      this.destinationPath('gulp/tasks/nunjucks-watch.js'));
   }
   install() {
     const dependencies = [
