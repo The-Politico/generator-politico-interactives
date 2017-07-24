@@ -68,7 +68,7 @@ module.exports = class extends Generator {
       'html-webpack-plugin',
       'lodash',
       'marked',
-      'node-env-file'
+      'node-env-file',
       'node-sass',
       'nunjucks',
       'open',
