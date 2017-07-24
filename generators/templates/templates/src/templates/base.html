@@ -1,3 +1,10 @@
+{% macro jpg(name, alt='Image') %}
+<img
+  src="images/{{ name }}-1800.jpg"
+  srcset="images/{{ name }}-400.jpg 400w, images/{{ name }}-800.jpg 800w, images/{{ name }}-1200.jpg 1200w, images/{{ name }}-1800.jpg 1800w"
+  alt="{{ alt }}"
+/>
+{% endmacro %}
 <!DOCTYPE html>
 <html>
     <head>
