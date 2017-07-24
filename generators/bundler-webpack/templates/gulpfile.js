@@ -37,10 +37,6 @@ try {
 
 gulp.task('default', ['dev']);
 
-gulp.task('img', (cb) => {
-  runSequence('img-optimize', 'img-resize', 'img-copy', cb);
-});
-
 gulp.task('render', (cb) => {
   runSequence('html', 'img', 'build', cb);
 });
