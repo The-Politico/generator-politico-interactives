@@ -19,7 +19,7 @@ Install the package's dependencies globally.
 Symlink
 -------
 
-Alternatively, you can clone a copy of the generator's git repository and use a symlink to install the package. This is especially useful if you'll be developing the generator.
+Alternatively, you can clone a copy of the generator's git repository and use a symlink to install the package. This is especially useful if you'll be developing templates within the generator.
 
 ::
 
