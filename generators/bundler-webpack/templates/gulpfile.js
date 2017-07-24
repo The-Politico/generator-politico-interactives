@@ -12,9 +12,7 @@ const gulp = require('./gulp')([
   'build',
   'dev',
   'html',
-  'img-copy',
-  'img-optimize',
-  'img-resize',
+  'img'
 ]);
 
 /* Add secure keys to environment */
