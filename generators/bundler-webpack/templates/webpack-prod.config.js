@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   resolve: {
@@ -28,7 +29,7 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: ['postcss-loader', 'sass-loader']
         })
       },
     ],
@@ -48,6 +49,7 @@ module.exports = {
       },
       comments: false
     }),
-    new ExtractTextPlugin('css/styles.css')
+    new ExtractTextPlugin('css/styles.css'),
+    new OptimizeCssAssetsPlugin()
   ],
 };

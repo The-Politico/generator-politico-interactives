@@ -28,6 +28,7 @@ function getContext() {
     path.resolve(process.cwd(), 'meta.json'));
 
   const templateContext = Object.assign({ meta }, contextData);
+  templateContext['env'] = process.env.NODE_ENV;
   return templateContext;
 }
 
@@ -48,6 +49,7 @@ module.exports = {
     })
   },
   renderIndex: () => {
+    process.env.NODE_ENV = 'production';
     const ctx = getContext();
 
     app.render('index.html', ctx, function(err, html) {
