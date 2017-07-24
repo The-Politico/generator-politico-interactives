@@ -16,26 +16,43 @@ nunjucks.configure('./src/templates/', {
   watch: true
 })
 
-const compiler = webpack(webpackConfig);
-const middleware = webpackMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath
-});
-app.use(middleware);
-app.use(webpackHotMiddleware(compiler));
-
 app.get('/', function(req, res) {
+  const ctx = getContext();
+  res.render('index.html', ctx);
+});
+
+function getContext() {
   const contextData = fs.readJsonSync(
     path.resolve(process.cwd(), 'src/templates/data.json'));
   const meta = fs.readJsonSync(
     path.resolve(process.cwd(), 'meta.json'));
 
   const templateContext = Object.assign({ meta }, contextData);
+  return templateContext;
+}
 
-  res.render('index.html', templateContext);
-})
 
-app.listen('3000', function() {
-  app.keepAliveTimeout = 0;
-  console.log('app started on port 3000');
-  open(`http://localhost:3000`);
-})
+module.exports = {
+  startServer: (port) => {
+    const compiler = webpack(webpackConfig);
+    const middleware = webpackMiddleware(compiler, {
+      publicPath: webpackConfig.output.publicPath
+    });
+    app.use(middleware);
+    app.use(webpackHotMiddleware(compiler));
+
+    app.listen(port, function() {
+      app.keepAliveTimeout = 0;
+      console.log(`app started on port ${port}`);
+      open(`http://localhost:${port}`);
+    })
+  },
+  renderIndex: () => {
+    const ctx = getContext();
+
+    app.render('index.html', ctx, function(err, html) {
+      fs.writeFileSync('dist/index.html', html);
+      console.log('dist/index.html written');
+    })
+  }
+}

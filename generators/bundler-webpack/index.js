@@ -24,6 +24,9 @@ module.exports = class extends Generator {
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js'));
     this.fs.copy(
+      this.templatePath('webpack-prod.config.js'),
+      this.destinationPath('webpack-prod.config.js'));
+    this.fs.copy(
       this.templatePath('postcss.config.js'),
       this.destinationPath('postcss.config.js'));
     this.fs.copy(
@@ -31,11 +34,14 @@ module.exports = class extends Generator {
       this.destinationPath('server.js'));
     // Gulp files
     this.fs.copy(
-      this.templatePath('gulp/tasks/nunjucks.js'),
-      this.destinationPath('gulp/tasks/nunjucks.js'));
+      this.templatePath('gulp/tasks/dev.js'),
+      this.destinationPath('gulp/tasks/dev.js'));
     this.fs.copy(
-      this.templatePath('gulp/tasks/webpack.js'),
-      this.destinationPath('gulp/tasks/webpack.js'));
+      this.templatePath('gulp/tasks/build.js'),
+      this.destinationPath('gulp/tasks/build.js'));
+    this.fs.copy(
+      this.templatePath('gulp/tasks/html.js'),
+      this.destinationPath('gulp/tasks/html.js'));
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js'), {
@@ -72,7 +78,7 @@ module.exports = class extends Generator {
       'style-loader',
       'uglify-js',
       'uglifyjs-webpack-plugin',
-      'webpack@2.6.1',
+      'webpack',
       'webpack-dev-middleware',
       'webpack-hot-middleware',
       'webpack-stream',
