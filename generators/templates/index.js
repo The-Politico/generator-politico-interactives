@@ -22,27 +22,23 @@ module.exports = class extends Generator {
     }];
 
     return this.prompt(questions).then((answers) => {
-      this.webpack = answers.bundler === this.WEBPACK;
       this.archie = answers.archie;
     });
   }
 
   template() {
-    if (this.webpack) {
-      this.composeWith(require.resolve('../bundler-webpack'), {
-        archie: this.archie,
-      });
-    } else {
-      this.composeWith(require.resolve('../bundler-browserify'), {
-        archie: this.archie,
-      });
-    }
+    this.composeWith(require.resolve('../bundler-webpack'), {
+      archie: this.archie
+    });
+    this.composeWith(require.resolve('../gulp'), {
+      archie: this.archie,
+    });
     if (this.archie) this.composeWith(require.resolve('../archie'));
   }
 
   writing() {
     // Skeleton
-    mkdirp('./src');
+    mkdirp('./src/data');
     mkdirp('./dist');
     // Nunjucks templates
     this.fs.copy(
@@ -93,7 +89,7 @@ module.exports = class extends Generator {
       this.templatePath('src/templates/ads/script.html'),
       this.destinationPath('src/templates/ads/script.html'));
     // Template context
-    this.fs.writeJSON('src/templates/data.json', {});
+    this.fs.writeJSON('src/data/data.json', {});
     // Images directories
     mkdirp('./src/images');
     this.fs.copy(

@@ -1,36 +1,24 @@
 const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
+const context = require('./context.js');
 const express = require('express');
 const nunjucks = require('nunjucks');
+const router = require('./router.js');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('../webpack.config.js');
 
 const app = express();
+app.use('/', router);
+
 app.set('view engine', 'html');
 nunjucks.configure('./src/templates/', {
   autoescape: true,
   express: app,
   watch: true
 })
-
-app.get('/', function(req, res) {
-  const ctx = getContext();
-  res.render('index.html', ctx);
-});
-
-function getContext() {
-  const contextData = fs.readJsonSync(
-    path.resolve(process.cwd(), 'src/templates/data.json'));
-  const meta = fs.readJsonSync(
-    path.resolve(process.cwd(), 'meta.json'));
-
-  const templateContext = Object.assign({ meta }, contextData);
-  templateContext['env'] = process.env.NODE_ENV;
-  return templateContext;
-}
 
 
 module.exports = {
@@ -53,7 +41,7 @@ module.exports = {
   },
   renderIndex: () => {
     process.env.NODE_ENV = 'production';
-    const ctx = getContext();
+    const ctx = context.getContext();
 
     app.render('index.html', ctx, function(err, html) {
       fs.writeFileSync('dist/index.html', html);

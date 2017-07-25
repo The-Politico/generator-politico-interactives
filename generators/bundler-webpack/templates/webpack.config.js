@@ -31,7 +31,7 @@ module.exports = {
             loader: 'style-loader'
           }, 
           {
-            loader: 'css-loader'
+            loader: 'postcss-loader'
           },
           {
             loader: 'sass-loader'

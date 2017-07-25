@@ -12,10 +12,11 @@ module.exports = class extends Generator {
       desc: 'Use ArchieML',
     });
   }
-
+  
   writing() {
     mkdirp('./dist/js');
     mkdirp('./dist/css');
+    mkdirp('./server')
     // Config files
     this.fs.copy(
       this.templatePath('.babelrc'),
@@ -30,21 +31,14 @@ module.exports = class extends Generator {
       this.templatePath('postcss.config.js'),
       this.destinationPath('postcss.config.js'));
     this.fs.copy(
-      this.templatePath('server.js'),
-      this.destinationPath('server.js'));
-    // Gulp files
+      this.templatePath('server/server.js'),
+      this.destinationPath('server/server.js'));
     this.fs.copy(
-      this.templatePath('gulp/tasks/dev.js'),
-      this.destinationPath('gulp/tasks/dev.js'));
-    this.fs.copy(
-      this.templatePath('gulp/tasks/build.js'),
-      this.destinationPath('gulp/tasks/build.js'));
-    this.fs.copy(
-      this.templatePath('gulp/tasks/html.js'),
-      this.destinationPath('gulp/tasks/html.js'));
+      this.templatePath('server/router.js'),
+      this.destinationPath('server/router.js'));
     this.fs.copyTpl(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'), {
+      this.templatePath('server/context.js'),
+      this.destinationPath('server/context.js'), {
         archie: this.options.archie,
       });
   }
