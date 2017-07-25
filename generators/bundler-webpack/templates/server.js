@@ -44,9 +44,12 @@ module.exports = {
 
     app.listen(port, function() {
       app.keepAliveTimeout = 0;
+    })
+
+    middleware.waitUntilValid(() => {
       console.log(`app started on port ${port}`);
       open(`http://localhost:${port}`);
-    })
+    });
   },
   renderIndex: () => {
     process.env.NODE_ENV = 'production';
