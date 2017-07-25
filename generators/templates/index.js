@@ -11,28 +11,10 @@ module.exports = class extends Generator {
       required: true,
       desc: 'Project title',
     });
-
-    this.BROWSERIFY = 'browserify';
-    this.WEBPACK = 'webpack';
   }
 
   prompting() {
     const questions = [{
-      type: 'list',
-      name: 'bundler',
-      message: 'Which module bundler would you like to use?',
-      default: this.BROWSERIFY,
-      choices: [
-        {
-          name: 'Browserify (default)',
-          value: this.BROWSERIFY,
-        },
-        {
-          name: 'Webpack (ES2015 + SCSS)',
-          value: this.WEBPACK,
-        },
-      ],
-    }, {
       type: 'confirm',
       name: 'archie',
       message: 'Would you like to include an ArchieML configuration?',
@@ -68,8 +50,7 @@ module.exports = class extends Generator {
       this.destinationPath('src/templates/index.html'));
     this.fs.copyTpl(
       this.templatePath('src/templates/base.html'),
-      this.destinationPath('src/templates/base.html'),
-      { webpack: this.webpack });
+      this.destinationPath('src/templates/base.html'));
     // Meta
     this.fs.copy(
       this.templatePath('src/templates/meta/social.html'),
