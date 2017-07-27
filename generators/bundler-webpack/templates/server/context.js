@@ -15,7 +15,7 @@ module.exports = {
     const templateContext = {
       META: meta,
       DATA: contextData,
-      ARCHIE: archie,
+      <% if (archie) { %> ARCHIE: archie, <% } %>
       ENV: process.env.NODE_ENV
     };
 
