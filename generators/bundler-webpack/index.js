@@ -14,6 +14,8 @@ module.exports = class extends Generator {
   }
   
   writing() {
+    console.log(this.options.archie);
+
     mkdirp('./dist/js');
     mkdirp('./dist/css');
     mkdirp('./server')

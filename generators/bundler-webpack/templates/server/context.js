@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   getContext: () => {
-    <% if (this.archie) { %>
+    <% if (archie) { %>
     const archie = fs.readJsonSync(
       path.resolve(process.cwd(), 'src/data/archie.json'));
     <% } %>
