@@ -4,6 +4,8 @@ const open = require('open');
 const context = require('./context.js');
 const express = require('express');
 const nunjucks = require('nunjucks');
+const safe = require('nunjucks').runtime.markSafe;
+const marked = require('marked');
 const router = require('./router.js');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
@@ -14,12 +16,21 @@ const app = express();
 app.use('/', router);
 
 app.set('view engine', 'html');
-nunjucks.configure('./src/templates/', {
+const env = nunjucks.configure('./src/templates/', {
   autoescape: true,
   express: app,
   watch: true
-})
+});
 
+env.addFilter('markdown', (str, kwargs) => {
+  // strip outer <p> tags?
+  const strip = typeof kwargs === 'undefined' ?
+    false : kwargs.strip || false;
+  return !strip ? safe(marked(str)) :
+    safe(marked(str).trim().replace(/^<p>|<\/p>$/g, ''));
+});
+
+app.use(express.static('src'))
 
 module.exports = {
   startServer: (port) => {
