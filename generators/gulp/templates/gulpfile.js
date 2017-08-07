@@ -12,7 +12,8 @@ const gulp = require('./gulp')([
   'build',
   'dev',
   'html',
-  'img'
+  'img',
+  <% if (spreadsheet) { %>'spreadsheet', <% } %>
 ]);
 
 /* Add secure keys to environment */

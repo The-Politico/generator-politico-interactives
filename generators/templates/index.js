@@ -14,15 +14,24 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    const questions = [{
-      type: 'confirm',
-      name: 'archie',
-      message: 'Would you like to include an ArchieML configuration?',
-      default: false,
-    }];
+    const questions = [
+      {
+        type: 'confirm',
+        name: 'archie',
+        message: 'Would you like to include an ArchieML configuration?',
+        default: false,
+      },
+      {
+        type: 'confirm',
+        name: 'spreadsheet',
+        message: 'Would you like Google Spreadsheet integration?',
+        default: false
+      }
+    ];
 
     return this.prompt(questions).then((answers) => {
       this.archie = answers.archie;
+      this.spreadsheet = answers.spreadsheet
     });
   }
 
@@ -32,8 +41,10 @@ module.exports = class extends Generator {
     });
     this.composeWith(require.resolve('../gulp'), {
       archie: this.archie,
+      spreadsheet: this.spreadsheet
     });
     if (this.archie) this.composeWith(require.resolve('../archie'));
+    if (this.spreadsheet) this.composeWith(require.resolve('../spreadsheet'));
   }
 
   writing() {

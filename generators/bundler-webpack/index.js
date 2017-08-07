@@ -11,11 +11,15 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Use ArchieML',
     });
+    this.option('context', {
+      type: Boolean,
+      required: false,
+      default: true,
+      desc: 'Use context building'
+    })
   }
   
   writing() {
-    console.log(this.options.archie);
-
     mkdirp('./dist/js');
     mkdirp('./dist/css');
     mkdirp('./server')
@@ -32,17 +36,24 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('postcss.config.js'),
       this.destinationPath('postcss.config.js'));
-    this.fs.copy(
-      this.templatePath('server/server.js'),
-      this.destinationPath('server/server.js'));
-    this.fs.copy(
-      this.templatePath('server/router.js'),
-      this.destinationPath('server/router.js'));
     this.fs.copyTpl(
-      this.templatePath('server/context.js'),
-      this.destinationPath('server/context.js'), {
-        archie: this.options.archie,
+      this.templatePath('server/server.js'),
+      this.destinationPath('server/server.js'), {
+        context: this.options.context
       });
+    this.fs.copyTpl(
+      this.templatePath('server/router.js'),
+      this.destinationPath('server/router.js'), {
+        context: this.options.context
+      });
+
+    if (this.options.context) {
+      this.fs.copyTpl(
+        this.templatePath('server/context.js'),
+        this.destinationPath('server/context.js'), {
+          archie: this.options.archie,
+        });
+    }
   }
 
   install() {
@@ -81,6 +92,10 @@ module.exports = class extends Generator {
       'webpack-hot-middleware',
       'webpack-stream',
     ];
+
+    if (this.options.nunjucks) {
+      dependencies.push('');
+    }
     this.yarnInstall(dependencies, { save: true });
   }
 };

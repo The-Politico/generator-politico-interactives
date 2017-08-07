@@ -10,6 +10,13 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Use ArchieML',
     });
+
+    this.option('spreadsheet', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Use google spreadsheet',
+    });
   }
   writing() {
     this.fs.copy(
@@ -34,10 +41,15 @@ module.exports = class extends Generator {
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js'), {
         archie: this.options.archie,
+        spreadsheet: this.options.spreadsheet
       });
 
     if (this.archie) {
       this.fs.writeJSON('src/data/archie.json', {});
+    }
+
+    if (this.spreadsheet) {
+      this.fs.writeJSON('src/data/data.json', {});
     }
   }
   install() {

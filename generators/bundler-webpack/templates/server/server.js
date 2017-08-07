@@ -1,8 +1,10 @@
 const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
-const context = require('./context.js');
 const express = require('express');
+<% if (context) { %>
+const context = require('./context.js');
+<% } %>
 const nunjucks = require('nunjucks');
 const safe = require('nunjucks').runtime.markSafe;
 const marked = require('marked');
@@ -16,12 +18,12 @@ const app = express();
 app.use('/', router);
 
 app.set('view engine', 'html');
+
 const env = nunjucks.configure('./src/templates/', {
   autoescape: true,
   express: app,
   watch: true
 });
-
 env.addFilter('markdown', (str, kwargs) => {
   // strip outer <p> tags?
   const strip = typeof kwargs === 'undefined' ?
@@ -52,11 +54,12 @@ module.exports = {
   },
   renderIndex: () => {
     process.env.NODE_ENV = 'production';
+    <% if (context) { %>
     const ctx = context.getContext();
-
+    <% } %>
     app.render('index.html', ctx, function(err, html) {
       fs.writeFileSync('dist/index.html', html);
       console.log('dist/index.html written');
-    })
+    });
   }
 }
