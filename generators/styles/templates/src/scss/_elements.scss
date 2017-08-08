@@ -44,16 +44,24 @@ button {
 
 
 // Aligning text
-.center-align-text{
+.center-align{
   text-align: center;
 }
 
-.left-align-text{
+.left-align{
   text-align: left;
 }
 
-.right-align-text{
+.right-align{
   text-align: right;
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.bold{
+  font-weight: 600;
 }
 
 // Fitting elements to the size of the well
@@ -72,6 +80,8 @@ button {
   @include margin-auto;
 }
 
+
+// Paragraphs
 p {
   font-family: $tisa;
   font-size: 1.2em;
@@ -80,10 +90,17 @@ p {
   max-width: 600px;
   overflow-wrap: break-word;
 
+// Using a sans font
+  &.sans{
+    font-size: 1.15em;
+    line-height: 1.45em;
+  }
+
   @media (max-width: $width-medium) {
     font-size: 1.15em;
   }
 
+// The dropcap
   span.dropcap {
     float: left;
     font-size: 90px;
@@ -96,17 +113,26 @@ p {
    }
 }
 
+// Header groups
 h2,
 h3,
 h4,
 h5 {
-  font-family: $jubilat;
-  margin: 0 auto 5px;
+  font-family: $proxima;
+  margin: 0 auto 3px;
   max-width: 100%;
   text-align: center;
 
-  &.sans{
-    font-family: $proxima;
+  + p{
+    margin-top: 0px;
+  }
+
+  &.serif{
+    font-family: $tisa;
+
+    + p{
+      margin-top: 5px;
+    }
   }
 }
 
@@ -114,11 +140,11 @@ h2,
 h3,
 h4,
 h5{
-  &.left{
+  &.align-left{
   text-align: left;
   }
   + p{
-    margin-top: .1em;
+    margin-top: 0px;
   }
 }
 
@@ -126,27 +152,36 @@ h2,
 h3,
 h4,
 h5{
-  &.right{
+  &.align-right{
   text-align: right;
   }
   + p{
-    margin-top: .1em;
+    margin-top: 0px;
   }
 }
 
+p + h2{margin-top:2em;}
 
+
+p + h3{margin-top:2em;}
+
+section + h3{
+  margin-top: 2em;
+}
+
+// Header custom sizes
 h2, .h2 {
-  font-weight: 400;
-  font-size: 35px;
-
-  &.sans{
-    font-weight: 600;
-    font-size:30px;
-  }
+  font-weight: 600;
+  font-size: 30px;
 
   @media(max-width: $width-small){
     font-size: 28px;
   }
+}
+
+h2.serif{
+  font-size: 28px;
+  font-weight: normal;
 }
 
 h3, .h3 {
@@ -154,12 +189,11 @@ h3, .h3 {
   font-size: 26px;
 
   @media(max-width: $width-small){
-    font-size: 25px;
+    font-size: 24px;
   }
 }
 
 h4, .h4 {
-  font-family: $proxima;
   font-weight: 600;
   font-size: 19px;
 
@@ -169,11 +203,10 @@ h4, .h4 {
 }
 
 h5, .h5 {
-  font-family: $proxima;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   color: $satan;
-  margin: 0 auto 2px;
+  margin: 0 auto 5px;
 
   @media(max-width: $width-small){
     font-size: 13px;
@@ -181,10 +214,10 @@ h5, .h5 {
 }
 
 
-// Sections
+// Sections. Sections should be used to offset sections of the text, like graphics etc.
   section {
   margin: 0 auto;
-  padding: 2em 0;
+  padding: 2em 0 0;
 
     p:last-of-type{
         margin-bottom: 0;
