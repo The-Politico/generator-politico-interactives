@@ -46,6 +46,9 @@ module.exports = {
     }),
     new ExtractTextPlugin('css/styles.css'),
     new OptimizeCssAssetsPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin()
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+    })
   ],
 };

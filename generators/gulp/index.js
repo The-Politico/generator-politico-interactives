@@ -65,6 +65,7 @@ module.exports = class extends Generator {
       'gulp-responsive',
       'gulp-rev-all',
       'gulp-util',
+      'ngrok',
       'open',
     ];
 
