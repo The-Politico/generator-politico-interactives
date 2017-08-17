@@ -11,6 +11,7 @@ const gulp = require('./gulp')([
   <% if (archie) { %>'archie',<% } %>
   'build',
   'dev',
+  'dist',
   'html',
   'img',
   <% if (spreadsheet) { %>'spreadsheet', <% } %>
@@ -40,6 +41,10 @@ gulp.task('default', ['dev']);
 
 gulp.task('render', (cb) => {
   runSequence('html', 'img', 'build', cb);
+});
+
+gulp.task('preview', (cb) => {
+  runSequence('render', 'dist', cb);
 });
 
 gulp.task('publish', (cb) => {

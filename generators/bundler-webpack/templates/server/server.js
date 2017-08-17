@@ -12,7 +12,7 @@ const router = require('./router.js');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackConfig = require('../webpack.config.js');
+const webpackConfig = require('../webpack-dev.config.js');
 
 const app = express();
 app.use('/', router);
