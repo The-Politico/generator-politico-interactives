@@ -29,12 +29,6 @@ Batteries included
 An app's development environment is built from the command line with a complete set of templates and scripts to build and publish the project, all of which can be overwritten within an individual project.
 
 
-Flat
-''''
-
-Every project is represented through flat files, making them very easy to reason about. File transformations like processing scripts, stylesheets and images are handled through background tasks that simply translate a flat file in the source directory to one in the built directory. The development server serves flat files from the built directory just as they will be served on S3.
-
-
 
 What it does
 ------------
