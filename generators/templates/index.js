@@ -108,8 +108,8 @@ module.exports = class extends Generator {
       this.destinationPath('dist/images/share.jpg'));
     // Javascript
     this.fs.copy(
-      this.templatePath('src/js/main.js'),
-      this.destinationPath('src/js/main.js'));
+      this.templatePath('src/js/main-app.js'),
+      this.destinationPath('src/js/main-app.js'));
   }
 
   end() {  

@@ -16,7 +16,7 @@
         {%include "meta/social.html"%}
 
         {% if env == 'production' %}
-        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/main-app.css" rel="stylesheet">
         {% endif %}
         <!-- jQuery -->
         <script
@@ -82,7 +82,7 @@
          {%endblock%}
 
          <script type="text/javascript">window.tweetText = "{{meta.share.twitter.share_tweet}}";</script>
-         <script type="text/javascript" src="js/main.bundle.js"></script>
+         <script type="text/javascript" src="js/main-app.bundle.js"></script>
          {% include "meta/telium.html" %}
          {% include "ads/script.html" %}
     </body>

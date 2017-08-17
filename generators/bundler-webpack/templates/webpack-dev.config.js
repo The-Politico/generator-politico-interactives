@@ -1,16 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
+const glob = require('glob');
+const _ = require('lodash');
 
 module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
   },
-  entry: {
-    main: [
-      'webpack-hot-middleware/client?reload=true',
-      './src/js/main.js',
-    ],
-  },
+  entry: _.zipObject(
+    glob.sync('./src/js/main-*.js*').map(f => path.basename(f, path.extname(f))),
+    glob.sync('./src/js/main-*.js*').map(f => [
+      `webpack-hot-middleware/client?reload=true`,
+      f
+    ])
+  ),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].bundle.js',

@@ -1,17 +1,18 @@
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const _ = require('lodash');
 
 module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
   },
-  entry: {
-    main: [
-      './src/js/main.js',
-    ],
-  },
+  entry: _.zipObject(
+    glob.sync('./src/js/main-*.js*').map(f => path.basename(f, path.extname(f))),
+    glob.sync('./src/js/main-*.js*')
+  ),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].bundle.js',
@@ -32,6 +33,13 @@ module.exports = {
           use: ['postcss-loader', 'sass-loader']
         })
       },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
+        })
+      }
     ],
   },
   plugins: [
@@ -44,7 +52,12 @@ module.exports = {
       },
       sourceMap: true
     }),
-    new ExtractTextPlugin('css/styles.css'),
+    new ExtractTextPlugin({
+      filename: (getPath) => {
+        return getPath('css/[name].css').replace('css/js', 'css');
+      },
+      allChunks: true
+    }),
     new OptimizeCssAssetsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.ProvidePlugin({

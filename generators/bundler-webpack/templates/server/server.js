@@ -2,9 +2,9 @@ const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
 const express = require('express');
-<% if (context) { %>
+
 const context = require('./context.js');
-<% } %>
+
 const nunjucks = require('nunjucks');
 const safe = require('nunjucks').runtime.markSafe;
 const marked = require('marked');
@@ -54,9 +54,10 @@ module.exports = {
   },
   renderIndex: () => {
     process.env.NODE_ENV = 'production';
-    <% if (context) { %>
+    
     const ctx = context.getContext();
-    <% } %>
+    ctx['env'] = process.env.NODE_ENV;
+
     app.render('index.html', ctx, function(err, html) {
       fs.writeFileSync('dist/index.html', html);
       console.log('dist/index.html written');

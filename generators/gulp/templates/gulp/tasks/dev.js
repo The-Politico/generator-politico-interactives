@@ -1,7 +1,9 @@
-const argv = require('yargs').argv;
+const { argv } = require('yargs');
 const app = require('../../server/server.js');
 const ngrok = require('ngrok');
 const open = require('open');
+
+const port = argv.port || 3000;
 
 const startTunel = (port) => {
   ngrok.connect({
@@ -11,8 +13,6 @@ const startTunel = (port) => {
     addr: port,
   }, (err, url) => { open(url); });
 };
-
-const port = 3000;
 
 module.exports = (cb) => {
   app.startServer(port);
