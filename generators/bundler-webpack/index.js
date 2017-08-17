@@ -28,8 +28,8 @@ module.exports = class extends Generator {
       this.templatePath('.babelrc'),
       this.destinationPath('.babelrc'));
     this.fs.copy(
-      this.templatePath('webpack.config.js'),
-      this.destinationPath('webpack.config.js'));
+      this.templatePath('webpack-dev.config.js'),
+      this.destinationPath('webpack-dev.config.js'));
     this.fs.copy(
       this.templatePath('webpack-prod.config.js'),
       this.destinationPath('webpack-prod.config.js'));
