@@ -7,7 +7,4 @@ module.exports = () => {
   return gulp.src('src/js/main.js')
     .pipe(webpackStream(prodConfig, webpack))
     .pipe(gulp.dest('dist/'))
-    .once('end', () => {
-      process.exit();
-    });
 };
