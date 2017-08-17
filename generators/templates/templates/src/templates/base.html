@@ -15,8 +15,9 @@
         {%include "meta/icons.html"%}
         {%include "meta/social.html"%}
 
-        <%# Skip if using webpack. #%>
-        <% if (!webpack) { %><link href="css/main.bundle.css" rel="stylesheet"><% } %>
+        {% if env == 'production' %}
+        <link href="css/main-app.css" rel="stylesheet">
+        {% endif %}
         <!-- jQuery -->
         <script
           src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -81,8 +82,7 @@
          {%endblock%}
 
          <script type="text/javascript">window.tweetText = "{{meta.share.twitter.share_tweet}}";</script>
-         <%# Skip if using webpack. #%>
-         <% if (!webpack) { %><script type="text/javascript" src="js/main.bundle.js"></script><% } %>
+         <script type="text/javascript" src="js/main-app.bundle.js"></script>
          {% include "meta/telium.html" %}
          {% include "ads/script.html" %}
     </body>

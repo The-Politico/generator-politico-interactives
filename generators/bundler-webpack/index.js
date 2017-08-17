@@ -11,30 +11,49 @@ module.exports = class extends Generator {
       default: false,
       desc: 'Use ArchieML',
     });
+    this.option('context', {
+      type: Boolean,
+      required: false,
+      default: true,
+      desc: 'Use context building'
+    })
   }
-
+  
   writing() {
     mkdirp('./dist/js');
     mkdirp('./dist/css');
+    mkdirp('./server')
     // Config files
     this.fs.copy(
-      this.templatePath('webpack.config.js'),
-      this.destinationPath('webpack.config.js'));
+      this.templatePath('.babelrc'),
+      this.destinationPath('.babelrc'));
+    this.fs.copy(
+      this.templatePath('webpack-dev.config.js'),
+      this.destinationPath('webpack-dev.config.js'));
+    this.fs.copy(
+      this.templatePath('webpack-prod.config.js'),
+      this.destinationPath('webpack-prod.config.js'));
     this.fs.copy(
       this.templatePath('postcss.config.js'),
       this.destinationPath('postcss.config.js'));
-    // Gulp files
-    this.fs.copy(
-      this.templatePath('gulp/tasks/nunjucks.js'),
-      this.destinationPath('gulp/tasks/nunjucks.js'));
-    this.fs.copy(
-      this.templatePath('gulp/tasks/webpack.js'),
-      this.destinationPath('gulp/tasks/webpack.js'));
     this.fs.copyTpl(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'), {
-        archie: this.options.archie,
+      this.templatePath('server/server.js'),
+      this.destinationPath('server/server.js'), {
+        context: this.options.context
       });
+    this.fs.copyTpl(
+      this.templatePath('server/router.js'),
+      this.destinationPath('server/router.js'), {
+        context: this.options.context
+      });
+
+    if (this.options.context) {
+      this.fs.copyTpl(
+        this.templatePath('server/context.js'),
+        this.destinationPath('server/context.js'), {
+          archie: this.options.archie,
+        });
+    }
   }
 
   install() {
@@ -43,17 +62,24 @@ module.exports = class extends Generator {
       'babel-core',
       'babel-loader',
       'babel-preset-env',
+      'babel-preset-es2015',
+      'babel-preset-react',
+      'babel-preset-stage-0',
       'css-loader',
+      'exports-loader',
+      'express',
       'extract-text-webpack-plugin',
       'fs-extra',
       'glob',
       'globby',
       'gulp',
-      'gulp-nunjucks-render',
+      'gulp-env',
       'gulp-util',
       'html-webpack-plugin',
+      'imports-loader',
       'lodash',
       'marked',
+      'node-env-file',
       'node-sass',
       'nunjucks',
       'open',
@@ -61,13 +87,20 @@ module.exports = class extends Generator {
       'postcss-loader',
       'run-sequence',
       'sass-loader',
+      'secure-keys',
       'style-loader',
       'uglify-js',
       'uglifyjs-webpack-plugin',
+      'whatwg-fetch',
       'webpack',
-      'webpack-dev-server',
+      'webpack-dev-middleware',
+      'webpack-hot-middleware',
       'webpack-stream',
     ];
+
+    if (this.options.nunjucks) {
+      dependencies.push('');
+    }
     this.yarnInstall(dependencies, { save: true });
   }
 };

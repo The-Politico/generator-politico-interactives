@@ -1,3 +1,5 @@
+require('../scss/main.scss');
+
 window.$('.icon-facebook').click((e) => {
   e.preventDefault();
   const uri = encodeURIComponent(window.location.href);

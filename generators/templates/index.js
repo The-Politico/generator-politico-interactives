@@ -11,56 +11,45 @@ module.exports = class extends Generator {
       required: true,
       desc: 'Project title',
     });
-
-    this.BROWSERIFY = 'browserify';
-    this.WEBPACK = 'webpack';
   }
 
   prompting() {
-    const questions = [{
-      type: 'list',
-      name: 'bundler',
-      message: 'Which module bundler would you like to use?',
-      default: this.BROWSERIFY,
-      choices: [
-        {
-          name: 'Browserify (default)',
-          value: this.BROWSERIFY,
-        },
-        {
-          name: 'Webpack (ES2015 + SCSS)',
-          value: this.WEBPACK,
-        },
-      ],
-    }, {
-      type: 'confirm',
-      name: 'archie',
-      message: 'Would you like to include an ArchieML configuration?',
-      default: false,
-    }];
+    const questions = [
+      {
+        type: 'confirm',
+        name: 'archie',
+        message: 'Would you like to include an ArchieML configuration?',
+        default: false,
+      },
+      {
+        type: 'confirm',
+        name: 'spreadsheet',
+        message: 'Would you like Google Spreadsheet integration?',
+        default: false
+      }
+    ];
 
     return this.prompt(questions).then((answers) => {
-      this.webpack = answers.bundler === this.WEBPACK;
       this.archie = answers.archie;
+      this.spreadsheet = answers.spreadsheet
     });
   }
 
   template() {
-    if (this.webpack) {
-      this.composeWith(require.resolve('../bundler-webpack'), {
-        archie: this.archie,
-      });
-    } else {
-      this.composeWith(require.resolve('../bundler-browserify'), {
-        archie: this.archie,
-      });
-    }
+    this.composeWith(require.resolve('../bundler-webpack'), {
+      archie: this.archie
+    });
+    this.composeWith(require.resolve('../gulp'), {
+      archie: this.archie,
+      spreadsheet: this.spreadsheet
+    });
     if (this.archie) this.composeWith(require.resolve('../archie'));
+    if (this.spreadsheet) this.composeWith(require.resolve('../spreadsheet'));
   }
 
   writing() {
     // Skeleton
-    mkdirp('./src');
+    mkdirp('./src/data');
     mkdirp('./dist');
     // Nunjucks templates
     this.fs.copy(
@@ -68,8 +57,7 @@ module.exports = class extends Generator {
       this.destinationPath('src/templates/index.html'));
     this.fs.copyTpl(
       this.templatePath('src/templates/base.html'),
-      this.destinationPath('src/templates/base.html'),
-      { webpack: this.webpack });
+      this.destinationPath('src/templates/base.html'));
     // Meta
     this.fs.copy(
       this.templatePath('src/templates/meta/social.html'),
@@ -112,7 +100,7 @@ module.exports = class extends Generator {
       this.templatePath('src/templates/ads/script.html'),
       this.destinationPath('src/templates/ads/script.html'));
     // Template context
-    this.fs.writeJSON('src/templates/data.json', {});
+    this.fs.writeJSON('src/data/data.json', {});
     // Images directories
     mkdirp('./src/images');
     this.fs.copy(
@@ -120,23 +108,11 @@ module.exports = class extends Generator {
       this.destinationPath('dist/images/share.jpg'));
     // Javascript
     this.fs.copy(
-      this.templatePath('src/js/main.js'),
-      this.destinationPath('src/js/main.js'));
+      this.templatePath('src/js/main-app.js'),
+      this.destinationPath('src/js/main-app.js'));
   }
 
-  end() {
-    const nunjucksTask = this.spawnCommand('gulp', ['nunjucks']);
-    nunjucksTask.on('close', () => {
-      // Copy the rendered template over initially
-      if (this.webpack) {
-        fs.createReadStream('./src/index.html').pipe(fs.createWriteStream('./dist/index.html'));
-      }
-
-      // Need this for webpack. Investigating why...
-      const yarnTask = this.spawnCommand('yarn', ['install']);
-      yarnTask.on('close', () => {
-        this.spawnCommand('gulp');
-      });
-    });
+  end() {  
+    this.spawnCommand('gulp');
   }
 };
