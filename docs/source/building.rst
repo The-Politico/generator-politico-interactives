@@ -10,17 +10,13 @@ Templates are rendered using Nunjucks templating syntax. See Nunjucks' `template
 Template context
 ''''''''''''''''
 
-You can put data in :code:`templates/data.json` and it will be rendered as context with your templates.
-
-For example:
-
-.. code-block:: javascript
-
-  { "headline": "My headline" }
+Data to go into the template context can come from three places: an ArchieML doc, a spreadsheet, and the meta JSON file. Each of those data sources are prefixed in the template context. So, to use an Archie key, you would write:
 
 .. code-block:: html+jinja
+  
+  {{ ARCHIE.key }}
 
-  <h1>{{headline}}</h1>
+Spreadsheet keys are prefixed with :code:`DATA`, and meta keys are prefixed with :code:`META`. For more, take a look at :code:`server/context.js`.
 
 Markdown
 ''''''''
@@ -90,7 +86,7 @@ https://docs.google.com/document/d/**yourGoogleIDhere**/edit
   Your document must have access set at least to :code:`Anyone with the link can view` to use this task.
 
 
-The archie gulp task will access your Google doc and overwrite :code:`templates/data.json` with ArchieML data. To run it:
+The archie gulp task will access your Google doc and overwrite :code:`src/data/archie.json` with ArchieML data. To run it:
 
 ::
 
@@ -114,3 +110,24 @@ The archie gulp task will access your Google doc and overwrite :code:`templates/
         'archie', // Add this line
         // ...
       ]);
+
+Spreadsheet
+-----------
+
+There is an optional gulp task for loading a Google Spreadsheet into JSON for use in your Nunjucks templates (or to load onto the page directly). 
+
+To set it up, run:
+
+::
+  
+  $ yo politico-interactives:spreadsheet
+
+This will ask you for a spreadsheet ID. You can get that from the URL of your spreadsheet:
+
+https://docs.google.com/spreadsheets/d/**yourGoogleIDhere**/edit
+
+The spreadsheet gulp task will overwrite :code:`src/data/data.json` with the data from the spreadsheet.
+
+The conversion from spreadsheet to JSON takes each sheet and converts it to JSON using `copytext <https://github.com/rdmurphy/node-copytext>`_'s table converter. This makes each row an object, using the first row as a header row for keys inside the JSON object. 
+
+This is customizable at a sheet level in :code:`gulp/tasks/spreadsheet.js`. See the `copytext <https://github.com/rdmurphy/node-copytext>`_ docs for more information on how to customize the parsing.

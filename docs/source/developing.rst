@@ -23,12 +23,12 @@ Sets up an ArchieML integration for the project, if requested.
 bundler-browserify
 ''''''''''''''''''
 
-Sets up a browserify-based bundler system.
+Sets up a browserify-based bundler system (deprecated).
 
 bundler-webpack
 '''''''''''''''
 
-Sets up a webpack-based bundler system (depricated).
+Sets up a webpack-based bundler system.
 
 github
 ''''''
@@ -67,6 +67,11 @@ passphrase
 ''''''''''
 
 Uses your passphrase to try to decrypt keys file.
+
+spreadsheet
+''''''''''
+
+Sets up gulp tasks and context loading for using a Google Spreadsheet
 
 styles
 ''''''
