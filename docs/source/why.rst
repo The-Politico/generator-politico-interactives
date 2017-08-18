@@ -18,7 +18,7 @@ The build system creates projects that are...
 Decentralized
 '''''''''''''
 
-Every project is an independent application. This keeps our builds lean. It gives us the flexibiltiy to use whatever front-end technology we need for the project at hand and to integrate easily with backends in a decoupled way.
+Every project is an independent application. This keeps our builds lean. It gives us the flexibility to use whatever front-end technology we need for the project at hand and to integrate easily with backends in a decoupled way.
 
 Treating our projects as independent apps means we intentionally skip several conventions that are normally part of content management systems, like centralized revision control and release management.
 
