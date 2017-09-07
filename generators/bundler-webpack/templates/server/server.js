@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
-const net = require('net');
 const express = require('express');
 <% if (context) { %>
 const context = require('./context.js');
