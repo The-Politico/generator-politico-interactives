@@ -67,19 +67,4 @@ module.exports = {
       console.log('dist/index.html written');
     });
   },
-  checkPort: (port, cb) => {
-    const server = net.createServer(function(socket) {
-      socket.write('Echo server\r\n');
-      socket.pipe(socket);
-    });
-
-    server.listen(port, 'localhost');
-    server.on('error', function(e) {
-      cb(true);
-    });
-    server.on('listening', function(e) {
-      server.close();
-      cb(false);
-    })
-  }
 }
