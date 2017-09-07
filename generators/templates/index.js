@@ -39,6 +39,9 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../bundler-webpack'), {
       archie: this.archie
     });
+    this.composeWith(require.resolve('../router'), {
+      context: true
+    });
     this.composeWith(require.resolve('../gulp'), {
       archie: this.archie,
       spreadsheet: this.spreadsheet
