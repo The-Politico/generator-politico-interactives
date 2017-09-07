@@ -69,6 +69,7 @@ module.exports = class extends Generator {
       'gulp-rev-all',
       'gulp-util',
       'ngrok',
+      'portfinder',
       'open',
     ];
 

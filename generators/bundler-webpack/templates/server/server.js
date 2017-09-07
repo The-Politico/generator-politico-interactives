@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
+const net = require('net');
 const express = require('express');
 <% if (context) { %>
 const context = require('./context.js');
@@ -65,5 +66,20 @@ module.exports = {
       fs.writeFileSync('dist/index.html', html);
       console.log('dist/index.html written');
     });
+  },
+  checkPort: (port, cb) => {
+    const server = net.createServer(function(socket) {
+      socket.write('Echo server\r\n');
+      socket.pipe(socket);
+    });
+
+    server.listen(port, 'localhost');
+    server.on('error', function(e) {
+      cb(true);
+    });
+    server.on('listening', function(e) {
+      server.close();
+      cb(false);
+    })
   }
 }
