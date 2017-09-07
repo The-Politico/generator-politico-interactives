@@ -4,8 +4,9 @@ const fs = require('fs-extra');
 const path = require('path');
 
 module.exports = (cb) => {
-  var safePattern =    /^[a-z0-9_\/\-.,?:@#%^+=\[\]]*$/i;
+  var safePattern = /^[a-z0-9_\/\-.,?:@#%^+=\[\]]*$/i;
   var safeishPattern = /^[a-z0-9_\/\-.,?:@#%^+=\[\]{}|&()<>; *']*$/i;
+
   function bashEscape(arg) {
     // These don't need quoting
     if (safePattern.test(arg)) return arg;
@@ -13,10 +14,10 @@ module.exports = (cb) => {
     // These are fine wrapped in double quotes using weak escaping.
     if (safeishPattern.test(arg)) return '"' + arg + '"';
 
-    arg = arg.replace(/(\r\n|\n|\r)/gm,"");
+    arg = arg.replace(/(\r\n|\n|\r)/gm, "");
 
     // Otherwise use strong escaping with single quotes
-    return "'" + arg.replace(/'+/g, function (val) {
+    return "'" + arg.replace(/'+/g, function(val) {
       // But we need to interpolate single quotes efficiently
 
       // One or two can simply be '\'' -> ' or '\'\'' -> ''
@@ -38,4 +39,5 @@ module.exports = (cb) => {
   });
   fs.writeJsonSync(jsonPath, data);
   cb();
+  process.exit();
 }
