@@ -1,3 +1,20 @@
+0.5.2 / 2017-09-08
+==================
+
+  * Allow for multiple dev servers to run on different ports
+  * Make Express router independent subgenerator in order to facilitate overwriting in dependent generators
+  * Hard exit Gulp commands
+
+0.5.1 / 2017-08-18
+=================
+
+  * Fix default meta tag templates
+
+0.5.0 / 2017-08-17
+=================
+
+  * Complete rewrite of dev server architecture to use Express and Webpack
+
 0.4.0 / 2017-07-16
 ==================
 
