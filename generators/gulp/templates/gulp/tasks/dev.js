@@ -2,10 +2,11 @@ const { argv } = require('yargs');
 const app = require('../../server/server.js');
 const ngrok = require('ngrok');
 const open = require('open');
+const portfinder = require('portfinder');
 
 const port = argv.port || 3000;
 
-const startTunel = (port) => {
+const startTunnel = (port) => {
   ngrok.connect({
     authtoken: process.env.ngrokToken,
     auth: 'interactive:news',
@@ -15,9 +16,16 @@ const startTunel = (port) => {
 };
 
 module.exports = (cb) => {
-  app.startServer(port);
+  portfinder.basePort = port;
 
-  if (argv.ngrok) {
-    startTunel(port);
-  }
+  portfinder.getPortPromise()
+    .then((foundPort) => {
+      app.startServer(foundPort);
+      if (argv.ngrok) {
+        startTunnel(foundPort);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    })
 };

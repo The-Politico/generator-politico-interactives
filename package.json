@@ -1,0 +1,45 @@
+<<<<<<< HEAD
+=======
+{
+  "name": "generator-politico-interactives",
+  "description": "Yeoman generator for interactive projects at POLITICO.",
+  "version": "0.5.2",
+  "main": "generators/app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": {
+    "name": "Jon McClure",
+    "email": "jmcclure@politico.com",
+    "url": "https://github.com/The-Politico"
+  },
+  "license": "ISC",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/The-Politico/generator-politico-interactives.git"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "fs-extra": "^3.0.1",
+    "github": "^9.2.0",
+    "mkdirp": "^0.5.1",
+    "secure-keys": "^1.0.0",
+    "simple-git": "^1.73.0",
+    "string": "^3.3.3",
+    "yeoman-generator": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3"
+  }
+}
+>>>>>>> 4804ee851c8ddd34f0c8444b7b8688542ee36cbb
