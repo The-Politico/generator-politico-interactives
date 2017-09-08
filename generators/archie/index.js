@@ -20,6 +20,8 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('gulp/tasks/archie.js'),
       this.destinationPath('gulp/tasks/archie.js'));
+
+    this.fs.writeJSON('src/data/archie.json', {});
   }
 
   install() {

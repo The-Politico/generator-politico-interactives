@@ -15,6 +15,15 @@ Install the package's dependencies globally.
 
   $ npm install -g gulp-cli yo generator-politico-interactives
 
+To use the Google Spreadsheet integration, you will need gdrive and its authentication setup.
+
+::
+  
+  $ brew install gdrive
+
+  $ gdrive list
+
+
 
 Symlink
 -------

@@ -6,7 +6,7 @@ module.exports = (cb) => {
     googleDocId: process.env.ARCHIEDOC,
     googleClientId: process.env.googleClientId,
     googleClientSecret: process.env.googleClientSecret,
-    exportPath: path.join(process.cwd(), 'src/templates/data.json'),
+    exportPath: path.join(process.cwd(), 'src/data/archie.json'),
   });
   cb();
 };
