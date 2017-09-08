@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 {
   "name": "generator-politico-interactives",
   "description": "Yeoman generator for interactive projects at POLITICO.",
@@ -42,4 +40,3 @@
     "eslint-plugin-react": "^6.10.3"
   }
 }
->>>>>>> 4804ee851c8ddd34f0c8444b7b8688542ee36cbb
