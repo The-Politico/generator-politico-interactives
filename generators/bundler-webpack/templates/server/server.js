@@ -65,5 +65,5 @@ module.exports = {
       fs.writeFileSync('dist/index.html', html);
       console.log('dist/index.html written');
     });
-  }
+  },
 }

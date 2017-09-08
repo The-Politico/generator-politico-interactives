@@ -50,3 +50,9 @@ gulp.task('preview', (cb) => {
 gulp.task('publish', (cb) => {
   runSequence('render', 'aws', cb);
 });
+
+gulp.on('stop', () => {
+  process.nextTick(() => {
+    process.exit();
+  });
+});

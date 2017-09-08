@@ -41,12 +41,6 @@ module.exports = class extends Generator {
       this.destinationPath('server/server.js'), {
         context: this.options.context
       });
-    this.fs.copyTpl(
-      this.templatePath('server/router.js'),
-      this.destinationPath('server/router.js'), {
-        context: this.options.context
-      });
-
     if (this.options.context) {
       this.fs.copyTpl(
         this.templatePath('server/context.js'),
