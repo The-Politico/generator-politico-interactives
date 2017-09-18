@@ -13,6 +13,7 @@ const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('../webpack-dev.config.js');
+const { argv } = require('yargs');
 
 const app = express();
 app.use('/', router);
@@ -34,36 +35,42 @@ env.addFilter('markdown', (str, kwargs) => {
 
 app.use(express.static('src'))
 
-module.exports = {
-  startServer: (port) => {
-    const compiler = webpack(webpackConfig);
-    const middleware = webpackMiddleware(compiler, {
-      publicPath: webpackConfig.output.publicPath
-    });
-    app.use(middleware);
-    app.use(webpackHotMiddleware(compiler));
+function startServer(port) {
+  const compiler = webpack(webpackConfig);
+  const middleware = webpackMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath
+  });
+  app.use(middleware);
+  app.use(webpackHotMiddleware(compiler));
 
-    app.listen(port, function() {
-      app.keepAliveTimeout = 0;
-    })
+  app.listen(port, function() {
+    app.keepAliveTimeout = 0;
+  })
 
-    middleware.waitUntilValid(() => {
-      console.log(`app started on port ${port}`);
-      open(`http://localhost:${port}`);
-    });
-  },
-  renderIndex: () => {
-    process.env.NODE_ENV = 'production';
-    <% if (context) { %>
-    const ctx = context.getContext();
-    <% } else { %>
-    const ctx = {};
-    <% } %>
-    ctx['env'] = process.env.NODE_ENV;
+  middleware.waitUntilValid(() => {
+    console.log(`app started on port ${port}`);
+    open(`http://localhost:${port}`);
+  });
+};
 
-    app.render('index.html', ctx, function(err, html) {
-      fs.writeFileSync('dist/index.html', html);
-      console.log('dist/index.html written');
-    });
-  },
+function renderIndex() {
+  process.env.NODE_ENV = 'production';
+  <% if (context) { %>
+  const ctx = context.getContext();
+  <% } else { %>
+  const ctx = {};
+  <% } %>
+  ctx['env'] = process.env.NODE_ENV;
+
+  app.render('index.html', ctx, function(err, html) {
+    fs.writeFileSync('dist/index.html', html);
+    console.log('dist/index.html written');
+    process.exit();
+  });
+};
+
+if (argv.render) {
+  renderIndex();
+} else {
+  startServer(argv.port || 3000);
 }

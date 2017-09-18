@@ -1,5 +1,9 @@
-const app = require('../../server/server.js');
+const { exec } = require('child_process');
 
-module.exports = () => {
-  app.renderIndex();
+module.exports = (cb) => {
+  exec('node server/server.js --render', (err, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
 }

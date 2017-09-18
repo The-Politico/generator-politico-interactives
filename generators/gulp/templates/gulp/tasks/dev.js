@@ -1,5 +1,5 @@
 const { argv } = require('yargs');
-const app = require('../../server/server.js');
+const nodemon = require('gulp-nodemon');
 const ngrok = require('ngrok');
 const open = require('open');
 const portfinder = require('portfinder');
@@ -20,12 +20,19 @@ module.exports = (cb) => {
 
   portfinder.getPortPromise()
     .then((foundPort) => {
-      app.startServer(foundPort);
+      nodemon({
+        script: 'server/server.js',
+        env: { 'NODE_ENV': 'development'},
+        args: ['--port', foundPort.toString()],
+        ignore: ['*']
+      });
       if (argv.ngrok) {
         startTunnel(foundPort);
       }
+      cb();
     })
     .catch((err) => {
       console.error(err);
+      cb();
     })
 };
