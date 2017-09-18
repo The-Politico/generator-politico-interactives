@@ -33,7 +33,9 @@ env.addFilter('markdown', (str, kwargs) => {
     safe(marked(str).trim().replace(/^<p>|<\/p>$/g, ''));
 });
 
-app.use(express.static('src'))
+app.use(express.static('src'));
+app.use('/images', express.static('dist/images'));
+app.use('/data', express.static('dist/data'));
 
 function startServer(port) {
   const compiler = webpack(webpackConfig);
