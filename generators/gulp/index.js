@@ -65,7 +65,7 @@ module.exports = class extends Generator {
       'gulp-if',
       'gulp-prompt',
       'gulp-rename',
-      'gulp-responsive',
+      'github:The-Politico/gulp-responsive',
       'gulp-rev-all',
       'gulp-util',
       'ngrok',
