@@ -1,4 +1,5 @@
 const { argv } = require('yargs');
+const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 const ngrok = require('ngrok');
 const open = require('open');
@@ -26,9 +27,13 @@ module.exports = (cb) => {
         args: ['--port', foundPort.toString()],
         ignore: ['*']
       });
+
+      gulp.watch('src/images/**/*.jpg', ['img']);
+      
       if (argv.ngrok) {
         startTunnel(foundPort);
       }
+      
       cb();
     })
     .catch((err) => {
