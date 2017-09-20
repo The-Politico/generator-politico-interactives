@@ -36,11 +36,9 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('postcss.config.js'),
       this.destinationPath('postcss.config.js'));
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('server/server.js'),
-      this.destinationPath('server/server.js'), {
-        context: this.options.context
-      });
+      this.destinationPath('server/server.js'));
     this.fs.copyTpl(
       this.templatePath('server/nunjucks-settings.js'),
       this.destinationPath('server/nunjucks-settings.js'), {

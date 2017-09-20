@@ -10,5 +10,5 @@ module.exports = {
       false : kwargs.strip || false;
     return !strip ? safe(marked(str)) :
       safe(marked(str).trim().replace(/^<p>|<\/p>$/g, ''));
-  }
-}
+  },
+};

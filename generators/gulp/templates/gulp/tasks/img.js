@@ -33,4 +33,4 @@ module.exports = () => {
       })))
       .pipe(gulp.dest('./dist/images'));
   });
-}
+};

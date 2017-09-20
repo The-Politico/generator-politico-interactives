@@ -9,7 +9,7 @@ const manageEnvironment = (environment) => {
 
 module.exports = () => {
   const ctx = context.getContext();
-  ctx['env'] = 'production';
+  ctx.env = 'production';
 
   return gulp.src('src/templates/index.html')
     .pipe(nunjucksRender({

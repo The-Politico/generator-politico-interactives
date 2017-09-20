@@ -53,7 +53,7 @@ module.exports = class extends Generator {
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js'), {
         archie: this.options.archie,
-        spreadsheet: this.options.spreadsheet
+        spreadsheet: this.options.spreadsheet,
       });
 
     if (this.archie) {

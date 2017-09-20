@@ -1,12 +1,7 @@
-const path = require('path');
-const fs = require('fs-extra');
 const open = require('open');
 const express = require('express');
-
-const context = require('./context.js');
-
 const nunjucks = require('nunjucks');
-const nunjucksSettings = require('./nunjucks-settings.js')
+const nunjucksSettings = require('./nunjucks-settings.js');
 const router = require('./router.js');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
@@ -22,7 +17,7 @@ app.set('view engine', 'html');
 const env = nunjucks.configure('./src/templates/', {
   autoescape: true,
   express: app,
-  watch: true
+  watch: true,
 });
 env.addFilter('markdown', nunjucksSettings.markdownFilter);
 
@@ -33,19 +28,19 @@ app.use('/data', express.static('dist/data'));
 function startServer(port) {
   const compiler = webpack(webpackConfig);
   const middleware = webpackMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath
+    publicPath: webpackConfig.output.publicPath,
   });
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
 
-  app.listen(port, function() {
+  app.listen(port, () => {
     app.keepAliveTimeout = 0;
-  })
+  });
 
   middleware.waitUntilValid(() => {
     console.log(`app started on port ${port}`);
     open(`http://localhost:${port}`);
   });
-};
+}
 
 startServer(argv.port || 3000);
