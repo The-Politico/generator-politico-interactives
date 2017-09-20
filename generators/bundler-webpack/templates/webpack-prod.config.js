@@ -3,6 +3,7 @@ const glob = require('glob');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const _ = require('lodash');
 
 module.exports = {
@@ -46,12 +47,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
-    }),
+    new MinifyPlugin(),
     new ExtractTextPlugin({
       filename: (getPath) => {
         return getPath('css/[name].css').replace('css/js', 'css');
