@@ -27,8 +27,6 @@ module.exports = (cb) => {
         args: ['--port', foundPort.toString()],
         ignore: ['*']
       });
-
-      gulp.watch('src/images/**/*.jpg', ['img']);
       
       if (argv.ngrok) {
         startTunnel(foundPort);

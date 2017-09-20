@@ -29,6 +29,9 @@ module.exports = class extends Generator {
       this.templatePath('gulp/tasks/img.js'),
       this.destinationPath('gulp/tasks/img.js'));
     this.fs.copy(
+      this.templatePath('gulp/tasks/img-watch.js'),
+      this.destinationPath('gulp/tasks/img-watch.js'));
+    this.fs.copy(
       this.templatePath('gulp/tasks/dev.js'),
       this.destinationPath('gulp/tasks/dev.js'));
     this.fs.copy(
@@ -69,6 +72,7 @@ module.exports = class extends Generator {
       'gulp-responsive',
       'gulp-rev-all',
       'gulp-util',
+      'gulp-watch',
       'ngrok',
       'nodemon',
       'portfinder',
