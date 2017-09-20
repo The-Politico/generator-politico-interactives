@@ -16,8 +16,8 @@ const gulp = require('./gulp')([
   'dist',
   'html',
   'img',
-  'img-watch'
-  <% if (spreadsheet) { %>'spreadsheet', <% } %>
+  'img-watch',
+  <% if (spreadsheet) { %>'spreadsheet',<% } %>
 ]);
 
 /* Add secure keys to environment */
