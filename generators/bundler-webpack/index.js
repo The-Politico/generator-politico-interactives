@@ -15,14 +15,14 @@ module.exports = class extends Generator {
       type: Boolean,
       required: false,
       default: true,
-      desc: 'Use context building'
-    })
+      desc: 'Use context building',
+    });
   }
-  
+
   writing() {
     mkdirp('./dist/js');
     mkdirp('./dist/css');
-    mkdirp('./server')
+    mkdirp('./server');
     // Config files
     this.fs.copy(
       this.templatePath('.babelrc'),
@@ -42,7 +42,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('server/nunjucks-settings.js'),
       this.destinationPath('server/nunjucks-settings.js'), {
-        context: this.options.context
+        context: this.options.context,
       });
     if (this.options.context) {
       this.fs.copyTpl(

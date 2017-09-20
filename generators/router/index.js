@@ -1,5 +1,4 @@
 const Generator = require('yeoman-generator');
-const fs = require('fs-extra');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -9,7 +8,7 @@ module.exports = class extends Generator {
       type: Boolean,
       required: false,
       default: true,
-      desc: 'Use context building'
+      desc: 'Use context building',
     });
   }
 
@@ -18,7 +17,7 @@ module.exports = class extends Generator {
       this.templatePath('server/router.js'),
       this.destinationPath('server/router.js'),
       {
-        context: this.options.context
+        context: this.options.context,
       });
   }
 };

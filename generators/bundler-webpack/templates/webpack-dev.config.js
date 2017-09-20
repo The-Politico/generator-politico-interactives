@@ -10,10 +10,9 @@ module.exports = {
   entry: _.zipObject(
     glob.sync('./src/js/main-*.js*').map(f => path.basename(f, path.extname(f))),
     glob.sync('./src/js/main-*.js*').map(f => [
-      `webpack-hot-middleware/client?reload=true`,
-      f
-    ])
-  ),
+      'webpack-hot-middleware/client?reload=true',
+      f,
+    ])),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].bundle.js',
@@ -31,15 +30,15 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader'
-          }, 
-          {
-            loader: 'postcss-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'sass-loader'
-          }
-        ]
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
@@ -47,8 +46,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.ProvidePlugin({
-      'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
-    })
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+    }),
   ],
   stats: 'minimal',
   devtool: 'cheap-module-eval-source-map',
