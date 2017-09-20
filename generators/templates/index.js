@@ -1,6 +1,5 @@
 const Generator = require('yeoman-generator');
 const mkdirp = require('mkdirp');
-const fs = require('fs');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -25,27 +24,26 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'spreadsheet',
         message: 'Would you like Google Spreadsheet integration?',
-        default: false
-      }
+        default: false,
+      },
     ];
 
     return this.prompt(questions).then((answers) => {
       this.archie = answers.archie;
-      this.spreadsheet = answers.spreadsheet
+      this.spreadsheet = answers.spreadsheet;
     });
   }
 
   template() {
     this.composeWith(require.resolve('../bundler-webpack'), {
-      archie: this.archie
+      archie: this.archie,
     });
     this.composeWith(require.resolve('../router'), {
-      context: true
+      context: true,
     });
-    this.composeWith(require.resolve('../gulp'), {
-      archie: this.archie,
-      spreadsheet: this.spreadsheet
-    });
+    this.composeWith(require.resolve('../gulp-common'));
+    this.composeWith(require.resolve('../gulp-render'));
+    this.composeWith(require.resolve('../gulp-statics'));
     if (this.archie) this.composeWith(require.resolve('../archie'));
     if (this.spreadsheet) this.composeWith(require.resolve('../spreadsheet'));
   }
@@ -54,6 +52,12 @@ module.exports = class extends Generator {
     // Skeleton
     mkdirp('./src/data');
     mkdirp('./dist');
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js'), {
+        archie: this.archie,
+        spreadsheet: this.spreadsheet,
+      });
     // Nunjucks templates
     this.fs.copy(
       this.templatePath('src/templates/index.html'),
@@ -115,7 +119,18 @@ module.exports = class extends Generator {
       this.destinationPath('src/js/main-app.js'));
   }
 
-  end() {  
+  installing() {
+    const dependencies = [
+      'gulp-env',
+      'node-env-file',
+      'run-sequence',
+      'secure-keys',
+    ];
+
+    this.yarnInstall(dependencies, { dev: true });
+  }
+
+  end() {
     this.spawnCommand('gulp');
   }
 };
