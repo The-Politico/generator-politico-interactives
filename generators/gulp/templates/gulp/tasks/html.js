@@ -1,9 +1,21 @@
-const { exec } = require('child_process');
+const gulp = require('gulp');
+const nunjucksRender = require('gulp-nunjucks-render');
+const context = require('../../server/context.js');
+const nunjucksSettings = require('../../server/nunjucks-settings.js');
 
-module.exports = (cb) => {
-  exec('node server/server.js --render', (err, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-}
+const manageEnvironment = (environment) => {
+  environment.addFilter('markdown', nunjucksSettings.markdownFilter);
+};
+
+module.exports = () => {
+  const ctx = context.getContext();
+  ctx['env'] = 'production';
+
+  return gulp.src('src/templates/index.html')
+    .pipe(nunjucksRender({
+      path: ['src/templates/'],
+      data: ctx,
+      manageEnv: manageEnvironment,
+    }))
+    .pipe(gulp.dest('dist'));
+};

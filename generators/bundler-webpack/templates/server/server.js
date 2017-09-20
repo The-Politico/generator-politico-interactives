@@ -2,12 +2,11 @@ const path = require('path');
 const fs = require('fs-extra');
 const open = require('open');
 const express = require('express');
-<% if (context) { %>
+
 const context = require('./context.js');
-<% } %>
+
 const nunjucks = require('nunjucks');
-const safe = require('nunjucks').runtime.markSafe;
-const marked = require('marked');
+const nunjucksSettings = require('./nunjucks-settings.js')
 const router = require('./router.js');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
@@ -25,13 +24,7 @@ const env = nunjucks.configure('./src/templates/', {
   express: app,
   watch: true
 });
-env.addFilter('markdown', (str, kwargs) => {
-  // strip outer <p> tags?
-  const strip = typeof kwargs === 'undefined' ?
-    false : kwargs.strip || false;
-  return !strip ? safe(marked(str)) :
-    safe(marked(str).trim().replace(/^<p>|<\/p>$/g, ''));
-});
+env.addFilter('markdown', nunjucksSettings.markdownFilter);
 
 app.use(express.static('src'));
 app.use('/images', express.static('dist/images'));
@@ -55,24 +48,4 @@ function startServer(port) {
   });
 };
 
-function renderIndex() {
-  process.env.NODE_ENV = 'production';
-  <% if (context) { %>
-  const ctx = context.getContext();
-  <% } else { %>
-  const ctx = {};
-  <% } %>
-  ctx['env'] = process.env.NODE_ENV;
-
-  app.render('index.html', ctx, function(err, html) {
-    fs.writeFileSync('dist/index.html', html);
-    console.log('dist/index.html written');
-    process.exit();
-  });
-};
-
-if (argv.render) {
-  renderIndex();
-} else {
-  startServer(argv.port || 3000);
-}
+startServer(argv.port || 3000);

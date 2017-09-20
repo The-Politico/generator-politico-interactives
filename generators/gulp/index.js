@@ -73,6 +73,7 @@ module.exports = class extends Generator {
       'gulp-fail',
       'gulp-if',
       'gulp-nodemon',
+      'gulp-nunjucks-render',
       'gulp-prompt',
       'gulp-rename',
       'gulp-responsive',
