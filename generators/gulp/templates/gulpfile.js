@@ -11,6 +11,8 @@ const gulp = require('./gulp')([
   <% if (archie) { %>'archie',<% } %>
   'build',
   'dev',
+  'data',
+  'data-watch',
   'dist',
   'html',
   'img',
@@ -38,10 +40,10 @@ try {
 }
 
 
-gulp.task('default', ['dev', 'img-watch']);
+gulp.task('default', ['dev', 'img-watch', 'data-watch']);
 
 gulp.task('render', (cb) => {
-  runSequence('html', 'img', 'build', cb);
+  runSequence('html', 'img', 'data', 'build', cb);
 });
 
 gulp.task('preview', (cb) => {

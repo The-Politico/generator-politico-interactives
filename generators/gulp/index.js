@@ -26,6 +26,12 @@ module.exports = class extends Generator {
       this.templatePath('gulp/tasks/aws.js'),
       this.destinationPath('gulp/tasks/aws.js'));
     this.fs.copy(
+      this.templatePath('gulp/tasks/data.js'),
+      this.destinationPath('gulp/tasks/data.js'));
+    this.fs.copy(
+      this.templatePath('gulp/tasks/data-watch.js'),
+      this.destinationPath('gulp/tasks/data-watch.js'));
+    this.fs.copy(
       this.templatePath('gulp/tasks/img.js'),
       this.destinationPath('gulp/tasks/img.js'));
     this.fs.copy(
