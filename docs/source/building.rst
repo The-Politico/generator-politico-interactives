@@ -90,6 +90,7 @@ For data that needs to be used on the front-end (i.e. data for a D3 chart), you 
 If you need to use files in :code:`src/data`, such as data pulled in from :code:`gulp spreadsheet`, those files will be automatically copied to dist when :code:`gulp` is running. To copy files manually, run:
 
 ::
+
   $ gulp data
 
 
