@@ -31,11 +31,22 @@ There is a custom filter included for rendering template context formatted in `M
   <!-- Remove the outer paragraph tags with the strip option -->
   <h1>{{sectionTitle|markdown(strip=true)}}</h1>
 
+Adding a new page
+'''''''''''''''''
+
+To add a new page to your interactive, use the :code:`new-page` subgenerator:
+
+::
+  
+  $ yo politico-interactives:new-page
+
+This will ask you to give a name for your page. You can see your new page by going to :code:`localhost:3000/my-new-page/index.html`.
+
 
 Responsive images
 -----------------
 
-To make responsive images that load more quickly on smaller devices, drop a high-res jpg image into the :code:`src/images` directory, the run the :code:`img` task.
+To make responsive images that load more quickly on smaller devices, drop a high-res jpg image into the :code:`src/images` directory. If you have :code:`gulp` running, then the image task should run automatically. If :code:`gulp` isn't running. then you can run the image task manually:
 
 ::
 
@@ -63,6 +74,12 @@ Renders as:
       <img src="images/cat-1800.jpg" srcset="images/cat-400.jpg 400w, images/cat-800.jpg 800w, images/cat-1200.jpg 1200w, images/cat-1800.jpg 1800w" alt="A cat!">
       <figcaption>A pretty cat</figcaption>
   </figure>
+
+
+Other image assets
+------------------
+
+For image assets that should not be converted using our responsive image task, such as svgs and gifs, you should save those directly in :code:`dist/images`.
 
 
 ArchieML
@@ -131,3 +148,23 @@ The spreadsheet gulp task will overwrite :code:`src/data/data.json` with the dat
 The conversion from spreadsheet to JSON takes each sheet and converts it to JSON using `copytext <https://github.com/rdmurphy/node-copytext>`_'s table converter. This makes each row an object, using the first row as a header row for keys inside the JSON object. 
 
 This is customizable at a sheet level in :code:`gulp/tasks/spreadsheet.js`. See the `copytext <https://github.com/rdmurphy/node-copytext>`_ docs for more information on how to customize the parsing.
+
+.. note::
+
+    If you've added the spreadsheet task after the project was already created, you'll also need to add the task to your gulpfile. Simply edit it into the array of other tasks in :code:`gulpfile.js`:
+
+    .. code-block:: javascript
+
+    const gulp = require('./gulp')([
+      'aws',
+      'archie',
+      'build',
+      'dev',
+      'data',
+      'data-watch',
+      'dist',
+      'html',
+      'img',
+      'img-watch',
+      'spreadsheet', // add this line
+    ]);
