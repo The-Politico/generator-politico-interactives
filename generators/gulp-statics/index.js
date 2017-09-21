@@ -9,6 +9,12 @@ module.exports = class extends Generator {
       this.templatePath('gulp/tasks/data.js'),
       this.destinationPath('gulp/tasks/data.js'));
     this.fs.copy(
+      this.templatePath('gulp/tasks/dist.js'),
+      this.destinationPath('gulp/tasks/dist.js'));
+    this.fs.copy(
+      this.templatePath('gulp/tasks/html.js'),
+      this.destinationPath('gulp/tasks/html.js'));
+    this.fs.copy(
       this.templatePath('gulp/tasks/img-watch.js'),
       this.destinationPath('gulp/tasks/img-watch.js'));
     this.fs.copy(
@@ -19,8 +25,10 @@ module.exports = class extends Generator {
   installing() {
     const dependencies = [
       'glob',
+      'gulp-nunjucks-render',
       'gulp-responsive',
       'gulp-watch',
+      'yargs',
     ];
 
     this.yarnInstall(dependencies, { dev: true });

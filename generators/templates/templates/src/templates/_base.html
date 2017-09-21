@@ -12,8 +12,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta charset="utf-8">
         {%block title%}<title>Politico Interactives</title>{%endblock%}
-        {%include "meta/icons.html"%}
-        {%include "meta/social.html"%}
+        {%include "meta/_icons.html"%}
+        {%include "meta/_social.html"%}
 
         {% if env == 'production' %}
         <link href="css/main-app.css" rel="stylesheet">
@@ -83,7 +83,7 @@
 
          <script type="text/javascript">window.tweetText = "{{META.share.twitter.share_tweet}}";</script>
          <script type="text/javascript" src="js/main-app.bundle.js"></script>
-         {% include "meta/telium.html" %}
-         {% include "ads/script.html" %}
+         {% include "meta/_telium.html" %}
+         {% include "ads/_script.html" %}
     </body>
 </html>
