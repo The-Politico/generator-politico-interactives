@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %}
+<title><%= viewName %></title>
+{% endblock %}
+
+{% block css %}
+{% if env == 'production' %}
+<link rel="stylesheet" href="../css/main-app.css">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block js %}
+<script src="../js/main-app.bundle.js"></script>
+{% endblock %}
