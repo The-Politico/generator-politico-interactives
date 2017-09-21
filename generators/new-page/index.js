@@ -4,7 +4,7 @@ module.exports = class extends Generator {
   prompting() {
     const prompts = [{
       name: 'viewName',
-      message: 'What is your new view called?',
+      message: 'What is your new page called?',
     }];
 
     return this.prompt(prompts).then((answers) => {
