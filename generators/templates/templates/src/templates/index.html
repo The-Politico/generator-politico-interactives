@@ -4,6 +4,11 @@
 <title>{{META.share.fbook.card_title}}</title>
 {%endblock%}
 
+{% block css %}
+{% if env == 'production' %}
+<link href="css/main-app.css" rel="stylesheet">
+{% endif %}
+{% endblock %}
 
 {%block header%}
 
@@ -102,3 +107,7 @@
 {% include "meta/_comments.html" %}
 
 {%endblock%}
+
+{% block js %}
+<script type="text/javascript" src="js/main-app.bundle.js"></script>
+{% endblock %}
