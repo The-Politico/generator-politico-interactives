@@ -77,9 +77,20 @@ Renders as:
 
 
 Other image assets
-------------------
+''''''''''''''''''
 
 For image assets that should not be converted using our responsive image task, such as svgs and gifs, you should save those directly in :code:`dist/images`.
+
+
+Data assets
+-----------
+
+For data that needs to be used on the front-end (i.e. data for a D3 chart), you should place those files in :code:`dist/data` directly. 
+
+If you need to use files in :code:`src/data`, such as data pulled in from :code:`gulp spreadsheet`, those files will be automatically copied to dist when :code:`gulp` is running. To copy files manually, run:
+
+::
+  $ gulp data
 
 
 ArchieML
