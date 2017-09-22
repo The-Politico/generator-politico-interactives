@@ -15,14 +15,14 @@ module.exports = class extends Generator {
       type: Boolean,
       required: false,
       default: true,
-      desc: 'Use context building'
-    })
+      desc: 'Use context building',
+    });
   }
-  
+
   writing() {
     mkdirp('./dist/js');
     mkdirp('./dist/css');
-    mkdirp('./server')
+    mkdirp('./server');
     // Config files
     this.fs.copy(
       this.templatePath('.babelrc'),
@@ -36,10 +36,13 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('postcss.config.js'),
       this.destinationPath('postcss.config.js'));
-    this.fs.copyTpl(
+    this.fs.copy(
       this.templatePath('server/server.js'),
-      this.destinationPath('server/server.js'), {
-        context: this.options.context
+      this.destinationPath('server/server.js'));
+    this.fs.copyTpl(
+      this.templatePath('server/nunjucks-settings.js'),
+      this.destinationPath('server/nunjucks-settings.js'), {
+        context: this.options.context,
       });
     if (this.options.context) {
       this.fs.copyTpl(
@@ -55,6 +58,7 @@ module.exports = class extends Generator {
       'autoprefixer',
       'babel-core',
       'babel-loader',
+      'babel-minify-webpack-plugin',
       'babel-preset-env',
       'babel-preset-es2015',
       'babel-preset-react',
@@ -83,8 +87,6 @@ module.exports = class extends Generator {
       'sass-loader',
       'secure-keys',
       'style-loader',
-      'uglify-js',
-      'uglifyjs-webpack-plugin',
       'whatwg-fetch',
       'webpack',
       'webpack-dev-middleware',

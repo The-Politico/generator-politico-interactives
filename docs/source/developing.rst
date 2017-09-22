@@ -20,10 +20,6 @@ archie
 
 Sets up an ArchieML integration for the project, if requested.
 
-bundler-browserify
-''''''''''''''''''
-
-Sets up a browserify-based bundler system (deprecated).
 
 bundler-webpack
 '''''''''''''''
@@ -35,10 +31,15 @@ github
 
 Generates a GitHub repository for the project, if requested.
 
-gulp
-''''
+gulp-common
+'''''''''''
 
-Sets up major gulp tasks.
+Common gulp tasks shared across our generators.
+
+gulp-statics
+''''''''''''
+
+Gulp tasks for building static assets beyond JS and CSS (i.e. Nunjucks templates, image processing).
 
 keys
 ''''
@@ -63,10 +64,20 @@ meta
 
 Writes meta file.
 
+new-page
+''''''''
+
+Generates a new page in your templates folder.
+
 passphrase
 ''''''''''
 
 Uses your passphrase to try to decrypt keys file.
+
+router
+''''''
+
+Router file for Express server.
 
 spreadsheet
 ''''''''''

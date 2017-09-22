@@ -9,16 +9,16 @@ const envFile = require('node-env-file');
 const gulp = require('./gulp')([
   'aws',
   <% if (archie) { %>'archie',<% } %>
-  'browserify',
-  'js-build',
-  'js-watch',
-  'nunjucks',
-  'scss',
-  'server',
+  'build',
+  'dev',
+  'data',
+  'data-watch',
+  'dist',
+  'html',
   'img',
-  'nunjucks-watch',
+  'img-watch',
+  <% if (spreadsheet) { %>'spreadsheet',<% } %>
 ]);
-
 
 /* Add secure keys to environment */
 envFile(path.join(__dirname, '.env'), { overwrite: true }); // Adds PASSPHRASE to env
@@ -40,9 +40,16 @@ try {
 }
 
 
-gulp.task('build', ['scss', 'js-build', 'nunjucks']);
-gulp.task('publish', (cb) => {
-  env.set({ NODE_ENV: 'production' });
-  runSequence('build', 'aws', cb);
+gulp.task('default', ['dev', 'img-watch', 'data-watch']);
+
+gulp.task('render', (cb) => {
+  runSequence('html', 'img', 'data', 'build', cb);
 });
-gulp.task('default', ['nunjucks', 'nunjucks-watch', 'scss', 'js-watch', 'server']);
+
+gulp.task('preview', (cb) => {
+  runSequence('render', 'dist', cb);
+});
+
+gulp.task('publish', (cb) => {
+  runSequence('render', 'aws', cb);
+});

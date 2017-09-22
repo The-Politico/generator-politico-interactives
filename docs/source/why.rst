@@ -47,6 +47,7 @@ The build pipeline uses:
 - `Gulp <http://gulpjs.com/>`_ to run tasks
 - `Babel <https://babeljs.io/>`_ to transpile ES6 Javascript
 - `Webpack <https://webpack.js.org//>`_ to bundle scripts
+- `Express <https://expressjs.com/>`_ to serve your work in development
 - `node-sass <https://github.com/sass/node-sass>`_ to compile SCSS
 - `Sharp <http://sharp.dimens.io/en/stable/>`_ for image processing
 - `ESLint <http://eslint.org/>`_ for syntax highlighting

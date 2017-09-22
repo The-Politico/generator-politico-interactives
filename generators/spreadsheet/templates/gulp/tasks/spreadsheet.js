@@ -4,20 +4,20 @@ const fs = require('fs-extra');
 const path = require('path');
 
 module.exports = (cb) => {
-  var safePattern = /^[a-z0-9_\/\-.,?:@#%^+=\[\]]*$/i;
-  var safeishPattern = /^[a-z0-9_\/\-.,?:@#%^+=\[\]{}|&()<>; *']*$/i;
+  const safePattern = /^[a-z0-9_\/\-.,?:@#%^+=\[\]]*$/i;
+  const safeishPattern = /^[a-z0-9_\/\-.,?:@#%^+=\[\]{}|&()<>; *']*$/i;
 
   function bashEscape(arg) {
     // These don't need quoting
     if (safePattern.test(arg)) return arg;
 
     // These are fine wrapped in double quotes using weak escaping.
-    if (safeishPattern.test(arg)) return '"' + arg + '"';
+    if (safeishPattern.test(arg)) return `"${arg}"`;
 
-    arg = arg.replace(/(\r\n|\n|\r)/gm, "");
+    arg = arg.replace(/(\r\n|\n|\r)/gm, '');
 
     // Otherwise use strong escaping with single quotes
-    return "'" + arg.replace(/'+/g, function(val) {
+    arg = arg.replace(/'+/g, function(val) {
       // But we need to interpolate single quotes efficiently
 
       // One or two can simply be '\'' -> ' or '\'\'' -> ''
@@ -25,8 +25,9 @@ module.exports = (cb) => {
 
       // But more in a row, it's better to wrap in double quotes '"'''''"' -> '''''
       return "'\"" + val + "\"'";
+    });
 
-    }) + "'";
+    return "'" + arg + "'";
   }
 
   const filename = execSync(`gdrive export ${process.env.SHEETID} --mime application/vnd.openxmlformats-officedocument.spreadsheetml.sheet | awk -F\\' '{print $2}'`);
@@ -35,9 +36,9 @@ module.exports = (cb) => {
 
   execSync(`mv ${bashEscape(filename.toString()).trim()} ${xlsxPath}`);
   const data = copytext.process(xlsxPath, {
-    processor: 'table'
+    processor: 'table',
   });
   fs.writeJsonSync(jsonPath, data);
   cb();
   process.exit();
-}
+};

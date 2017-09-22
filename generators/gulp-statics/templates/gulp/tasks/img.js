@@ -6,10 +6,10 @@ const responsive = require('gulp-responsive');
 let images = false;
 
 module.exports = () => {
-  glob('./src/images/**/*.jpg', (er, files) => {
+  glob('./src/images/**/*.@(jpg|png)', (er, files) => {
     if (files.length > 0) images = true;
 
-    return gulp.src('./src/images/**/*.jpg')
+    return gulp.src('./src/images/**/*.@(jpg|png)')
       .pipe(gulpif(images, responsive({
         '*': [{
           width: 400,
@@ -33,4 +33,4 @@ module.exports = () => {
       })))
       .pipe(gulp.dest('./dist/images'));
   });
-}
+};

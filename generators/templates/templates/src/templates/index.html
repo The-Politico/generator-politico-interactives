@@ -1,13 +1,18 @@
-{%extends "base.html"%}
+{%extends "_base.html"%}
 
 {%block title%}
 <title>{{META.share.fbook.card_title}}</title>
 {%endblock%}
 
+{% block css %}
+{% if env == 'production' %}
+<link href="css/main-app.css" rel="stylesheet">
+{% endif %}
+{% endblock %}
 
 {%block header%}
 
-{% include "ads/banner1.html" %}
+{% include "ads/_banner1.html" %}
 <header class="center">
     <div class="share">
        <a href="" class="icon icon-facebook" target="_blank"></a>
@@ -37,7 +42,7 @@
 {%block content%}
 <p><span class="dropcap">G</span>eorge Washington (February 11, 1731) was an American politician and soldier who served as the first President of the United States from 1789 to 1797 and was one of the Founding Fathers of the United States.</p>
 
-{% include "ads/cube1.html" %}
+{% include "ads/_cube1.html" %}
 
 <p>Historians laud Washington for the selection and supervision of his generals; preservation and command of the army; coordination with the Congress, state governors, and their militia; and attention to supplies, logistics, and training. In battle, however, Washington was repeatedly outmaneuvered by British generals with larger armies.</p>
 
@@ -76,7 +81,7 @@
  <p>this is in a section, does it look weird? nd of the army; coordination with the Congress, state governors, and their militia; and attention to supplies, logistics, and training. In battle, however, Washington was repeatedly outmaneuvered by British generals with larger armies.</p>
 <section>
 
-{% include "ads/cube2.html" %}
+{% include "ads/_cube2.html" %}
 
 <section>
 <h2>H2 No gutters phone example</h2>
@@ -99,6 +104,10 @@
 </section>
 
 
-{% include "meta/comments.html" %}
+{% include "meta/_comments.html" %}
 
 {%endblock%}
+
+{% block js %}
+<script type="text/javascript" src="js/main-app.bundle.js"></script>
+{% endblock %}

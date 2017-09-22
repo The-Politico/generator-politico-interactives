@@ -10,7 +10,7 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then((answers) => {
       this.sheetId = answers.sheetId;
-    })
+    });
   }
 
   writing() {
@@ -23,9 +23,9 @@ module.exports = class extends Generator {
 
   install() {
     const dependencies = [
-      'copytext'
+      'copytext',
     ];
 
     this.yarnInstall(dependencies, { save: true });
   }
-}
+};
