@@ -167,16 +167,16 @@ This is customizable at a sheet level in :code:`gulp/tasks/spreadsheet.js`. See 
 
     .. code-block:: javascript
 
-    const gulp = require('./gulp')([
-      'aws',
-      'archie',
-      'build',
-      'dev',
-      'data',
-      'data-watch',
-      'dist',
-      'html',
-      'img',
-      'img-watch',
-      'spreadsheet', // add this line
-    ]);
+      const gulp = require('./gulp')([
+        'aws',
+        'archie',
+        'build',
+        'dev',
+        'data',
+        'data-watch',
+        'dist',
+        'html',
+        'img',
+        'img-watch',
+        'spreadsheet', // add this line
+      ]);
