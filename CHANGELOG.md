@@ -1,3 +1,11 @@
+0.6.1 / 2017-10-13
+==================
+
+  * CSS adjustments
+  * New Typekit [Politico Interactive 2.0] - kills Jubliat, adds Franklin
+  * Addition of supercube ads
+
+
 0.5.2 / 2017-09-08
 ==================
 
