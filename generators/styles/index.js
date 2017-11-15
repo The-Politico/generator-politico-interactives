@@ -27,6 +27,9 @@ module.exports = class extends Generator {
       this.templatePath('src/scss/colors/_sequential.scss'),
       this.destinationPath('src/scss/colors/_sequential.scss'));
     this.fs.copy(
+      this.templatePath('src/scss/_card.scss'),
+      this.destinationPath('src/scss/_card.scss'));
+    this.fs.copy(
       this.templatePath('src/scss/_comments.scss'),
       this.destinationPath('src/scss/_comments.scss'));
     this.fs.copy(
@@ -54,6 +57,9 @@ module.exports = class extends Generator {
       this.templatePath('src/scss/_icons.scss'),
       this.destinationPath('src/scss/_icons.scss'));
     this.fs.copy(
+      this.templatePath('src/scss/_key.scss'),
+      this.destinationPath('src/scss/_key.scss'));
+    this.fs.copy(
       this.templatePath('src/scss/_mixins.scss'),
       this.destinationPath('src/scss/_mixins.scss'));
     this.fs.copy(
@@ -62,6 +68,9 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/scss/_photos.scss'),
       this.destinationPath('src/scss/_photos.scss'));
+    this.fs.copy(
+      this.templatePath('src/scss/_sections.scss'),
+      this.destinationPath('src/scss/_sections.scss'));
     this.fs.copy(
       this.templatePath('src/scss/_share.scss'),
       this.destinationPath('src/scss/_share.scss'));
