@@ -7,14 +7,14 @@ $politico-gray: #22252c;
 $black: #000;
 $white: #fff;
 
-$light-gray: #ddd;
-$medium-gray: #999;
-$dark-gray: #666;
-
-$light-grey: $light-gray;
-$medium-grey: $medium-gray;
+$light-gray: #f7f7f7;
+$gray: #ddd;
+$dark-gray: #999;
+$very-dark-gray: #666;
 $dark-grey: $dark-gray;
-$satan: $dark-gray;
+$satan: $very-dark-gray;
+
+$medium-gray: $dark-gray;
 
 // Element colors
 $facebook: #3b5998;
@@ -24,3 +24,7 @@ $link: #0a7cc4;
 $button: #7aaaf4;
 $highlighter-yellow: #fffAb7;
 $highlighter-orange: #f9d289;
+
+$dem: #2b6abd;
+$gop: #fd5639;
+$teal: #6BD1BB;

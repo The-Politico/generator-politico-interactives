@@ -1,0 +1,42 @@
+// Sections. Sections should be used to offset sections of the text, like graphics etc.
+  section {
+  padding: 1.25rem 0;
+
+    figure + p{
+        margin-top: 10px;
+    }
+
+    h3, h4, h5 {
+      + figure {
+        margin-top: 10px;
+      }
+    }
+}
+
+
+// Fitting elements to the size of the well
+
+.content-small{
+  max-width: 400px;
+  @include margin-auto;
+}
+
+.content-fit{
+max-width: 550px;
+@include margin-auto;
+}
+
+.content-large{
+max-width: 800px;
+@include margin-auto;
+}
+
+.content-extra-large{
+max-width: 1200px;
+@include margin-auto;
+}
+
+.content-full-width{
+width: 100%;
+@include margin-auto;
+}
