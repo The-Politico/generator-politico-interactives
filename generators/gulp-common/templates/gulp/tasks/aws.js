@@ -36,7 +36,6 @@ module.exports = () => {
     region,
     params: publishParams,
   });
-  console.log(publisher.client);
   const awsDirectory = meta.publishPath;
 
   const headers = {
