@@ -1,3 +1,4 @@
+const { argv } = require('yargs');
 const prompt = require('gulp-prompt');
 const rename = require('gulp-rename');
 const awspublish = require('gulp-awspublish');
@@ -13,15 +14,27 @@ const revAll = require('gulp-rev-all');
 const querystring = require('querystring');
 
 module.exports = () => {
+  const target = argv.production ? 
+    'com.politico.interactives.politico.com' : 
+    'staging.interactives.politico.com';
+
+  const region = 'us-east-1';
+
+  const publishParams = {
+    Bucket: target,
+  };
+
+  if (argv.production) {
+    publishParams['Cloudfront'] = 'E3V6OHE700RHMR';
+  }
+
   const meta = fs.readJsonSync(
     path.resolve(process.cwd(), 'meta.json'));
   const publisher = awspublish.create({
     accessKeyId: process.env.awsAccessKey,
     secretAccessKey: process.env.awsSecretKey,
-    params: {
-      Bucket: 'com.politico.interactives.politico.com',
-      CloudFront: 'E3V6OHE700RHMR',
-    },
+    region,
+    params: publishParams,
   });
   const awsDirectory = meta.publishPath;
 
@@ -74,9 +87,13 @@ module.exports = () => {
     .pipe(awspublish.reporter())
     .on('end', () => {
       setTimeout(() => {
-        const q = querystring.stringify({ q: meta.url });
-        open(`https://developers.facebook.com/tools/debug/sharing/?${q}`);
-        open(meta.url);
+        const metaUrl = argv.production ? meta.url : meta.stagingUrl;
+
+        const q = querystring.stringify({ q: metaUrl });
+        if (argv.production) {
+          open(`https://developers.facebook.com/tools/debug/sharing/?${q}`);        
+        }
+        open(metaUrl);
       }, 1000);
     });
 };

@@ -18,7 +18,8 @@ module.exports = class extends Generator {
 
     const timestamp = new Date();
     const publishPath = `${timestamp.getFullYear()}/${this.slug}/`;
-    const url = `http://www.politico.com/interactives/${publishPath}`;
+    const prodUrl = `https://www.politico.com/interactives/${publishPath}`;
+    const stagingUrl = `https://s3.amazonaws.com/staging.interactives.politico.com/${publishPath}index.html`
 
     this.fs.copy(
       this.templatePath('gitignore'),
@@ -43,14 +44,15 @@ module.exports = class extends Generator {
         title: this.title,
         userName: this.user.git.name(),
         userEmail: this.user.git.email(),
-        url,
+        url: prodUrl,
         year: timestamp.getFullYear(),
       });
 
     const metaJSON = {
       id: (Math.floor(Math.random() * 100000000000) + 1).toString(),
       publishPath,
-      url,
+      stagingUrl,
+      url: prodUrl,
       timestamp: '2017-04-13T08:13-0400',
       dateline: '04/13/17 08:13 PM EDT',
       share: {
@@ -66,7 +68,7 @@ module.exports = class extends Generator {
           author: '@politico',
         },
         image: {
-          url: `${url}images/share.jpg`,
+          url: `${prodUrl}images/share.jpg`,
           alt: '<Text>',
           type: 'image/jpeg',
           width: '600',
