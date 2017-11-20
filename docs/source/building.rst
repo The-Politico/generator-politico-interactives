@@ -18,6 +18,11 @@ Data to go into the template context can come from three places: an ArchieML doc
 
 Spreadsheet keys are prefixed with :code:`DATA`, and meta keys are prefixed with :code:`META`. For more, take a look at :code:`server/context.js`.
 
+Includes
+''''''''
+
+When using a template include, you should prefix the include filename with an underscore. So :code:`graphic.html` should actually be :code:`_graphic.html`.
+
 Markdown
 ''''''''
 
