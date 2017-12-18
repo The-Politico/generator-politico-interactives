@@ -25,6 +25,7 @@ module.exports = class extends Generator {
   installing() {
     const dependencies = [
       'glob',
+      'glob-promise',
       'gulp-nunjucks-render',
       'gulp-responsive',
       'gulp-watch',
