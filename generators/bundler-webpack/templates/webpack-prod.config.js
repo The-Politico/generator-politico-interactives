@@ -3,8 +3,8 @@ const glob = require('glob');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
 const _ = require('lodash');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   resolve: {
@@ -24,6 +24,23 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                "env", 
+                {
+                  "targets": {
+                    "browsers": ["last 2 versions"]
+                  },
+                  "debug": true,
+                  "modules": false,
+                }
+              ],
+              "react",
+              "stage-0",
+              "airbnb",
+            ]
+          }
         },
       },
       {
@@ -46,13 +63,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
-    new MinifyPlugin(),
     new ExtractTextPlugin({
       filename: getPath => getPath('css/[name].css').replace('css/js', 'css'),
       allChunks: true,
     }),
     new OptimizeCssAssetsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new UglifyJSPlugin(),
     new webpack.ProvidePlugin({
       fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
     }),

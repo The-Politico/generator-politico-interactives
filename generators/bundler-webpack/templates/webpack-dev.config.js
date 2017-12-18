@@ -24,6 +24,23 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                "env", 
+                {
+                  "targets": {
+                    "browsers": ["last 2 versions"]
+                  },
+                  "debug": true,
+                  "modules": false,
+                }
+              ],
+              "react",
+              "stage-0",
+              "airbnb",
+            ]
+          }
         },
       },
       {
