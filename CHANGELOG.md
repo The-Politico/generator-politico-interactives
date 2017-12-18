@@ -7,6 +7,16 @@
   * Built in rules for not gzipping videos
   * Gitignore compiled dist files
 
+  NOTE: If you are using an older version of the generator, and you need to redeploy, you **must** adjust two files in order to deploy to production again.
+
+  First, in `gulp/tasks/aws.js`, change the production bucket to `interactives.politico.com`. Then, in `meta.json`, prepend your `publishPath` with `interactives/`.
+
+  ```
+    "publishPath": "interactives/2017/your-project-slug/",
+    "stagingUrl": "https://s3.amazonaws.com/staging.interactives.politico.com/interactives/2017/your-project-slug/index.html",
+    "url": "https://www.politico.com/interactives/2017/your-project-slug/",
+  ```
+
 
 
 0.6.1 / 2017-10-13
