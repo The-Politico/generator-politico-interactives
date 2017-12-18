@@ -66,6 +66,16 @@ module.exports = () => {
     indexRootPath: true,
   };
 
+  const checkFileExtension = function(file) {
+    const videoExtensions = ['.mp4', '.ogv', '.webm'];
+    if (videoExtensions.indexOf(path.extname(file.path)) < 0) {
+      return true;
+    } else {
+      console.log('skipping gzip: ' + file.path);
+      return false;
+    }
+  }
+
   return gulp.src('./dist/**/*')
     .pipe(gulpIf(() => {
       // As a dumb check against syncing the entire bucket
@@ -87,11 +97,11 @@ module.exports = () => {
       dontRenameFile: versionIgnore,
       dontUpdateReference: versionIgnore,
     }))
-    .pipe(awspublish.gzip())
+    .pipe(gulpIf(checkFileExtension, awspublish.gzip()))
     .pipe(publisher.publish(headers, { force: false }))
     .pipe(publisher.sync(awsDirectory))
     // eslint-disable-next-line no-extra-boolean-cast
-    .pipe(!!gutil.env.invalidate ? invalidate(cloudFrontConfig) : gutil.noop())
+    .pipe(!!argv.invalidate ? invalidate(cloudFrontConfig) : gutil.noop())
     .pipe(publisher.cache())
     .pipe(awspublish.reporter())
     .on('end', () => {
