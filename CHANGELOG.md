@@ -6,6 +6,7 @@
   * Changed production bucket name and URL routing for new POLITICO structure
   * Built in rules for not gzipping videos
   * Gitignore compiled dist files
+  * Changed JavaScript compiler to use [babel-preset-env](https://github.com/babel/babel/tree/master/packages/babel-preset-env) and [UglifyJS](https://github.com/mishoo/UglifyJS2).
 
   NOTE: If you are using an older version of the generator, and you need to redeploy, you **must** adjust two files in order to deploy to production again.
 
