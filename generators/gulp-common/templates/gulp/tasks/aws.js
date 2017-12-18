@@ -38,8 +38,17 @@ module.exports = () => {
   });
   const awsDirectory = meta.publishPath;
 
+  const cacheControl = 'max-age=300, no-transform, public';
+
+  let acl = 'private';
+
+  if (argv.production) {
+    acl = 'public-read';
+  }
+
   const headers = {
-    'Cache-Control': 'max-age=300, no-transform, public',
+    'Cache-Control': cacheControl,
+    'x-amz-acl': acl,
   };
 
   // Ignore these files during versioning
