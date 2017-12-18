@@ -67,3 +67,8 @@ typings/
 .env
 
 .DS_Store
+
+dist/css/*
+dist/js/*
+dist/index.html
+*.ai
