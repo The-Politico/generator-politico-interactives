@@ -1,3 +1,14 @@
+0.7.0 / 2017-12-??
+==================
+
+  * Gives correct ACL permissions to files deployed to staging bucket
+  * Made image processing task synchronous so other tasks wait on it
+  * Changed production bucket name and URL routing for new POLITICO structure
+  * Built in rules for not gzipping videos
+  * Gitignore compiled dist files
+
+
+
 0.6.1 / 2017-10-13
 ==================
 
