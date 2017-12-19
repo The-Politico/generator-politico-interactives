@@ -19,7 +19,7 @@ module.exports = class extends Generator {
     const timestamp = new Date();
     const publishPath = `interactives/${timestamp.getFullYear()}/${this.slug}/`;
     const prodUrl = `https://www.politico.com/${publishPath}`;
-    const stagingUrl = `https://s3.amazonaws.com/staging.interactives.politico.com/${publishPath}index.html`
+    const stagingUrl = `https://s3.amazonaws.com/staging.interactives.politico.com/${publishPath}index.html`;
 
     this.fs.copy(
       this.templatePath('gitignore'),
