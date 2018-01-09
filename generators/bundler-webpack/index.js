@@ -25,9 +25,6 @@ module.exports = class extends Generator {
     mkdirp('./server');
     // Config files
     this.fs.copy(
-      this.templatePath('.babelrc'),
-      this.destinationPath('.babelrc'));
-    this.fs.copy(
       this.templatePath('webpack-dev.config.js'),
       this.destinationPath('webpack-dev.config.js'));
     this.fs.copy(
@@ -58,9 +55,8 @@ module.exports = class extends Generator {
       'autoprefixer',
       'babel-core',
       'babel-loader',
-      'babel-minify-webpack-plugin',
+      'babel-preset-airbnb',
       'babel-preset-env',
-      'babel-preset-es2015',
       'babel-preset-react',
       'babel-preset-stage-0',
       'css-loader',
@@ -87,6 +83,7 @@ module.exports = class extends Generator {
       'sass-loader',
       'secure-keys',
       'style-loader',
+      'uglifyjs-webpack-plugin',
       'whatwg-fetch',
       'webpack',
       'webpack-dev-middleware',

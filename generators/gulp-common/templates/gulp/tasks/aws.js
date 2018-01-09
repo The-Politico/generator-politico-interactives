@@ -15,7 +15,7 @@ const querystring = require('querystring');
 
 module.exports = () => {
   const target = argv.production ? 
-    'com.politico.interactives.politico.com' : 
+    'interactives.politico.com' : 
     'staging.interactives.politico.com';
 
   const region = 'us-east-1';
@@ -38,8 +38,17 @@ module.exports = () => {
   });
   const awsDirectory = meta.publishPath;
 
+  const cacheControl = 'max-age=300, no-transform, public';
+
+  let acl = 'private';
+
+  if (argv.production) {
+    acl = 'public-read';
+  }
+
   const headers = {
-    'Cache-Control': 'max-age=300, no-transform, public',
+    'Cache-Control': cacheControl,
+    'x-amz-acl': acl,
   };
 
   // Ignore these files during versioning
@@ -56,6 +65,16 @@ module.exports = () => {
     secretAccessKey: process.env.awsSecretKey,
     indexRootPath: true,
   };
+
+  const checkFileExtension = function(file) {
+    const videoExtensions = ['.mp4', '.ogv', '.webm'];
+    if (videoExtensions.indexOf(path.extname(file.path)) < 0) {
+      return true;
+    } else {
+      console.log('skipping gzip: ' + file.path);
+      return false;
+    }
+  }
 
   return gulp.src('./dist/**/*')
     .pipe(gulpIf(() => {
@@ -78,11 +97,11 @@ module.exports = () => {
       dontRenameFile: versionIgnore,
       dontUpdateReference: versionIgnore,
     }))
-    .pipe(awspublish.gzip())
+    .pipe(gulpIf(checkFileExtension, awspublish.gzip()))
     .pipe(publisher.publish(headers, { force: false }))
     .pipe(publisher.sync(awsDirectory))
     // eslint-disable-next-line no-extra-boolean-cast
-    .pipe(!!gutil.env.invalidate ? invalidate(cloudFrontConfig) : gutil.noop())
+    .pipe(!!argv.invalidate ? invalidate(cloudFrontConfig) : gutil.noop())
     .pipe(publisher.cache())
     .pipe(awspublish.reporter())
     .on('end', () => {
