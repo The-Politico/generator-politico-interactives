@@ -11,5 +11,5 @@ window.$('.icon-twitter').click((e) => {
   e.preventDefault();
   const uri = window.location.href;
   const status = encodeURIComponent(`${window.tweetText} ${uri}`);
-  window.open(`https://twitter.com/home?status=${status}`);
+  window.open(`https://twitter.com/intent/tweet?text=${status}`);
 });
