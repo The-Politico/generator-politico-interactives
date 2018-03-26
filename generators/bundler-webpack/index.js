@@ -77,7 +77,7 @@ module.exports = class extends Generator {
       'node-sass',
       'nunjucks',
       'open',
-      'optimize-css-assets-webpack-plugin',
+      'optimize-css-assets-webpack-plugin@3.2.0',
       'postcss-loader',
       'run-sequence',
       'sass-loader',
