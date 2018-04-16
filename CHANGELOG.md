@@ -1,3 +1,8 @@
+0.8.0 / 2018-04-16
+==================
+
+* Update default styles to new [politico-style](https://github.com/The-Politico/politico-style) package.
+
 0.7.2 / 2018-01-30
 ==================
 
