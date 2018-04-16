@@ -53,8 +53,14 @@ module.exports = class extends Generator {
       publishPath,
       stagingUrl,
       url: prodUrl,
-      timestamp: '2017-04-13T08:13-0400',
-      dateline: '04/13/17 08:13 PM EDT',
+      timestamp: '2018-04-10T08:13-0400',
+      dateline: '04/10/18 08:13 PM EDT',
+      "header": {
+        "headline": "This is your headline in the metadata file",
+        "subhed": "Subhed lives in the metadata.",
+        "byline": "Polly Politico in metadata",
+        "byline_link": "https://www.politico.com/"
+      },
       share: {
         fbook: {
           card_title: this.title,

@@ -1,4 +1,4 @@
-require('../scss/main.scss');
+import "../scss/main.scss";
 
 window.$('.icon-facebook').click((e) => {
   e.preventDefault();

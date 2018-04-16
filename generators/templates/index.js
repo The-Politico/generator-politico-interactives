@@ -61,9 +61,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/templates/index.html'),
       this.destinationPath('src/templates/index.html'));
-    this.fs.copyTpl(
-      this.templatePath('src/templates/_base.html'),
-      this.destinationPath('src/templates/_base.html'));
     // Meta
     this.fs.copy(
       this.templatePath('src/templates/meta/_social.html'),
@@ -102,6 +99,18 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/templates/ads/_script.html'),
       this.destinationPath('src/templates/ads/_script.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/partials/breakpoints.html'),
+      this.destinationPath('src/templates/partials/breakpoints.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/partials/footer.html'),
+      this.destinationPath('src/templates/partials/footer.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/partials/header.html'),
+      this.destinationPath('src/templates/partials/header.html'));
+    this.fs.copy(
+      this.templatePath('src/templates/partials/nav.html'),
+      this.destinationPath('src/templates/partials/nav.html'));
     // Template context
     this.fs.writeJSON('src/data/data.json', {});
     // Images directories
