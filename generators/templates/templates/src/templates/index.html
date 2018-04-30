@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta charset="utf-8">
-        <title>{{META.page_name}}</title>
+        <title>{{META.telium.page_name}}</title>
         {%include "meta/_icons.html"%}
 
         {%include "meta/_social.html"%}
@@ -47,21 +47,21 @@
         <p class="content-fit mb0 small">
         <a  class="sans" target="blank" href="https://the-politico.github.io/politico-style/components/">Full Style guide <b class="bt-icon bt-icon--add"></b></a></span>
         </p>
+
         <!-- Breakpoint reminder which you can delete -->
         {% include "partials/breakpoints.html" %}
-
-
-      {% include "meta/_comments.html" %}
+        <!-- Comments -->
+        {% include "meta/_comments.html" %}
       </article>
-
-
-        {% include "partials/footer.html" %}
-        <script type="text/javascript">window.tweetText = "{{META.share.twitter.share_tweet}}";</script>
+      {% include "partials/footer.html" %}
+      <script type="text/javascript">window.tweetText = "{{META.share.twitter.share_tweet}}";</script>
     </body>
 </html>
-
 
 
 {% block js %}
 <script type="text/javascript" src="js/main-app.bundle.js"></script>
 {% endblock %}
+
+{% include "meta/_telium.html" %}
+{% include "ads/_script.html" %}
