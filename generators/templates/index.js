@@ -100,17 +100,17 @@ module.exports = class extends Generator {
       this.templatePath('src/templates/ads/_script.html'),
       this.destinationPath('src/templates/ads/_script.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/breakpoints.html'),
-      this.destinationPath('src/templates/partials/breakpoints.html'));
+      this.templatePath('src/templates/partials/_breakpoints.html'),
+      this.destinationPath('src/templates/partials/_breakpoints.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/footer.html'),
-      this.destinationPath('src/templates/partials/footer.html'));
+      this.templatePath('src/templates/partials/_footer.html'),
+      this.destinationPath('src/templates/partials/_footer.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/header.html'),
-      this.destinationPath('src/templates/partials/header.html'));
+      this.templatePath('src/templates/partials/_header.html'),
+      this.destinationPath('src/templates/partials/_header.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/nav.html'),
-      this.destinationPath('src/templates/partials/nav.html'));
+      this.templatePath('src/templates/partials/_nav.html'),
+      this.destinationPath('src/templates/partials/_nav.html'));
     // Template context
     this.fs.writeJSON('src/data/data.json', {});
     // Images directories
