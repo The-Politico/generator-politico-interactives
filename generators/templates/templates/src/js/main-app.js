@@ -1,13 +1,13 @@
-import "../scss/main.scss";
+import '../scss/main.scss';
 
-window.$('.icon-facebook').click((e) => {
+window.$('.custom-icon--facebook').click((e) => {
   e.preventDefault();
   const uri = encodeURIComponent(window.location.href);
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${uri}`);
 });
 
 
-window.$('.icon-twitter').click((e) => {
+window.$('.bt-icon--twitter').click((e) => {
   e.preventDefault();
   const uri = window.location.href;
   const status = encodeURIComponent(`${window.tweetText} ${uri}`);
