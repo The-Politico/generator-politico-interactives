@@ -1,0 +1,3 @@
+image_source_path: images/
+image_output_path: ../../dist/images/
+html_output_path: ../templates/
