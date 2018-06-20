@@ -26,11 +26,18 @@ module.exports = class extends Generator {
         message: 'Would you like Google Spreadsheet integration?',
         default: false,
       },
+      {
+        type: 'confirm',
+        name: 'ai2html',
+        message: 'Would you like to include an ai2html configuration?',
+        default: false,
+      },
     ];
 
     return this.prompt(questions).then((answers) => {
       this.archie = answers.archie;
       this.spreadsheet = answers.spreadsheet;
+      this.ai2html = answers.ai2html;
     });
   }
 
@@ -45,6 +52,7 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../gulp-statics'));
     if (this.archie) this.composeWith(require.resolve('../archie'));
     if (this.spreadsheet) this.composeWith(require.resolve('../spreadsheet'));
+    if (this.ai2html) this.composeWith(require.resolve('../ai2html'));
   }
 
   writing() {
@@ -82,35 +90,35 @@ module.exports = class extends Generator {
       this.templatePath('src/templates/ads/_cube1.html'),
       this.destinationPath('src/templates/ads/_cube1.html'));
     this.fs.copy(
-        this.templatePath('src/templates/ads/_cube2.html'),
-        this.destinationPath('src/templates/ads/_cube2.html'));
+      this.templatePath('src/templates/ads/_cube2.html'),
+      this.destinationPath('src/templates/ads/_cube2.html'));
     this.fs.copy(
-        this.templatePath('src/templates/ads/_cube-super1.html'),
-        this.destinationPath('src/templates/ads/_cube-super1.html'));
+      this.templatePath('src/templates/ads/_cube-super1.html'),
+      this.destinationPath('src/templates/ads/_cube-super1.html'));
     this.fs.copy(
-        this.templatePath('src/templates/ads/_cube-super2.html'),
-        this.destinationPath('src/templates/ads/_cube-super2.html'));
+      this.templatePath('src/templates/ads/_cube-super2.html'),
+      this.destinationPath('src/templates/ads/_cube-super2.html'));
     this.fs.copy(
-        this.templatePath('src/templates/ads/_cube-super3.html'),
-        this.destinationPath('src/templates/ads/_cube-super3.html'));
+      this.templatePath('src/templates/ads/_cube-super3.html'),
+      this.destinationPath('src/templates/ads/_cube-super3.html'));
     this.fs.copy(
-        this.templatePath('src/templates/ads/_cube-super4.html'),
-        this.destinationPath('src/templates/ads/_cube-super4.html'));
+      this.templatePath('src/templates/ads/_cube-super4.html'),
+      this.destinationPath('src/templates/ads/_cube-super4.html'));
     this.fs.copy(
       this.templatePath('src/templates/ads/_script.html'),
       this.destinationPath('src/templates/ads/_script.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/breakpoints.html'),
-      this.destinationPath('src/templates/partials/breakpoints.html'));
+      this.templatePath('src/templates/partials/_breakpoints.html'),
+      this.destinationPath('src/templates/partials/_breakpoints.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/footer.html'),
-      this.destinationPath('src/templates/partials/footer.html'));
+      this.templatePath('src/templates/partials/_footer.html'),
+      this.destinationPath('src/templates/partials/_footer.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/header.html'),
-      this.destinationPath('src/templates/partials/header.html'));
+      this.templatePath('src/templates/partials/_header.html'),
+      this.destinationPath('src/templates/partials/_header.html'));
     this.fs.copy(
-      this.templatePath('src/templates/partials/nav.html'),
-      this.destinationPath('src/templates/partials/nav.html'));
+      this.templatePath('src/templates/partials/_nav.html'),
+      this.destinationPath('src/templates/partials/_nav.html'));
     // Template context
     this.fs.writeJSON('src/data/data.json', {});
     // Images directories

@@ -36,23 +36,23 @@
     </head>
 
     <body>
-      {% include "partials/nav.html" %}
+      {% include "partials/_nav.html" %}
       {% include "ads/_banner1.html" %}
-      {% include "partials/header.html" %}
+      {% include "partials/_header.html" %}
 
       <article class="container">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.</p>
 
         <p class="content-fit mb0 small">
-        <a  class="sans" target="blank" href="https://the-politico.github.io/politico-style/components/">Full Style guide <b class="bt-icon bt-icon--add"></b></a></span>
+        <a  class="sans" target="blank" href="https://the-politico.github.io/politico-style/style-guide/">Full Style guide <b class="bt-icon bt-icon--add"></b></a></span>
         </p>
 
         <!-- Breakpoint reminder which you can delete -->
-        {% include "partials/breakpoints.html" %}
+        {% include "partials/_breakpoints.html" %}
         <!-- Comments -->
         {% include "meta/_comments.html" %}
       </article>
-      {% include "partials/footer.html" %}
+      {% include "partials/_footer.html" %}
       <script type="text/javascript">window.tweetText = "{{META.share.twitter.share_tweet}}";</script>
     </body>
 </html>

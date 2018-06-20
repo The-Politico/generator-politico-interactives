@@ -27,24 +27,24 @@ module.exports = {
           options: {
             presets: [
               [
-                "env", 
+                'env',
                 {
-                  "targets": {
-                    "browsers": ["last 2 versions"]
+                  targets: {
+                    browsers: ['last 2 versions']
                   },
-                  "debug": true,
-                  "modules": false,
+                  debug: true,
+                  modules: false,
                 }
               ],
-              "react",
-              "stage-0",
-              "airbnb",
+              'react',
+              'stage-0',
+              'airbnb',
             ]
           }
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.s*css$/,
         use: [
           {
             loader: 'style-loader',
