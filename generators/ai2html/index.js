@@ -5,5 +5,8 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('src/ai/config.yml'),
       this.destinationPath('src/ai/config.yml'));
+    this.fs.copy(
+      this.templatePath('src/templates/partials/_ai2html-resizer.html'),
+      this.destinationPath('src/templates/partials/_ai2html-resizer.html'));
   }
 };
