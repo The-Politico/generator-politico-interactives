@@ -66,9 +66,11 @@ module.exports = class extends Generator {
         spreadsheet: this.spreadsheet,
       });
     // Nunjucks templates
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('src/templates/index.html'),
-      this.destinationPath('src/templates/index.html'));
+      this.destinationPath('src/templates/index.html'), {
+        ai2html: this.ai2html,
+      });
     // Meta
     this.fs.copy(
       this.templatePath('src/templates/meta/_social.html'),

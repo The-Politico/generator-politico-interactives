@@ -60,6 +60,7 @@
 
 {% block js %}
 <script type="text/javascript" src="js/main-app.bundle.js"></script>
+<% if (ai2html) {%>{%include "partials/_ai2html-resizer.html"%}<%} %>
 {% endblock %}
 
 {% include "meta/_telium.html" %}

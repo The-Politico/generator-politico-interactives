@@ -72,3 +72,4 @@ dist/css/*
 dist/js/*
 dist/index.html
 *.ai
+*.ait
