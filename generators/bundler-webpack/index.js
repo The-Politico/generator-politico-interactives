@@ -89,7 +89,7 @@ module.exports = class extends Generator {
       'webpack@3.10.0',
       'webpack-dev-middleware@2.0.6',
       'webpack-hot-middleware',
-      'webpack-stream',
+      'webpack-stream@4.0.3',
     ];
 
     if (this.options.nunjucks) {
