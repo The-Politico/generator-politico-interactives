@@ -1,5 +1,5 @@
 const Generator = require('yeoman-generator');
-const GitHubApi = require('github');
+const GitHubApi = require('@octokit/rest');
 const git = require('simple-git');
 const fs = require('fs-extra');
 const os = require('os');
