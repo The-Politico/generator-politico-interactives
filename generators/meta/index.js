@@ -1,5 +1,5 @@
 const Generator = require('yeoman-generator');
-const S = require('string');
+const S = require('slugify');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -14,7 +14,7 @@ module.exports = class extends Generator {
 
   writing() {
     this.title = this.options.title;
-    this.slug = S(this.title).slugify().s;
+    this.slug = S(this.title);
 
     const timestamp = new Date();
     const publishPath = `interactives/${timestamp.getFullYear()}/${this.slug}/`;
@@ -55,11 +55,11 @@ module.exports = class extends Generator {
       url: prodUrl,
       timestamp: '2018-04-10T08:13-0400',
       dateline: '04/10/18 08:13 PM EDT',
-      "header": {
-        "headline": "This is your headline in the metadata file",
-        "subhed": "Subhed lives in the metadata.",
-        "byline": "Polly Politico in metadata",
-        "byline_link": "https://www.politico.com/"
+      header: {
+        headline: 'This is your headline in the metadata file',
+        subhed: 'Subhed lives in the metadata.',
+        byline: 'Polly Politico in metadata',
+        byline_link: 'https://www.politico.com/',
       },
       share: {
         fbook: {
@@ -94,5 +94,4 @@ module.exports = class extends Generator {
 
     this.fs.writeJSON('meta.json', metaJSON);
   }
-
 };
