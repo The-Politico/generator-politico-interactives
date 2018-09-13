@@ -20,27 +20,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
+        test: /\.(js|jsx)$/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
-              [
-                'env',
-                {
-                  targets: {
-                    browsers: ['last 2 versions']
-                  },
-                  debug: true,
-                  modules: false,
-                }
-              ],
-              'react',
-              'stage-0',
-              'airbnb',
-            ]
-          }
+              ['@babel/preset-env', {
+                targets: {
+                  browsers: 'last 2 versions',
+                },
+              }],
+              '@babel/preset-react',
+            ],
+            plugins: [
+              '@babel/proposal-class-properties',
+            ],
+          },
         },
       },
       {
