@@ -19,7 +19,6 @@
         {% if env == 'production' %}
         <link href="css/main-app.css" rel="stylesheet">
         {% endif %}
-
         <link rel="stylesheet" type="text/css" href="https://www.politico.com/interactives/cdn/fonts/battletoads/icons/politico-battletoads-icons.min.css">
         <!-- jQuery -->
         <script
@@ -27,6 +26,10 @@
           integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
           crossorigin="anonymous">
         </script>
+
+        <!-- Piano ad blocker detection -->
+        {% include "ads/_piano.html" %}
+        
         <!--Typekit-->
         <!-- DIN 2014 only -->
         <link rel="stylesheet" href="https://use.typekit.net/dsx2uhv.css">
